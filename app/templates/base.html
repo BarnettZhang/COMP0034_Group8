@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="../static/jquery-3.4.1/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <script src="../static/js/bootstrap.min.js"></script>
+    <title>{% block title %}{{ title }}{% endblock %}</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container flex-lg-column  py-0 px-3">
+    <img src="QNR_example_logo.png" alt="QNR Logo" width="108" height="108" class="navbar-brand">
+    <button class="navbar-toggler border-light" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="row justify-content-end collapse navbar-collapse" id="collapsibleNavbar">
+        <u1 class="navbar-nav">
+                <form class="form-inline" action="search" method="post">
+                    <input class="form-control mr-md-4" type="search"
+                           placeholder="Search users, surveys" aria-label="Search"
+                           name="search_term">
+                    <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            <li class="nav-item">
+                <a class="nav-item nav-link active" href="{{ url_for() }}">My Surveys</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-item nav-link active" href="{{ url_for() }}">Saved Surveys</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-item nav-link active" href="{{ url_for() }}">Take Survey</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-item nav-link active" href="{{ url_for() }}">Create New Survey</a>
+            </li>
+        </u1>
+    </div>
+        </div>
+</nav>
+</body>
+</html>

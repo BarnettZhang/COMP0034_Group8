@@ -3943,6 +3943,11 @@ input[type="button"].btn-block {
   text-align: center;
 }
 
+.navbar-nav li{
+  padding-left:30px;
+  padding-right:30px;
+}
+
 .nav-justified .nav-item {
   -ms-flex-preferred-size: 0;
   flex-basis: 0;
