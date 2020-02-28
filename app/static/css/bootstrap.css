@@ -9071,7 +9071,8 @@ a.text-dark:hover, a.text-dark:focus {
 }
 /*# sourceMappingURL=bootstrap.css.map */
 
-.list-group-item-margin{
-  margin-top: 4px;
-  margin-bottom: 4px;
+.list-group-item{
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 20px;
 }
