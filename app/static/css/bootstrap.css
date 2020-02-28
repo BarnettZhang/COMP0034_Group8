@@ -3963,7 +3963,6 @@ input[type="button"].btn-block {
 
 .navbar-nav li{
   padding-left:20px;
-  padding-right:20px;
 }
 
 .nav-justified .nav-item {
@@ -9071,3 +9070,8 @@ a.text-dark:hover, a.text-dark:focus {
   }
 }
 /*# sourceMappingURL=bootstrap.css.map */
+
+.list-group-item-margin{
+  margin-top: 4px;
+  margin-bottom: 4px;
+}

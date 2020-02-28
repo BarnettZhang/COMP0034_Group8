@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block title %}Homepage {% endblock %}
+{% block content %}
+    <div class="row">
+        <h3 class="font-weight-normal" style="margin-left:20px">Welcome to QNR, {{ username }}</h3>
+    </div>
+    <div class="row">
+    <div class="col-auto" style="margin-top: 25px">
+        <table class="table ml-1 ">
+        <tbody class="thead-light">
+        <tr>
+            <th>
+                <a href="{{ url_for() }}">
+                    <img src="QNR_example_logo.png" href="{{ url_for() }}" class="img-fluid rounded-circle " alt="Profile picture" style="width: 140px;height: auto;" data-toggle="tooltip" title="Change your profile picture"></th>
+            </a>
+        </tr>
+        <tr>
+            <th>Current credits</th>
+            <td>{{credit}}</td>
+        </tr>
+        <tr>
+            <th>My survey</th>
+
+        </tr>
+
+        </tbody>
+    </table>
+    </div>
+    <div class="col-lg-8 list-group">
+        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start" style="margin-top: 20px">
+            <h4>Search Result</h4></a>
+        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+        <div class="d-flex w-auto justify-content-between">
+        <h5 class="mb-1">Search result title 1</h5>
+        <small>Search result 1 posting date</small>
+        </div>
+            <p class="mb-1">Search result 1 description. Maecenas sed diam eget risus varius blandit.aecenas sed diam eget risus varius blandit.aecenas sed diam eget risus varius blandit.</p>
+    </a>
+        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+        <div class="d-flex w-auto justify-content-between">
+        <h5 class="mb-1">Search result title 2</h5>
+        <small>Search result 2 posting date</small>
+        </div>
+            <p class="mb-1">Search result 2 description. Maecenas sed diam eget risus varius blandit.aecenas sed diam eget risus varius blandit.aecenas sed diam eget risus varius blandit.</p>
+    </a>
+        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+        <div class="d-flex w-auto justify-content-between">
+        <h5 class="mb-1">Search result title 3</h5>
+        <small>Search result 3 posting date</small>
+        </div>
+            <p class="mb-1">Search result 3 description. Maecenas sed diam eget risus varius blandit.aecenas sed diam eget risus varius blandit.aecenas sed diam eget risus varius blandit.</p>
+    </a>
+        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+        <div class="d-flex w-auto justify-content-between">
+        <h5 class="mb-1">Search result title 4</h5>
+        <small>Search result 4 posting date</small>
+        </div>
+            <p class="mb-1">Search result 4 description. Maecenas sed diam eget risus varius blandit.aecenas sed diam eget risus varius blandit.aecenas sed diam eget risus varius blandit.</p>
+    </a>
+        <a href="#" class="list-group-item list-group-item-action  flex-column align-items-start">
+        <div class="d-flex w-auto justify-content-between">
+        <h5 class="mb-1">Search result title 5</h5>
+        <small>Search result 5 posting date</small>
+        </div>
+            <p class="mb-1">Search result 5 description. Maecenas sed diam eget risus varius blandit.aecenas sed diam eget risus varius blandit.aecenas sed diam eget risus varius blandit.</p>
+    </a>
+    </div>
+
+{% endblock %}
