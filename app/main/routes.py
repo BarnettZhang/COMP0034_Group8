@@ -14,6 +14,6 @@ def pp():
     return render_template("privacy policy 3.html")
 
 
-@bp_main.route('/searchresult2', methods=['GET'])
+@bp_main.route('/searchresult3', methods=['GET'])
 def sr():
-    return render_template("searchresult2.html")
+    return render_template("searchresult3.html")
