@@ -1823,6 +1823,22 @@ pre code {
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
+.searchuserform{
+  display: block;
+  width: 50%;
+  height: calc(2.25rem + 2px);
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  margin-left: 20px;
+}
+
 @media screen and (prefers-reduced-motion: reduce) {
   .form-control {
     transition: none;
@@ -2221,6 +2237,8 @@ textarea.form-control {
   -ms-flex-align: center;
   align-items: center;
 }
+
+
 
 .form-inline .form-check {
   width: 100%;
@@ -2968,7 +2986,7 @@ input[type="button"].btn-block {
 }
 
 .dropdown-toggle::after {
-  display: inline-block;
+  display: block;
   width: 0;
   height: 0;
   margin-left: 0.255em;
@@ -3944,8 +3962,7 @@ input[type="button"].btn-block {
 }
 
 .navbar-nav li{
-  padding-left:30px;
-  padding-right:30px;
+  padding-left:20px;
 }
 
 .nav-justified .nav-item {
@@ -4115,7 +4132,7 @@ input[type="button"].btn-block {
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 700px) {
   .navbar-expand-md {
     -ms-flex-flow: row nowrap;
     flex-flow: row nowrap;
@@ -4786,6 +4803,26 @@ input[type="button"].btn-block {
 .btn .badge {
   position: relative;
   top: -1px;
+}
+
+.search-btn{
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: 1px solid;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  margin-right:30px;
+  margin-top: 20px;
 }
 
 .badge-pill {
@@ -9033,3 +9070,9 @@ a.text-dark:hover, a.text-dark:focus {
   }
 }
 /*# sourceMappingURL=bootstrap.css.map */
+
+.list-group-item{
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 20px;
+}
