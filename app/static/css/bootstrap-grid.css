@@ -1493,7 +1493,7 @@ html {
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 700px) {
   .flex-md-row {
     -ms-flex-direction: row !important;
     flex-direction: row !important;
