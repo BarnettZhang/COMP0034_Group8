@@ -9103,7 +9103,7 @@ main > nav {
 .section-nav a {
 	text-decoration: none;
 	display: block;
-	padding: .125rem 0;
+	padding: .150rem 0;
 	color: #ccc;
 	transition: all 50ms ease-in-out; /* 💡 This small transition makes setting of the active state smooth */
 }

@@ -24,16 +24,16 @@
     <div class="row justify-content-md-center justify-content-lg-end justify-content-sm-center justify-content-xs-center flexwrap collapse navbar-collapse" id="collapsibleNavbar">
         <u1 class="navbar-nav ml-md-auto">
             <li class="nav-item my-2">
-                <a class="nav-item nav-link active" href="{{ url_for() }}">Home</a>
+                <a class="nav-item nav-link active" href="#">Home</a>
             </li>
             <li class="nav-item dropdown my-2">
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Surveys
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{{ url_for() }}">My surveys</a>
-                    <a class="dropdown-item" href="{{ url_for() }}">Take surveys</a>
-                    <a class="dropdown-item" href="{{ url_for() }}">Create surveys</a>
+                    <a class="dropdown-item" href="#">My surveys</a>
+                    <a class="dropdown-item" href="#">Take surveys</a>
+                    <a class="dropdown-item" href="#">Create surveys</a>
                 </div>
             </li>
             <li class="nav-item dropdown my-2">
@@ -41,10 +41,10 @@
                   User
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{{ url_for() }}">My profile</a>
-                    <a class="dropdown-item" href="{{ url_for() }}">Credit</a>
-                    <a class="dropdown-item" href="{{ url_for() }}">My library</a>
-                    <a class="dropdown-item" href="{{ url_for() }}">Log out</a>
+                    <a class="dropdown-item" href="#">My profile</a>
+                    <a class="dropdown-item" href="#">Credit</a>
+                    <a class="dropdown-item" href="#">My library</a>
+                    <a class="dropdown-item" href="#">Log out</a>
                 </div>
             </li>
             <li class="nav-item dropdown my-2">
@@ -52,8 +52,8 @@
                   Setting
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{{ url_for() }}">Privacy policy</a>
-                    <a class="dropdown-item" href="{{ url_for() }}">Cookie setting</a>
+                    <a class="dropdown-item" href="{{ url_for('main.pp') }}">Privacy policy</a>
+                    <a class="dropdown-item" href="{{ url_for('main.sr') }}">Cookie setting</a>
                 </div>
             </li>
             <div class="row">
@@ -67,8 +67,7 @@
         </u1>
     </div>
 </header>
-<div class="container-fluid bg-light">
      {% block content %}{% endblock %}
-</div>
+
 </body>
 </html>
