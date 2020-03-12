@@ -32,8 +32,8 @@
                   Surveys
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">My surveys</a>
-                    <a class="dropdown-item" href="#">Take surveys</a>
+                    <a class="dropdown-item" href="{{ url_for('main.survey_review_profile')}}">My surveys</a>
+                    <a class="dropdown-item" href="{{ url_for('main.take_survey_profile')}}">Take surveys</a>
                     <a class="dropdown-item" href="{{ url_for('main.create_survey') }}">Create surveys</a>
                 </div>
             </li>
@@ -68,21 +68,8 @@
         </u1>
     </div>
 </header>
-<div role=main class="container">
-    {# Displays flashed messages on a page #}
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <ul class="alert-warning list-unstyled">
-                {% for message in messages %}
-                    <li>{{ message }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-    {% endwith %}
-    {% block content %}
-    {% endblock %}
+<div class="container-fluid bg-light">
+     {% block content %}{% endblock %}
 </div>
-
-
 </body>
 </html>
