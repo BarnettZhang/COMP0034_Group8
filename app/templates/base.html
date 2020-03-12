@@ -6,10 +6,18 @@
     <link rel="stylesheet" href="../static/css/bootstrap.css">
     <script src="../static/js/bootstrap.min.js"></script>
     <title>{% block title %}{{ title }}{% endblock %}</title>
+    <script src="../static/jquery-3.4.1/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <script src="../static/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/1.css') }}">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container flex-lg-column  py-0 px-3">
+<header class="navbar navbar-expand-md navbar-light bg-light">
     <img src="QNR_example_logo.png" alt="QNR Logo" width="108" height="108" class="navbar-brand">
     <button class="navbar-toggler border-light" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
         <span class="navbar-toggler-icon"></span>
@@ -17,16 +25,16 @@
     <div class="row justify-content-md-center justify-content-lg-end justify-content-sm-center justify-content-xs-center flexwrap collapse navbar-collapse" id="collapsibleNavbar">
         <u1 class="navbar-nav ml-md-auto">
             <li class="nav-item my-2">
-                <a class="nav-item nav-link active" href="{{ url_for() }}">Home</a>
+                <a class="nav-item nav-link active" href="{{ url_for('main.index') }}">Home</a>
             </li>
             <li class="nav-item dropdown my-2">
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Surveys
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{{ url_for() }}">My surveys</a>
-                    <a class="dropdown-item" href="{{ url_for() }}">Take surveys</a>
-                    <a class="dropdown-item" href="{{ url_for() }}">Create surveys</a>
+                    <a class="dropdown-item" href="#">My surveys</a>
+                    <a class="dropdown-item" href="#">Take surveys</a>
+                    <a class="dropdown-item" href="{{ url_for('main.create_survey') }}">Create surveys</a>
                 </div>
             </li>
             <li class="nav-item dropdown my-2">
@@ -34,7 +42,7 @@
                   User
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{{ url_for("main.edit_personal_info") }}">My profile</a>
+                    <a class="dropdown-item" href="#">My profile</a>
                     <a class="dropdown-item" href="#">Credit</a>
                     <a class="dropdown-item" href="#">My library</a>
                     <a class="dropdown-item" href="#">Log out</a>
@@ -45,8 +53,8 @@
                   Setting
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{{ url_for() }}">Privacy policy</a>
-                    <a class="dropdown-item" href="{{ url_for() }}">Cookie setting</a>
+                    <a class="dropdown-item" href="{{ url_for('main.privacy_policy') }}">Privacy policy</a>
+                    <a class="dropdown-item" href="{{ url_for('main.search_result') }}">Cookie setting</a>
                 </div>
             </li>
             <div class="row">
@@ -60,8 +68,21 @@
         </u1>
     </div>
 </header>
-<div class="container-fluid bg-light">
-     {% block content %}{% endblock %}
+<div role=main class="container">
+    {# Displays flashed messages on a page #}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class="alert-warning list-unstyled">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    {% block content %}
+    {% endblock %}
 </div>
+
+
 </body>
 </html>
