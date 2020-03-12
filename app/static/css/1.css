@@ -73,3 +73,168 @@ main {
 section {
 	padding-bottom: 20rem;
 }
+
+.left_relative {
+  position: relative;
+  background-color: white;
+  top: 8vh;
+  left: 23vw;
+  border: 2px solid black;
+  text-align: center;
+  display: inline;
+  padding: 1vh;
+}
+
+.right_relative {
+  position: relative;
+  background-color: white;
+  top: 8vh;
+  left: 55vw;
+  border: 2px solid black;
+  text-align: center;
+  display: inline;
+  padding: 1vh;
+}
+
+.left_relative_2{
+  position: relative;
+  background-color: white;
+  top: 8vh;
+  left: 17vw;
+  border: 2px solid black;
+  text-align: center;
+  display: inline;
+  padding: 1vh;
+}
+
+.right_relative_2 {
+  position: relative;
+  background-color: white;
+  top: 8vh;
+  left: 41vw;
+  border: 2px solid black;
+  text-align: center;
+  display: inline;
+  padding: 1vh;
+}
+
+.app_page1 {
+  margin: 0;
+  overflow: hidden;
+  height:100%;
+}
+
+@media (min-width: 768px){
+  #left {
+    position: absolute;
+    top: 35vh;
+    left: 11vw;
+    width: 50vh;
+    border: 2px solid black;
+    overflow-y: scroll;
+  }
+
+    #right {
+    position: absolute;
+    top: 35vh;
+    right: 11vw;
+    width: 50vh;
+    border: 2px solid black;
+    overflow-y: scroll;
+  }
+}
+
+#left {
+  background-color: white;
+  text-align: center;
+  height:70%;
+  width: 100%;
+}
+
+#right {
+  background-color: white;
+  text-align: center;
+  height:70%;
+  width: 100%;
+}
+
+.take_survey_list_margin{
+  margin: 3px;
+}
+
+
+h4{
+  padding: 1vh 0;
+}
+
+.search-btn{
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: 1px solid;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  margin-right:30px;
+  margin-top: 20px;
+}
+
+.searchuserform{
+  display: block;
+  width: 50%;
+  height: calc(2.25rem + 2px);
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  margin-left: 20px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Create two unequal columns that floats next to each other */
+.column {
+  float: left;
+
+}
+
+.left {
+  width: 25%;
+  padding: 80px;
+}
+
+.right {
+  width: 75%;
+    padding: 60px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+button.
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+  }
+}
