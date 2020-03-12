@@ -27,3 +27,8 @@ def privacy_policy():
 @bp_main.route('/search_result', methods=['GET'])
 def search_result():
     return render_template("search_result.html")
+
+
+@bp_main.route('/edit_personal_info/', methods=['GET'])
+def edit_personal_info():
+    return render_template("personal_info_edit.html")
