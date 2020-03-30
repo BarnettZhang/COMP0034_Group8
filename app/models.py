@@ -7,8 +7,8 @@ class User(db.Model):
     user_id = db.Column(db.Integer, primary_key=True, nullable=False, unique=True)
     first_name = db.Column(db.Text, nullable=False)
     last_name = db.Column(db.Text, nullable=False)
-    username = db.Column(db.Text)
-    password = db.Column(db.Text)
+    username = db.Column(db.Text, nullable=False)
+    password = db.Column(db.Text, nullable=False)
     age = db.Column(db.Integer, nullable=False)
     gender = db.Column(db.Integer, nullable=False)
     email = db.Column(db.Text, nullable=False)
@@ -47,7 +47,8 @@ class Survey(db.Model):
 class Question(db.Model):
     question_id = db.Column(db.Integer, primary_key=True, nullable=False, unique=True)
     survey_id = db.Column(db.Integer, db.ForeignKey('survey.id'), nullable=False)
-    question_type = db.Column(db.Text, nullable=False)
+    q_mult = db.Column(db.Text, nullable=False)
+    q_shortAnswer = db.Column(db.Text, nullable=False)
     question_content = db.Column(db.Text, nullable=False)
     question_must = db.Column(db.Integer, nullable=False)
     answer_id = db.relationship('Answer', backref='questions')
@@ -63,6 +64,7 @@ class Answer(db.Model):
     answer_content = db.Column(db.Text, nullable=False)
     answer_time = db.Column(db.Integer, nullable=False)
     respondent_id = db.Column(db.Integer, nullable=False)
+    answer_pool = db.Column(db.Integer, nullable=False)
 
     def __repr__(self):
         return '<Answer {}>'.format(self.answer_id)
