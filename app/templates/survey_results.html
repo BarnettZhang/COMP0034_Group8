@@ -1,106 +1,37 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="../static/jquery-3.4.1/jquery-3.4.1.min.js"></script>
-    <link rel="stylesheet" href="../static/css/bootstrap.css">
-    <script src="../static/js/bootstrap.min.js"></script>
-<style>
-* {
-  box-sizing: border-box;
-}
+{% extends "base.html" %}
+{% block title %}Homepage {% endblock %}
+{% block content %}
+<h3>Edit personal information</h3>
 
-/* Create two unequal columns that floats next to each other */
-.column {
-  float: left;
+{% if courses|length %}
+<table class="table">
+    <thead class="thead-dark">
+    <tr>
+        <th scope="col">Answer ID</th>
+        <th scope="col">Answer</th>
+        <th scope="col">Time</th>
+        <th scope="col">Respondent ID</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for course in courses %}
+    <tr>
+        <td>{{ course.course_code }}</td>
+        <td>{{ course.name }}</td>
+        <td>{{ course.teacher_id }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>Sorry, no courses are available at this time</p>
+{% endif %}
 
-}
+{% endblock %}
 
-.left {
-  width: 25%;
-  padding: 80px;
-}
-
-.right {
-  width: 75%;
-    padding: 60px;
-}
-
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-button.
-
-/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
-@media screen and (max-width: 600px) {
-  .column {
-    width: 100%;
-  }
-}
-</style>
-</head>
-<body>
-
-<!--Nav bar-->
-<header class="navbar navbar-expand-md navbar-light bg-light">
-    <img src="QNR_example_logo.png" alt="QNR Logo" width="108" height="108" class="navbar-brand">
-    <button class="navbar-toggler border-light" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="row justify-content-md-center justify-content-lg-end justify-content-sm-center justify-content-xs-center flexwrap collapse navbar-collapse" id="collapsibleNavbar">
-        <u1 class="navbar-nav ml-md-auto">
-            <li class="nav-item my-2">
-                <a class="nav-item nav-link active" href="{{ url_for("main.index") }}">Home</a>
-            </li>
-            <li class="nav-item dropdown my-2">
-                <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Surveys
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">My surveys</a>
-                    <a class="dropdown-item" href="#">Take surveys</a>
-                    <a class="dropdown-item" href="#">Create surveys</a>
-                </div>
-            </li>
-            <li class="nav-item dropdown my-2">
-                <a class="nav-link dropdown-toggle " id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  User
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{{ url_for('main.edit_personal_info') }}">My profile</a>
-                    <a class="dropdown-item" href="#">Credit</a>
-                    <a class="dropdown-item" href="#">My library</a>
-                    <a class="dropdown-item" href="#">Log out</a>
-                </div>
-            </li>
-            <li class="nav-item dropdown my-2">
-                <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Setting
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Privacy policy</a>
-                    <a class="dropdown-item" href="#">Cookie setting</a>
-                </div>
-            </li>
-             <form class="form-inline" action="search" method="post">
-                    <input class="searchuserform mr-md-4" type="search"
-                           placeholder="Search users, surveys" aria-label="Search"
-                           name="search_term">
-                    <button class="search-btn btn-outline-dark my-2" type="submit">Search</button>
-                </form>
-        </u1>
-    </div>
-</header>
-
-
-<div class="container-fluid bg-light">
-
-
-</div>
-
-</body>
+    answer_id = db.Column(db.Integer, primary_key=False, nullable=False, unique=True)
+    question_id = db.Column(db.Integer, db.ForeignKey('question.id'), nullable=False)
+    survey_id = db.Column(db.Integer, db.ForeignKey('survey.id'), nullable=False)
+    answer_content = db.Column(db.Text, nullable=False)
+    answer_time = db.Column(db.Integer, nullable=False)
+    respondent_id = db.Column(db.Integer, nullable=False)
