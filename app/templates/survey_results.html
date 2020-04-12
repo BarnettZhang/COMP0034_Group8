@@ -1,9 +1,12 @@
 {% extends "base.html" %}
 {% block title %}Homepage {% endblock %}
 {% block content %}
-<h3>Edit personal information</h3>
+<h3>Survey Results</h3>
 
-{% if courses|length %}
+<body>
+<p>Survey ID: {{ answer.survey_id }}</p>
+
+{% if answer|length %}
 <table class="table">
     <thead class="thead-dark">
     <tr>
@@ -14,24 +17,21 @@
     </tr>
     </thead>
     <tbody>
-    {% for course in courses %}
+    {% for answer in answer %}
     <tr>
-        <td>{{ course.course_code }}</td>
-        <td>{{ course.name }}</td>
-        <td>{{ course.teacher_id }}</td>
+        <td>{{ answer.answer_id }}</td>
+        <td>{{ answer.answer_content }}</td>
+        <td>{{ answer.answer_time }}</td>
+        <td>{{ answer.respondent_id }}</td>
     </tr>
     {% endfor %}
     </tbody>
 </table>
 {% else %}
-<p>Sorry, no courses are available at this time</p>
+<p>Sorry, no answers are available at this time</p>
+
 {% endif %}
+</body>
 
 {% endblock %}
 
-    answer_id = db.Column(db.Integer, primary_key=False, nullable=False, unique=True)
-    question_id = db.Column(db.Integer, db.ForeignKey('question.id'), nullable=False)
-    survey_id = db.Column(db.Integer, db.ForeignKey('survey.id'), nullable=False)
-    answer_content = db.Column(db.Text, nullable=False)
-    answer_time = db.Column(db.Integer, nullable=False)
-    respondent_id = db.Column(db.Integer, nullable=False)
