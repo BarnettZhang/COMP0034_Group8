@@ -12,4 +12,4 @@ def index():
 def edit_personal_info(name=""):
     if 'username' in request.cookies:
         name = request.cookies.get('username')
-    return render_template('personal_info_edit.html', name=name)
+    return render_template('personal_info_edit.html', username=name)
