@@ -1,4 +1,4 @@
-from flask import render_template, Blueprint
+from flask import render_template, Blueprint, request
 
 bp_main = Blueprint('main', __name__)
 
@@ -9,7 +9,7 @@ def index():
 
 
 @bp_main.route('/edit_personal_info/', methods=['GET'])
-def edit_personal_info():
-    return render_template("personal_info_edit.html")
-
-
+def edit_personal_info(name=""):
+    if 'name' in request.cookies:
+        name = request.cookies.get('name')
+    return render_template('personal_info_edit.html', name=name)
