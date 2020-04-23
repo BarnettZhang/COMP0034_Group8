@@ -1,4 +1,4 @@
-from flask import render_template, Blueprint
+from flask import render_template, Blueprint, request
 
 bp_main = Blueprint('main', __name__)
 
@@ -10,9 +10,13 @@ def index():
 
 @bp_main.route('/take_survey_profile/', methods=['GET'])
 def take_survey_profile():
-    return render_template("tsp.html")
+    if 'name' in request.cookies:
+        name = request.cookies.get('name')
+    return render_template("tsp.html", name=name)
 
 
 @bp_main.route('/survey_review_profile/', methods=['GET'])
 def survey_review_profile():
-    return render_template("srp.html")
+    if 'name' in request.cookies:
+        name = request.cookies.get('name')
+    return render_template("srp.html", name=name)

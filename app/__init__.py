@@ -21,12 +21,16 @@ def create_app(config_class=DevConfig):
     :return: A Flask object
     """
     app = Flask(__name__)
+    app.config.from_object(config_class)
 
     # Configure app wth the settings from config.py
     app.config.from_object(config_class)
 
     # Initialise the database and create tables
     db.init_app(app)
+    from app.models import Survey, Answer, Question, User
+    with app.app_context():
+        db.create_all()
 
     from app.main.routes import bp_main
     app.register_blueprint(bp_main)
