@@ -1,5 +1,7 @@
-from flask import render_template, Blueprint
+from flask import Blueprint, request, make_response, redirect, url_for, flash, render_template, session, abort
+from sqlalchemy.exc import IntegrityError
 
+from app.main.forms import CreateSurveyRequest
 bp_main = Blueprint('main', __name__)
 
 
@@ -13,9 +15,10 @@ def edit_personal_info():
     return render_template("personal_info_edit.html")
 
 
-@bp_main.route('/create_survey')
+@bp_main.route('/create_survey/', methods=['POST', 'GET'])
 def create_survey():
-    return render_template("create_survey.html")
+    form = CreateSurveyRequest(request.form)
+    return render_template("create_survey.html", form=form)
 
 
 @bp_main.route('/')

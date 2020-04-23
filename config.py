@@ -8,7 +8,7 @@ CWD = dirname(abspath(__file__))
 class Config(object):
     DEBUG = False
     TESTING = False
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + join(CWD, 'cscourses.sqlite')
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + join(CWD, 'qnr.sqlite')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = 'dfdQbTOExternjy5xmCNaA'
 

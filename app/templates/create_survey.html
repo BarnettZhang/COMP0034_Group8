@@ -1,7 +1,8 @@
- <script src="../static/js/create_survey.js"></script>
+<script src="../static/js/create_survey.js"></script>
 {% extends "base.html" %}
 {% block title %}Homepage {% endblock %}
 {% block content %}
+    {% from "_formhelpers.html" import render_field %}
 <div class="container">
     <div class="row">
     <div class="col-sm-6">
@@ -12,13 +13,12 @@
             </div>
             <div class="modal-body">
                <form method="post" novalidate>
-
+                {{ form.csrf_token }}
                     <dl>
-                        <!-- >form.gender, class='form-control') }}
-                        form.age, class='form-control') }}
-                         render_field(form.religion, class='form-control') }}
-                       render_field(form.ethnic, class='form-control') }}
-                        render_field(form.nationality, class='form-control') }} -->
+                        {{ render_field (form.target_gender, class='form-control') }}
+                        {{ render_field (form.target_minimum_age, class='form-control') }}
+                        {{ render_field (form.target_maximum_age, class='form-control') }}
+                        {{ render_field(form.nationality, class='form-control') }}
                     </dl>
                 </form>
             </div>
@@ -27,24 +27,11 @@
                 </div>
             <div class="modal-body">
                 <form method="post" novalidate>
-
+                    {{ form.csrf_token }}
                     <dl>
-                        <!--render_field(form.time_window, class='form-control') }}
-                        render_field(form.amount_of_survey, class='form-control') -->
+                        {{ render_field(form.end_date, class='form-control') }}
+                        {{ render_field(form.respondent_number, class='form-control') }}
                     </dl>
-                </form>
-            </div>
-            <div class="modal-header">
-                    <h5 class="modal-title">Privacy</h5>
-                </div>
-            <div class="modal-body">
-                <form method="post" novalidate>
-
-                <dl>
-                    <!--render_field(form.open_access) }}
-                     render_field(form.friend_only) }}
-                     render_field(form.private) -->
-                </dl>
                 </form>
             </div>
             </div>

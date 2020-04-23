@@ -29,10 +29,12 @@ class User(db.Model):
 
 class Survey(db.Model):
     survey_id = db.Column(db.Integer, primary_key=True, nullable=False, unique=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable=False)
     survey_name = db.Column(db.Text, nullable=False)
     keyword = db.Column(db.Text, nullable=False)
-    target_respondent = db.Column(db.Text, nullable=False)
+    target_gender = db.Column(db.Text, nullable=False)
+    target_minimum_age = db.Column(db.Text, nullable=False)
+    target_maximum_age = db.Column(db.Text, nullable=False)
     respondent_number = db.Column(db.Integer, nullable=False)
     create_date = db.Column(db.Integer, nullable=False)
     end_date = db.Column(db.Integer, nullable=False)
@@ -46,9 +48,14 @@ class Survey(db.Model):
 
 class Question(db.Model):
     question_id = db.Column(db.Integer, primary_key=True, nullable=False, unique=True)
-    survey_id = db.Column(db.Integer, db.ForeignKey('survey.id'), nullable=False)
+    survey_id = db.Column(db.Integer, db.ForeignKey('survey.survey_id'), nullable=False)
+    question_num = db.Column(db.Integer, nullable=False)
     q_mult = db.Column(db.Text, nullable=False)
     q_shortAnswer = db.Column(db.Text, nullable=False)
+    choice_one = db.Column(db.Text, nullable=True)
+    choice_two = db.Column(db.Text, nullable=True)
+    choice_three = db.Column(db.Text, nullable=True)
+    choice_four = db.Column(db.Text, nullable=True)
     question_content = db.Column(db.Text, nullable=False)
     question_must = db.Column(db.Integer, nullable=False)
     answer_id = db.relationship('Answer', backref='questions')
@@ -58,9 +65,9 @@ class Question(db.Model):
 
 
 class Answer(db.Model):
-    answer_id = db.Column(db.Integer, primary_key=False, nullable=False, unique=True)
-    question_id = db.Column(db.Integer, db.ForeignKey('question.id'), nullable=False)
-    survey_id = db.Column(db.Integer, db.ForeignKey('survey.id'), nullable=False)
+    answer_id = db.Column(db.Integer, primary_key=True, nullable=False, unique=True)
+    question_id = db.Column(db.Integer, db.ForeignKey('question.question_id'), nullable=False)
+    survey_id = db.Column(db.Integer, db.ForeignKey('survey.survey_id'), nullable=False)
     answer_content = db.Column(db.Text, nullable=False)
     answer_time = db.Column(db.Integer, nullable=False)
     respondent_id = db.Column(db.Integer, nullable=False)
