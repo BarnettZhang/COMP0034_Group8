@@ -10,6 +10,6 @@ def index():
 
 @bp_main.route('/edit_personal_info/', methods=['GET'])
 def edit_personal_info(name=""):
-    if 'name' in request.cookies:
-        name = request.cookies.get('name')
+    if 'username' in request.cookies:
+        name = request.cookies.get('username')
     return render_template('personal_info_edit.html', name=name)
