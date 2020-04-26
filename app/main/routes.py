@@ -3,7 +3,7 @@ from sqlalchemy.exc import IntegrityError
 
 from app import db
 from app.main.forms import CreateSurvey
-from app.models import Survey, User, Question,
+from app.models import Survey, User, Question
 
 
 bp_main = Blueprint('main', __name__)
