@@ -1,11 +1,14 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <script src="../static/jquery-3.4.1/jquery-3.4.1.min.js"></script>
-    <link rel="stylesheet" href="../static/css/bootstrap.css">
-    <script src="../static/js/bootstrap.min.js"></script>
     <title>{% block title %}{{ title }}{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/1.css') }}">
 </head>
 <body>
 <header class="navbar navbar-expand-md navbar-light bg-light">
@@ -16,7 +19,7 @@
     <div class="row justify-content-md-center justify-content-lg-end justify-content-sm-center justify-content-xs-center flexwrap collapse navbar-collapse" id="collapsibleNavbar">
         <u1 class="navbar-nav ml-md-auto">
             <li class="nav-item my-2">
-                <a class="nav-item nav-link active" href="#">Home</a>
+                <a class="nav-item nav-link active" href="{{ url_for('main.index') }}">Home</a>
             </li>
             <li class="nav-item dropdown my-2">
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -25,7 +28,7 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="{{ url_for('main.survey_review_profile')}}">My surveys</a>
                     <a class="dropdown-item" href="{{ url_for('main.take_survey_profile')}}">Take surveys</a>
-                    <a class="dropdown-item" href="#">Create surveys</a>
+                    <a class="dropdown-item" href="{{ url_for('main.create_survey') }}">Create surveys</a>
                 </div>
             </li>
             <li class="nav-item dropdown my-2">
@@ -33,7 +36,7 @@
                   User
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">My profile</a>
+                    <a class="dropdown-item" href="{{ url_for('main.edit_personal_info') }}">My profile</a>
                     <a class="dropdown-item" href="#">Credit</a>
                     <a class="dropdown-item" href="#">My library</a>
                     <a class="dropdown-item" href="#">Log out</a>
@@ -44,20 +47,31 @@
                   Setting
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Privacy policy</a>
-                    <a class="dropdown-item" href="#">Cookie setting</a>
+                    <a class="dropdown-item" href="{{ url_for('main.privacy_policy') }}">Privacy policy</a>
+                    <a class="dropdown-item" href="{{ url_for('main.search_result') }}">Cookie setting</a>
                 </div>
             </li>
+            <div class="row">
              <form class="form-inline" action="search" method="post">
                     <input class="searchuserform mr-md-4" type="search"
                            placeholder="Search users, surveys" aria-label="Search"
                            name="search_term">
                     <button class="search-btn btn-outline-dark my-2" type="submit">Search</button>
                 </form>
+            </div>
         </u1>
     </div>
 </header>
 <div class="container-fluid bg-light">
+{% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class="alert-warning list-unstyled">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
      {% block content %}{% endblock %}
 </div>
 </body>

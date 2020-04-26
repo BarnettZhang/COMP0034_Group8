@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+            <div class="signupForm">
+                <h2>Create Account</h2>
+                <form>
+                    {{ form.hidden_tag() }}
+                    <fieldset class="form-group">
+                    <p>Username</p>
+                    {{ form.username(class="form-control-label") }}<br>
+                    <p>Email Address</p>
+                    {{ form.email(class="form-control-label") }}<br>
+                    <p>Password</p>
+                    {{ form.password(class="form-control-label") }}<br>
+                    <p>Conform Password</p>
+                    {{ form.confirm_password(class="form-control-label") }}<br>
+                    {{ form.submit(class="btn btn-outline-info") }}
+                    </fieldset>
+                </form>
+                <p>Already Have An Account? <a href="{{ url_for('main.login') }}">Login</a></p>
+            </div>
+{% endblock content %}

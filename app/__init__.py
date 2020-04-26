@@ -1,6 +1,6 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, url_for, flash, redirect, request
+from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
-
 from config import DevConfig
 
 # The SQLAlchemy object is defined globally

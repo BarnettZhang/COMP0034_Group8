@@ -1,25 +1,16 @@
 """Flask config class."""
+
 from os.path import dirname, abspath, join
+
+CWD = dirname(abspath(__file__))
 
 
 class Config(object):
-    """Set Flask base configuration"""
-    # CSRF_ENABLED = True
-    # Secret key was randomly created using a Python console and enter 'import secrets' and then 'secrets.token_urlsafe(16)'
-    SECRET_KEY = 'dfdQbTOExternjy5xmCNaA'
-
-    # General Config
     DEBUG = False
     TESTING = False
-
-    # Forms config
-    # Generated using the same method as the SECRET_KEY
-    WTF_CSRF_SECRET_KEY = 'f7Z-JN0ftel5Sp_TywHuxA'
-
-    # Database config
-    CWD = dirname(abspath(__file__))
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + join(CWD, 'cscourses.sqlite')
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + join(CWD, 'qnr.sqlite')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SECRET_KEY = 'dfdQbTOExternjy5xmCNaA'
 
 
 class ProdConfig(Config):
@@ -31,9 +22,20 @@ class ProdConfig(Config):
 
 
 class TestConfig(Config):
+    DEBUG = True
     TESTING = True
+    #  In memory database
     SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory:'
+    #  To allow forms to be submitted from the tests without the CSRF token
+    WTF_CSRF_ENABLED = False
 
 
 class DevConfig(Config):
     DEBUG = True
+
+
+app_config = {
+    'development': DevConfig,
+    'production': ProdConfig,
+    'testing': TestConfig
+}
