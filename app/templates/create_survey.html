@@ -1,7 +1,8 @@
- <script src="../static/js/create_survey.js"></script>
+<script src="../static/js/create_survey.js"></script>
 {% extends "base.html" %}
 {% block title %}Homepage {% endblock %}
 {% block content %}
+    {% from "_formhelpers.html" import render_field %}
 <div class="container">
     <div class="row">
     <div class="col-sm-6">
@@ -12,13 +13,13 @@
             </div>
             <div class="modal-body">
                <form method="post" novalidate>
-
+                {{ form.csrf_token }}
                     <dl>
-                        <!-- >form.gender, class='form-control') }}
-                        form.age, class='form-control') }}
-                         render_field(form.religion, class='form-control') }}
-                       render_field(form.ethnic, class='form-control') }}
-                        render_field(form.nationality, class='form-control') }} -->
+                        {{ render_field (form.target_gender, class='form-control') }}
+                        {{ render_field (form.target_minimum_age, class='form-control') }}
+                        {{ render_field (form.target_maximum_age, class='form-control') }}
+                        {{ render_field (form.target_nationality, class='form-control') }}
+
                     </dl>
                 </form>
             </div>
@@ -27,41 +28,126 @@
                 </div>
             <div class="modal-body">
                 <form method="post" novalidate>
-
+                    {{ form.csrf_token }}
                     <dl>
-                        <!--render_field(form.time_window, class='form-control') }}
-                        render_field(form.amount_of_survey, class='form-control') -->
+                        {{ render_field(form.end_date, class='form-control') }}
+                        {{ render_field(form.respondent_number, class='form-control') }}
                     </dl>
                 </form>
             </div>
-            <div class="modal-header">
-                    <h5 class="modal-title">Privacy</h5>
-                </div>
-            <div class="modal-body">
-                <form method="post" novalidate>
+            </div>
+        </div>
+    </div>
 
-                <dl>
-                    <!--render_field(form.open_access) }}
-                     render_field(form.friend_only) }}
-                     render_field(form.private) -->
-                </dl>
+    <div class="col-6">
+            <form method="post" novalidate>
+                    {{ form.csrf_token }}
+                    <dl>
+                        {{ render_field(form.survey_name, class='form-control') }}
+                        {{ render_field(form.q1question_num, class='form-control') }}
+                        {{ render_field(form.q1question_must, class='form-control') }}
+                        {{ render_field(form.q1question_content, class='form-control') }}
+                        {{ render_field(form.q1choice_one, class='form-control') }}
+                        {{ render_field(form.q1choice_two, class='form-control') }}
+                        {{ render_field(form.q1choice_three, class='form-control') }}
+                        {{ render_field(form.q1choice_four, class='form-control') }}
+                        <br>
+                        {{ render_field(form.q2question_num, class='form-control') }}
+                        {{ render_field(form.q2question_must, class='form-control') }}
+                        {{ render_field(form.q2question_content, class='form-control') }}
+                        {{ render_field(form.q2choice_one, class='form-control') }}
+                        {{ render_field(form.q2choice_two, class='form-control') }}
+                        {{ render_field(form.q2choice_three, class='form-control') }}
+                        {{ render_field(form.q2choice_four, class='form-control') }}
+ <br>
+                        {{ render_field(form.q3question_num, class='form-control') }}
+                        {{ render_field(form.q3question_must, class='form-control') }}
+                        {{ render_field(form.q3question_content, class='form-control') }}
+                        {{ render_field(form.q3choice_one, class='form-control') }}
+                        {{ render_field(form.q3choice_two, class='form-control') }}
+                        {{ render_field(form.q3choice_three, class='form-control') }}
+                        {{ render_field(form.q3choice_four, class='form-control') }}
+ <br>
+                        {{ render_field(form.q4question_num, class='form-control') }}
+                        {{ render_field(form.q4question_must, class='form-control') }}
+                        {{ render_field(form.q4question_content, class='form-control') }}
+                        {{ render_field(form.q4choice_one, class='form-control') }}
+                        {{ render_field(form.q4choice_two, class='form-control') }}
+                        {{ render_field(form.q4choice_three, class='form-control') }}
+                        {{ render_field(form.q4choice_four, class='form-control') }}
+ <br>
+                        {{ render_field(form.q5question_num, class='form-control') }}
+                        {{ render_field(form.q5question_must, class='form-control') }}
+                        {{ render_field(form.q5question_content, class='form-control') }}
+                        {{ render_field(form.q5choice_one, class='form-control') }}
+                        {{ render_field(form.q5choice_two, class='form-control') }}
+                        {{ render_field(form.q5choice_three, class='form-control') }}
+                        {{ render_field(form.q5choice_four, class='form-control') }}
+ <br>
+                        {{ render_field(form.q6question_num, class='form-control') }}
+                        {{ render_field(form.q6question_must, class='form-control') }}
+                        {{ render_field(form.q6question_content, class='form-control') }}
+                        {{ render_field(form.q6choice_one, class='form-control') }}
+                        {{ render_field(form.q6choice_two, class='form-control') }}
+                        {{ render_field(form.q6choice_three, class='form-control') }}
+                        {{ render_field(form.q6choice_four, class='form-control') }}
+ <br>
+                        {{ render_field(form.q7question_num, class='form-control') }}
+                        {{ render_field(form.q7question_must, class='form-control') }}
+                        {{ render_field(form.q7question_content, class='form-control') }}
+                        {{ render_field(form.q7choice_one, class='form-control') }}
+                        {{ render_field(form.q7choice_two, class='form-control') }}
+                        {{ render_field(form.q7choice_three, class='form-control') }}
+                        {{ render_field(form.q7choice_four, class='form-control') }}
+ <br>
+                        {{ render_field(form.q8question_num, class='form-control') }}
+                        {{ render_field(form.q8question_must, class='form-control') }}
+                        {{ render_field(form.q8question_content, class='form-control') }}
+                        {{ render_field(form.q8choice_one, class='form-control') }}
+                        {{ render_field(form.q8choice_two, class='form-control') }}
+                        {{ render_field(form.q8choice_three, class='form-control') }}
+                        {{ render_field(form.q8choice_four, class='form-control') }}
+ <br>
+                        {{ render_field(form.q9question_num, class='form-control') }}
+                        {{ render_field(form.q9question_must, class='form-control') }}
+                        {{ render_field(form.q9question_content, class='form-control') }}
+                        {{ render_field(form.q9choice_one, class='form-control') }}
+                        {{ render_field(form.q9choice_two, class='form-control') }}
+                        {{ render_field(form.q9choice_three, class='form-control') }}
+                        {{ render_field(form.q9choice_four, class='form-control') }}
+ <br>
+                        {{ render_field(form.q10question_num, class='form-control') }}
+                        {{ render_field(form.q10question_must, class='form-control') }}
+                        {{ render_field(form.q10question_content, class='form-control') }}
+                        {{ render_field(form.q10choice_one, class='form-control') }}
+                        {{ render_field(form.q10choice_two, class='form-control') }}
+                        {{ render_field(form.q10choice_three, class='form-control') }}
+                        {{ render_field(form.q10choice_four, class='form-control') }}
+ <br>
+                        {{ render_field(form.q11question_num, class='form-control') }}
+                        {{ render_field(form.q11question_must, class='form-control') }}
+                        {{ render_field(form.q11question_content, class='form-control') }}
+ <br>
+                        {{ render_field(form.q12question_num, class='form-control') }}
+                        {{ render_field(form.q12question_must, class='form-control') }}
+                        {{ render_field(form.q12question_content, class='form-control') }}
+ <br>
+                        {{ render_field(form.q13question_num, class='form-control') }}
+                        {{ render_field(form.q13question_must, class='form-control') }}
+                        {{ render_field(form.q13question_content, class='form-control') }}
+ <br>
+                        {{ render_field(form.q14question_num, class='form-control') }}
+                        {{ render_field(form.q14question_must, class='form-control') }}
+                        {{ render_field(form.q14question_content, class='form-control') }}
+ <br>
+                        {{ render_field(form.q15question_num, class='form-control') }}
+                        {{ render_field(form.q15question_must, class='form-control') }}
+                        {{ render_field(form.q15question_content, class='form-control') }}
+
+                    </dl>
+                 <button type="submit" class="btn btn-primary">Finish editing the survey</button>
                 </form>
-            </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-sm-6">
-        <div class="input-group mb-3" style="margin-top: 5px">
-            <input type="text" class="form-control" placeholder="Enter your survey title here." aria-label="Question">
-            <div class="input-group input-group-sm survey-question-create mb-2">
-        </div>
-        <input class="btn btn-outline-dark mr-1" type='button' value="+ Add multiple choice question" onclick="addQuestion()" style="margin-top: 20px;margin-bottom: 20px">
-        <input class="btn btn-outline-dark mr-1" type='button' value="+ Add comment box" onclick="addCommentBox()" style="margin-top: 20px;margin-bottom: 20px">
-        <div id="question">
-        </div>
-        <a href="{{ url_for('main.finish_create_survey') }}"><input class="btn btn-outline-dark mr-1" type='button' value="Finish Editing" style="margin-top: 20px;margin-bottom: 20px"></a>
     </div>
     </div>
-    </div>
+</div>
 {% endblock %}
