@@ -1,0 +1,23 @@
+<!-- Use the base template -->
+{% extends "base.html" %}
+
+{% block title %}Search Result {% endblock %}
+{% block content %}
+<table class="table">
+    <thead class="thead-dark">
+    <tr>
+        <th scope="col">survey name</th>
+        <th scope="col">keyword</th>
+        <th scope="col">survey link</th>
+    </tr>
+    </thead>
+    <tbody> {% for result in results %}
+    <tr>
+        <td>{{ result.survey_name }}</td>
+        <td>{{ result.keyword }}</td>
+        <td>{{ result.link }}</td>
+    </tr>
+         {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
