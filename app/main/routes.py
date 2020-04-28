@@ -15,9 +15,10 @@ def index():
 
 @bp_main.route('/edit_personal_info/', methods=['GET'])
 def edit_personal_info(name=""):
-    if 'username' in request.cookies:
-        name = request.cookies.get('username')
-    return render_template('personal_info_edit.html', username=name)
+    if 'name' in request.cookies:
+        name = request.cookies.get('name')
+
+    return render_template('personal_info_edit.html', name=name)
 
 @bp_main.route('/create_survey/', methods=['POST', 'GET'])
 def create_survey():
