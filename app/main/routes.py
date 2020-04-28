@@ -4,7 +4,7 @@ from sqlalchemy.exc import IntegrityError
 
 from app import db
 from app.main.forms import CreateSurvey, AnswerSurvey
-from app.models import Survey, User, Question, Answer
+from app.models import Survey, User, Answer
 
 bp_main = Blueprint('main', __name__)
 
@@ -111,8 +111,8 @@ def search_result():
 
 
 @bp_main.route('/answer', methods=['POST', 'GET'])
-def answer_question():
-    answers = AnswerSurvey(request.form)
+def answer_survey():
+    answer = AnswerSurvey(request.form)
     if request.method == 'POST':
         answer = Answer(q1answer=form.q1answer.data, q2answer=form.q2answer.data, q3answer=form.q3answer.data,
                         q4answer=form.q4answer.data, q5answer=form.q5answer.data, q6answer=form.q6answer.data,

@@ -6,7 +6,7 @@ from wtforms.validators import DataRequired, Email, EqualTo
 
 
 from app import db
-from app.models import Survey, User, Question, Answer
+from app.models import Survey, User, Answer
 
 
 class CreateSurvey(FlaskForm):
