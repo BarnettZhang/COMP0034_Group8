@@ -3,7 +3,7 @@ from sqlalchemy.exc import IntegrityError
 
 from app import db
 from app.main.forms import CreateSurvey
-from app.models import Survey, User, Question, Answer
+from app.models import Survey, User,  Answer
 
 bp_main = Blueprint('main', __name__)
 
@@ -25,7 +25,7 @@ def create_survey():
         survey = Survey(target_gender=form.target_gender.data, target_maximum_age=form.target_maximum_age.data,
                         target_minimum_age=form.target_minimum_age.data, target_nationality=form.target_nationality.data,
                         end_date=form.end_date.data, respondent_number=form.respondent_number.data,
-                        survey_name=form.survey_name.data,
+                        survey_name=form.survey_name.data, keyword=form.keyword.data,
                         q1question_num=form.q1question_num.data, q1question_must= form.q1question_must.data, q1question_content=form.q1question_content.data, q1choice_one=form.q1choice_one.data, q1choice_two=form.q1choice_two.data, q1choice_three=form.q1choice_three.data, q1choice_four=form.q1choice_four.data,
                         q2question_num=form.q2question_num.data, q2question_must= form.q2question_must.data, q2question_content=form.q2question_content.data, q2choice_one=form.q2choice_one.data, q2choice_two=form.q2choice_two.data, q2choice_three=form.q2choice_three.data, q2choice_four=form.q2choice_four.data,
                         q3question_num=form.q3question_num.data, q3question_must= form.q3question_must.data, q3question_content=form.q3question_content.data, q3choice_one=form.q3choice_one.data, q3choice_two=form.q3choice_two.data, q3choice_three=form.q3choice_three.data, q3choice_four=form.q3choice_four.data,

@@ -28,7 +28,7 @@ def create_app(config_class=DevConfig):
 
     # Initialise the database and create tables
     db.init_app(app)
-    from app.models import Survey, Answer, Question, User
+    from app.models import Survey, Answer, User
     with app.app_context():
         db.create_all()
 

@@ -6,7 +6,7 @@ from wtforms.validators import DataRequired, Email, EqualTo
 
 
 from app import db
-from app.models import Survey, User, Question, Answer
+from app.models import Survey, User, Answer
 
 
 class CreateSurvey(FlaskForm):
@@ -15,6 +15,7 @@ class CreateSurvey(FlaskForm):
     target_maximum_age = StringField('Maximum Age')
     target_nationality = StringField('Nationality')
     end_date = StringField('End date')
+    keyword = StringField('Keyword')
     respondent_number = StringField('Number of Required Responses')
     q1question_num = StringField('Question Number')
     q1question_content = StringField('Question Content')
@@ -107,6 +108,5 @@ class CreateSurvey(FlaskForm):
     def validate_age(self, target_minimum_age, target_maximum_age):
         if target_minimum_age > target_maximum_age:
             raise ValidationError('The target maximum age must be higher than the minimum.')
-
 
 
