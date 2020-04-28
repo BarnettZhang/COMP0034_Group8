@@ -131,30 +131,27 @@ class Survey(db.Model):
         return '<Survey {}>'.format(self.survey_id)
 
 
-class Question(db.Model):
-    question_id = db.Column(db.Integer, primary_key=True)
-    survey_id = db.Column(db.Integer, db.ForeignKey(Survey.survey_id), nullable=True)
-    question_num = db.Column(db.Integer, nullable=True)
-    choice_one = db.Column(db.Text, nullable=True)
-    choice_two = db.Column(db.Text, nullable=True)
-    choice_three = db.Column(db.Text, nullable=True)
-    choice_four = db.Column(db.Text, nullable=True)
-    question_content = db.Column(db.Text, nullable=True)
-    question_must = db.Column(db.Text, nullable=True)
-    #answer_id = db.relationship('Answer', backref='questions')
-
-    def __repr__(self):
-        return '<Question {}>'.format(self.question_id)
-
 
 class Answer(db.Model):
     answer_id = db.Column(db.Integer, primary_key=True, nullable=False, unique=True)
     #question_id = db.Column(db.Integer, db.ForeignKey(Question.question_id), nullable=False)
     #survey_id = db.Column(db.Integer, db.ForeignKey(Survey.survey_id), nullable=False)
-    answer_content = db.Column(db.Text, nullable=False)
-    answer_time = db.Column(db.Integer, nullable=False)
-    respondent_id = db.Column(db.Text, nullable=False)
-    answer_pool = db.Column(db.Integer, nullable=False)
+    q1answer = db.Column(db.Text, nullable=True)
+    q2answer = db.Column(db.Text, nullable=True)
+    q3answer = db.Column(db.Text, nullable=True)
+    q4answer = db.Column(db.Text, nullable=True)
+    q5answer = db.Column(db.Text, nullable=True)
+    q6answer = db.Column(db.Text, nullable=True)
+    q7answer = db.Column(db.Text, nullable=True)
+    q8answer = db.Column(db.Text, nullable=True)
+    q9answer = db.Column(db.Text, nullable=True)
+    q10answer = db.Column(db.Text, nullable=True)
+    q11answer = db.Column(db.Text, nullable=True)
+    q12answer = db.Column(db.Text, nullable=True)
+    q13answer = db.Column(db.Text, nullable=True)
+    q14answer = db.Column(db.Text, nullable=True)
+    q15answer = db.Column(db.Text, nullable=True)
+
 
     def __repr__(self):
         return '<Answer {}>'.format(self.answer_id)
