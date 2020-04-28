@@ -58,7 +58,7 @@ def signup():
             db.session.add(user)
             db.session.commit()
             response = make_response(redirect(url_for('main.index')))
-            response.set_cookie("name", form.name.data)
+            response.set_cookie("username", form.username.data)
             return response
         except IntegrityError:
             db.session.rollback()
@@ -76,11 +76,11 @@ def login():
             flash('Invalid username or password')
             return redirect(url_for('auth.login'))
         login_user(user, remember=form.remember.data, duration=timedelta(minutes=1))
-        flash('{} logged in successfully'.format(user.name))
+        flash('{} logged in successfully'.format(user.username))
         next = request.args.get('next')
         if not is_safe_url(next):
             return abort(400)
-        return redirect(next or url_for('main.homepage'))
+        return redirect(next or url_for('main.index'))
     return render_template('login.html', form=form)
 
 
@@ -89,4 +89,4 @@ def login():
 def logout():
     logout_user()
     flash('You have been logged out.')
-    return redirect(url_for('main.homepage'))
+    return redirect(url_for('main.index'))

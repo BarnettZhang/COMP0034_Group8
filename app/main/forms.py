@@ -1,16 +1,16 @@
 from flask_wtf import FlaskForm
 from sqlalchemy import or_
 from sqlalchemy.orm import with_polymorphic
-from wtforms import SelectField, StringField, PasswordField, ValidationError, BooleanField, SubmitField
-from wtforms.validators import DataRequired, Email, EqualTo, Length
+from wtforms import SelectField, StringField, PasswordField, ValidationError, BooleanField
+from wtforms.validators import DataRequired, Email, EqualTo
+
 
 from app import db
-from app.models import Survey, User, Question, Answer
+from app.models import Survey, User, Answer
 
 
 class CreateSurvey(FlaskForm):
-    target_gender = SelectField('Gender',
-                                choices=[('male', 'Male'), ('female', 'Female'), ('all gender', 'All Gender')])
+    target_gender = SelectField('Gender', choices=[('male', 'Male'), ('female', 'Female'), ('all gender', 'All Gender')])
     target_minimum_age = StringField('Minimum Age')
     target_maximum_age = StringField('Maximum Age')
     target_nationality = StringField('Nationality')

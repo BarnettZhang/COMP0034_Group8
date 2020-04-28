@@ -48,10 +48,12 @@
                     <a class="dropdown-item" href="{{ url_for('auth.unauthorized') }}">My profile</a>
                     <a class="dropdown-item" href="{{ url_for('auth.signup') }}">Signup</a>
                     <a class="dropdown-item" href="{{ url_for('auth.login') }}">Log in</a>
-
+                </div>
                 {% else %}
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="{{ url_for('main.edit_personal_info') }}">My profile</a>
                     <a class="dropdown-item" href="{{ url_for('auth.logout') }}">Logout</a>
+                </div>
                 {% endif %}
 
             </li>

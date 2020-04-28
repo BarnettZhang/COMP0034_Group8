@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from sqlalchemy.orm import with_polymorphic
-from wtforms import StringField, SubmitField, PasswordField, BooleanField, SelectField, DateField
+from wtforms import StringField, SubmitField, PasswordField, BooleanField, SelectField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 
 from app import db
