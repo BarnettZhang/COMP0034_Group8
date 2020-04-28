@@ -1,21 +1,15 @@
 {% extends "base.html" %}
+{% block title %} Login {% endblock %}
 {% block content %}
-            <div class="loginForm">
-                <h2>Login</h2>
-                <form>
-                    {{ form.hidden_tag() }}
-                    <fieldset class="form-group">
-                    <p>Username</p>
-                    {{ form.username(class="form-control-label") }}<br>
-                    <p>Email Address</p>
-                    {{ form.email(class="form-control-label") }}<br>
-                    <p>Password</p>
-                    {{ form.password(class="form-control-label") }}<br>
-                    <p>Conform Password</p>
-                    {{ form.confirm_password(class="form-control-label") }}<br>
-                    {{ form.submit(class="btn btn-outline-info") }}
-                    </fieldset>
-                </form>
-                <p>Already Have An Account? <a href=#>Login</a></p>
-            </div>
-{% endblock content %}
+    {% from "_formhelpers.html" import render_field %}
+    <form method=post novalidate>
+        {{ form.csrf_token }}
+    <dl>
+        {{ render_field(form.email, class='form-control') }}
+        {{ render_field(form.password, class='form-control') }}
+        {{ render_field(form.remember) }}
+        <input type=submit value='Login' class='btn btn-primary'>
+    </dl>
+</form>
+    <p>Register Here: <a href="{{ url_for('auth.signup') }}">Sign Up</a></p>
+{% endblock %}
