@@ -1,6 +1,5 @@
 <!-- Use the base template -->
 {% extends "base.html" %}
-
 {% block title %}Search Result {% endblock %}
 {% block content %}
 <table class="table">
@@ -15,7 +14,7 @@
     <tr>
         <td>{{ result.survey_name }}</td>
         <td>{{ result.keyword }}</td>
-        <td>><a href="">UCL home page</a></td>
+        <td><a href="{{ url_for('main.answer_survey') }}">link</a></td>
     </tr>
          {% endfor %}
     </tbody>

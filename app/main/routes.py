@@ -74,7 +74,7 @@ def search_result():
         return redirect(url_for('main.index'))
 
 
-@bp_main.route('/answer', methods=['POST', 'GET'])
+@bp_main.route('/answer_survey', methods=['POST', 'GET'])
 def answer_survey():
     form = CreateSurvey(request.form)
     answer = AnswerSurvey(request.form)
