@@ -108,3 +108,22 @@ class CreateSurvey(FlaskForm):
         if target_minimum_age > target_maximum_age:
             raise ValidationError('The target maximum age must be higher than the minimum.')
 
+
+class CreateSurvey(FlaskForm):
+    q1answer = StringField('Question 1 Answer')
+    q2answer = StringField('Question 2 Answer')
+    q3answer = StringField('Question 3 Answer')
+    q4answer = StringField('Question 4 Answer')
+    q5answer = StringField('Question 5 Answer')
+    q6answer = StringField('Question 6 Answer')
+    q7answer = StringField('Question 7 Answer')
+    q8answer = StringField('Question 8 Answer')
+    q9answer = StringField('Question 9 Answer')
+    q10answer = StringField('Question 10 Answer')
+    q11answer = StringField('Question 11 Answer')
+    q12answer = StringField('Question 12 Answer')
+    q13answer = StringField('Question 13 Answer')
+    q14answer = StringField('Question 14 Answer')
+    q15answer = StringField('Question 15 Answer')
+
+
