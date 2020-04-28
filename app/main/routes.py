@@ -112,21 +112,18 @@ def search_result():
 
 @bp_main.route('/answer', methods=['POST', 'GET'])
 def answer_survey():
+    form = CreateSurvey(request.form)
     answer = AnswerSurvey(request.form)
     if request.method == 'POST':
-        answer = Answer(q1answer=form.q1answer.data, q2answer=form.q2answer.data, q3answer=form.q3answer.data,
-                        q4answer=form.q4answer.data, q5answer=form.q5answer.data, q6answer=form.q6answer.data,
-                        q7answer=form.q7answer.data, q8answer=form.q8answer.data, q9answer=form.q9answer.data,
-                        q10answer=form.q10answer.data, q11answer=form.q11answer.data, q12answer=form.q12answer.data,
-                        q13answer=form.q13answer.data, q14answer=form.q14answer.data, q15answer=form.q15answer.data)
-    try:
+        answer = Answer(q1answer=answer.q1answer.data, q2answer=answer.q2answer.data, q3answer=answer.q3answer.data,
+                        q4answer=answer.q4answer.data, q5answer=answer.q5answer.data, q6answer=answer.q6answer.data,
+                        q7answer=answer.q7answer.data, q8answer=answer.q8answer.data, q9answer=answer.q9answer.data,
+                        q10answer=answer.q10answer.data, q11answer=answer.q11answer.data, q12answer=answer.q12answer.data,
+                        q13answer=answer.q13answer.data, q14answer=answer.q14answer.data, q15answer=answer.q15answer.data)
         db.session.add(answer)
         db.session.commit()
         flash('You have finished answering')
         return redirect(url_for('main.index'))
-    except IntegrityError:
-        db.session.rollback()
-        flash('There is something wrong with your answer.')
     return render_template("answer_survey.html", answer = answer)
 
 
