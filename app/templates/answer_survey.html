@@ -1,5 +1,54 @@
 {% extends "base.html" %}
 {% block title %} Answering Survey {% endblock %}
 {% block content %}
+    {% from "_formhelpers.html" import render_field %}
+<div class="container">
+<table class="table">
+    <thead class="thead-dark">
+    <tr>
+        <th scope="col">Question</th>
+        <th scope="col">Choice1</th>
+        <th scope="col">Choice2</th>
+        <th scope="col">Choice3</th>
+        <th scope="col">Choice4</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>{{ result.survey_name }}</td>
+        <td>{{ result.keyword }}</td>
+        <td>{{ result.link }}</td>
+    </tr>
+         {% endfor %}
+    </tbody>
+</table>
 
+
+    <div class="row">
+    <div class="col-6">
+            <form method="post" novalidate>
+                    {{ form.csrf_token }}
+                    <dl>
+                        {{ render_field(form.q1answer, class='form-control') }}
+                        {{ render_field(form.q2answer, class='form-control') }}
+                        {{ render_field(form.q3answer, class='form-control') }}
+                        {{ render_field(form.q4answer, class='form-control') }}
+                        {{ render_field(form.q5answer, class='form-control') }}
+                        {{ render_field(form.q6answer, class='form-control') }}
+                        {{ render_field(form.q7answer, class='form-control') }}
+                        {{ render_field(form.q8answer, class='form-control') }}
+                        {{ render_field(form.q9answer, class='form-control') }}
+                        {{ render_field(form.q10answer, class='form-control') }}
+                        {{ render_field(form.q11answer, class='form-control') }}
+                        {{ render_field(form.q12answer, class='form-control') }}
+                        {{ render_field(form.q13answer, class='form-control') }}
+                        {{ render_field(form.q14answer, class='form-control') }}
+                        {{ render_field(form.q15answer, class='form-control') }}
+
+                    </dl>
+                 <button type="submit" class="btn btn-primary">Submit Answer</button>
+                </form>
+    </div>
+    </div>
+</div>
 {% endblock %}
