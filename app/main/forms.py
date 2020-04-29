@@ -10,12 +10,13 @@ from app.models import Survey, User, Answer
 
 
 class CreateSurvey(FlaskForm):
-    target_gender = SelectField('Gender', choices=[('male', 'Male'), ('female', 'Female'), ('all gender', 'All Gender')])
+    target_gender = StringField('Gender')
     target_minimum_age = StringField('Minimum Age')
     target_maximum_age = StringField('Maximum Age')
     target_nationality = StringField('Nationality')
+    keyword = StringField('Keywords')
+    description = StringField('Description')
     end_date = StringField('End date')
-    keyword = StringField('Keyword')
     respondent_number = StringField('Number of Required Responses')
     q1question_num = StringField('Question Number')
     q1question_content = StringField('Question Content')
@@ -102,11 +103,22 @@ class CreateSurvey(FlaskForm):
     q15question_num = StringField('Question Number')
     q15question_content = StringField('Question Content')
     q15question_must = BooleanField('Compulsory or not')
-
-    survey_name = StringField('Survey title*')
-
-    def validate_age(self, target_minimum_age, target_maximum_age):
-        if target_minimum_age > target_maximum_age:
-            raise ValidationError('The target maximum age must be higher than the minimum.')
+    survey_name = StringField('Survey title*', validators=[DataRequired(message='You need a survey title!')])
 
 
+class AnswerSurvey(FlaskForm):
+    q1answer = StringField('Question 1 Answer')
+    q2answer = StringField('Question 2 Answer')
+    q3answer = StringField('Question 3 Answer')
+    q4answer = StringField('Question 4 Answer')
+    q5answer = StringField('Question 5 Answer')
+    q6answer = StringField('Question 6 Answer')
+    q7answer = StringField('Question 7 Answer')
+    q8answer = StringField('Question 8 Answer')
+    q9answer = StringField('Question 9 Answer')
+    q10answer = StringField('Question 10 Answer')
+    q11answer = StringField('Question 11 Answer')
+    q12answer = StringField('Question 12 Answer')
+    q13answer = StringField('Question 13 Answer')
+    q14answer = StringField('Question 14 Answer')
+    q15answer = StringField('Question 15 Answer')

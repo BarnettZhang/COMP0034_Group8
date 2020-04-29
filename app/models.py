@@ -32,6 +32,7 @@ class Survey(db.Model):
     #user_id = db.Column(db.Integer, db.ForeignKey(User.user_id), nullable=True)
     survey_name = db.Column(db.Text, nullable=False, unique=True)
     keyword = db.Column(db.Text, nullable=True)
+    description = db.Column(db.Text, nullable=True)
     target_gender = db.Column(db.Text, nullable=True)
     target_minimum_age = db.Column(db.Text, nullable=True)
     target_maximum_age = db.Column(db.Text, nullable=True)
