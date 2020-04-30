@@ -29,7 +29,7 @@ class User(db.Model, UserMixin):
 
 class Survey(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=True)
-    user_id = db.Column(db.Integer, db.ForeignKey(User.id), nullable=True)
+    user_username = db.Column(db.Integer, db.ForeignKey(User.username), nullable=True)
     survey_name = db.Column(db.Text, nullable=False, unique=True)
     keyword = db.Column(db.Text, nullable=True)
     target_ethnic = db.Column(db.Text, nullable=True)
@@ -135,7 +135,7 @@ class Survey(db.Model):
 
 
 class Answer(db.Model):
-    answer_id = db.Column(db.Integer, primary_key=True, nullable=False, unique=True)
+    id = db.Column(db.Integer, primary_key=True, nullable=False, unique=True)
     #question_id = db.Column(db.Integer, db.ForeignKey(Question.question_id), nullable=False)
     #survey_id = db.Column(db.Integer, db.ForeignKey(Survey.survey_id), nullable=False)
     answer_content = db.Column(db.Text, nullable=False)

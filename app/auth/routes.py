@@ -1,4 +1,4 @@
-from datetime import timedelta
+from datetime import timedelta, datetime
 from urllib.parse import urlparse, urljoin
 
 from flask import render_template, Blueprint, request, flash, redirect, url_for, make_response, abort, session
@@ -72,7 +72,7 @@ def login():
     if request.method == 'POST' and form.validate():
         user = User.query.filter_by(email=form.email.data).first()
         if user is None or not user.check_password(form.password.data):
-            flash('Invalid username or password')
+            flash('Invalid email or password')
             return redirect(url_for('auth.login'))
         login_user(user, remember=form.remember.data, duration=timedelta(minutes=1))
         flash('{} logged in successfully'.format(user.username))
@@ -87,5 +87,7 @@ def login():
 @login_required
 def logout():
     logout_user()
+    response = make_response(redirect(url_for('main.index')))
+    response.set_cookie('username', '', expires=datetime.now())
     flash('You have been logged out.')
-    return redirect(url_for('main.index'))
+    return response

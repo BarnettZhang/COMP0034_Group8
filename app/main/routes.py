@@ -5,7 +5,7 @@ from sqlalchemy import engine
 from sqlalchemy.exc import IntegrityError
 
 from app import db, sess, models
-from app.main.forms import CreateSurvey
+from app.main.forms import CreateSurvey, AnswerSurvey
 from app.models import Survey, User, Answer
 
 bp_main = Blueprint('main', __name__)
@@ -25,8 +25,9 @@ def edit_personal_info():
 @bp_main.route('/create_survey/', methods=['POST', 'GET'])
 def create_survey():
     form = CreateSurvey(request.form)
+    name = request.cookies.get('username')
     if request.method == 'POST':
-        survey = Survey(target_gender=form.target_gender.data, target_maximum_age=form.target_maximum_age.data,
+        survey = Survey(user_username=name, target_gender=form.target_gender.data, target_maximum_age=form.target_maximum_age.data,
                         target_minimum_age=form.target_minimum_age.data,
                         target_nationality=form.target_nationality.data,
                         description=form.description.data, keyword=form.keyword.data,
@@ -127,8 +128,10 @@ def answer_survey():
 
 
 @bp_main.route('/take_survey_profile/', methods=['GET'])
-def take_survey_profile():
-    return render_template("tsp.html")
+def take_survey_profile(name=""):
+    if 'username' in request.cookies:
+        name = request.cookies.get('username')
+    return render_template("tsp.html", name=name)
 
 
 @bp_main.route('/survey_review_profile/', methods=['GET'])
@@ -136,7 +139,7 @@ def survey_review_profile():
     if 'username' in request.cookies:
         name = request.cookies.get('username')
         print('name : '+name, file=sys.stderr)
-        results_only = db.session.query(User.username, User.id, Survey.survey_name, Survey.id.label('survey_id')).all()
+        results_only = db.session.query(Survey.survey_name, Survey.user_username, Survey.id.label('survey_id')).filter_by(user_username=name).all()
         print('results only : ' + str(results_only), file=sys.stderr)
         print('results only : ' + str(type(results_only)), file=sys.stderr)
         if not results_only:

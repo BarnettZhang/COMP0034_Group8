@@ -34,11 +34,10 @@ def create_app(config_class=DevConfig):
 
     # Initialise the database and create tables
     db.init_app(app)
-    from app.models import Survey, Answer,  User
-    from populate_db import populate_db
+    from app.models import Survey, Answer, User
     with app.app_context():
+        db.drop_all()
         db.create_all()
-        populate_db()
 
     # Register error handlers
     app.register_error_handler(404, page_not_found)

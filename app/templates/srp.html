@@ -1,153 +1,33 @@
 {% extends "base.html" %}
-{% block title %}Take Survey {% endblock %}
+{% block title %}My Survey {% endblock %}
 {% block content %}
+{% if results|length %}
+
+
      <h3>
-        <div class="left_relative_2">Ongoing Survey</div>
-        <div class="right_relative_2">Closed Survey</div>
+        <div class="mid_relative">My Survey</div>
     </h3>
+
+            <form class="form-inline ml-auto" action="search" method="post">
+        <input class="form-control" type="search_survey" placeholder="Enter survey ID" aria-label="Search" name="search_survey">
+        <button class="search-btn btn-outline-dark my-2" type="submit">Search Survey Result</button>
+        </form>
 
  <div class="app_page1">
     <div class="row">
-        <div class="col-sm-4" id="left">
-          <a href=" " class="list-group-item list-group-item-action flex-column align-items-start take_survey_list_margin">
+        <div class="col-sm-4" id="mid">
+          <a class="list-group-item list-group-item-action flex-column align-items-start take_survey_list_margin">
     <div class="d-flex w-auto justify-content-between">
-    <h5 class="mb-1">Search result title 1</h5>
-    <small>Search result 1 posting date</small>
+        {% for result in results %}
+    <h5 class="mb-1">{{ result.survey_name }}</h5>
+        <small>{{result.survey_id}}</small>
     </div>
-        <p class="mb-1">Search result 1 description. Maecenas sed diam eget risus varius blandit.aecenas sed diam eget risus varius blandit.aecenas sed diam eget risus varius blandit.</p >
-          </a >
-           <a href=" " class="list-group-item list-group-item-action flex-column align-items-start take_survey_list_margin">
-    <div class="d-flex w-auto justify-content-between">
-    <h5 class="mb-1">Search result title 1</h5>
-    <small>Search result 1 posting date</small>
-    </div>
-        <p class="mb-1">Search result 1 description. Maecenas sed diam eget risus varius blandit.aecenas sed diam eget risus varius blandit.aecenas sed diam eget risus varius blandit.</p >
-          </a >
-           <a href=" " class="list-group-item list-group-item-action flex-column align-items-start take_survey_list_margin">
-    <div class="d-flex w-auto justify-content-between">
-    <h5 class="mb-1">Search result title 1</h5>
-    <small>Search result 1 posting date</small>
-    </div>
-        <p class="mb-1">Search result 1 description. Maecenas sed diam eget risus varius blandit.aecenas sed diam eget risus varius blandit.aecenas sed diam eget risus varius blandit.</p >
-          </a >
-           <a href=" " class="list-group-item list-group-item-action flex-column align-items-start take_survey_list_margin">
-    <div class="d-flex w-auto justify-content-between">
-    <h5 class="mb-1">Search result title 1</h5>
-    <small>Search result 1 posting date</small>
-    </div>
-        <p class="mb-1">Search result 1 description. Maecenas sed diam eget risus varius blandit.aecenas sed diam eget risus varius blandit.aecenas sed diam eget risus varius blandit.</p >
-          </a >
-           <a href=" " class="list-group-item list-group-item-action flex-column align-items-start take_survey_list_margin">
-    <div class="d-flex w-auto justify-content-between">
-    <h5 class="mb-1">Search result title 1</h5>
-    <small>Search result 1 posting date</small>
-    </div>
-        <p class="mb-1">Search result 1 description. Maecenas sed diam eget risus varius blandit.aecenas sed diam eget risus varius blandit.aecenas sed diam eget risus varius blandit.</p >
-          </a >
-           <a href=" " class="list-group-item list-group-item-action flex-column align-items-start take_survey_list_margin">
-    <div class="d-flex w-auto justify-content-between">
-    <h5 class="mb-1">Search result title 1</h5>
-    <small>Search result 1 posting date</small>
-    </div>
-        <p class="mb-1">Search result 1 description. Maecenas sed diam eget risus varius blandit.aecenas sed diam eget risus varius blandit.aecenas sed diam eget risus varius blandit.</p >
-          </a >
-           <a href=" " class="list-group-item list-group-item-action flex-column align-items-start take_survey_list_margin">
-    <div class="d-flex w-auto justify-content-between">
-    <h5 class="mb-1">Search result title 1</h5>
-    <small>Search result 1 posting date</small>
-    </div>
-        <p class="mb-1">Search result 1 description. Maecenas sed diam eget risus varius blandit.aecenas sed diam eget risus varius blandit.aecenas sed diam eget risus varius blandit.</p >
-          </a >
-           <a href=" " class="list-group-item list-group-item-action flex-column align-items-start take_survey_list_margin">
-    <div class="d-flex w-auto justify-content-between">
-    <h5 class="mb-1">Search result title 1</h5>
-    <small>Search result 1 posting date</small>
-    </div>
-        <p class="mb-1">Search result 1 description. Maecenas sed diam eget risus varius blandit.aecenas sed diam eget risus varius blandit.aecenas sed diam eget risus varius blandit.</p >
-          </a >
-           <a href=" " class="list-group-item list-group-item-action flex-column align-items-start take_survey_list_margin">
-    <div class="d-flex w-auto justify-content-between">
-    <h5 class="mb-1">Search result title 1</h5>
-    <small>Search result 1 posting date</small>
-    </div>
-        <p class="mb-1">Search result 1 description. Maecenas sed diam eget risus varius blandit.aecenas sed diam eget risus varius blandit.aecenas sed diam eget risus varius blandit.</p >
-          </a >
+          </a>
         </div>
-
-
-        <div class="col-sm-4" id="right">
-           <a href=" " class="list-group-item list-group-item-action flex-column align-items-start take_survey_list_margin">
-    <div class="d-flex w-auto justify-content-between">
-    <h5 class="mb-1">Search result title 1</h5>
-    <small>Search result 1 posting date</small>
     </div>
-        <p class="mb-1">Search result 1 description. Maecenas sed diam eget risus varius blandit.aecenas sed diam eget risus varius blandit.aecenas sed diam eget risus varius blandit.</p >
-          </a >
-            <a href=" " class="list-group-item list-group-item-action flex-column align-items-start take_survey_list_margin">
-    <div class="d-flex w-auto justify-content-between">
-    <h5 class="mb-1">Search result title 1</h5>
-    <small>Search result 1 posting date</small>
-    </div>
-        <p class="mb-1">Search result 1 description. Maecenas sed diam eget risus varius blandit.aecenas sed diam eget risus varius blandit.aecenas sed diam eget risus varius blandit.</p >
-          </a >
-            <a href=" " class="list-group-item list-group-item-action flex-column align-items-start take_survey_list_margin">
-    <div class="d-flex w-auto justify-content-between">
-    <h5 class="mb-1">Search result title 1</h5>
-    <small>Search result 1 posting date</small>
-    </div>
-        <p class="mb-1">Search result 1 description. Maecenas sed diam eget risus varius blandit.aecenas sed diam eget risus varius blandit.aecenas sed diam eget risus varius blandit.</p >
-          </a >
-            <a href=" " class="list-group-item list-group-item-action flex-column align-items-start take_survey_list_margin">
-    <div class="d-flex w-auto justify-content-between">
-    <h5 class="mb-1">Search result title 1</h5>
-    <small>Search result 1 posting date</small>
-    </div>
-        <p class="mb-1">Search result 1 description. Maecenas sed diam eget risus varius blandit.aecenas sed diam eget risus varius blandit.aecenas sed diam eget risus varius blandit.</p >
-          </a >
-            <a href=" " class="list-group-item list-group-item-action flex-column align-items-start take_survey_list_margin">
-    <div class="d-flex w-auto justify-content-between">
-    <h5 class="mb-1">Search result title 1</h5>
-    <small>Search result 1 posting date</small>
-    </div>
-        <p class="mb-1">Search result 1 description. Maecenas sed diam eget risus varius blandit.aecenas sed diam eget risus varius blandit.aecenas sed diam eget risus varius blandit.</p >
-          </a >
-            <a href=" " class="list-group-item list-group-item-action flex-column align-items-start take_survey_list_margin">
-    <div class="d-flex w-auto justify-content-between">
-    <h5 class="mb-1">Search result title 1</h5>
-    <small>Search result 1 posting date</small>
-    </div>
-        <p class="mb-1">Search result 1 description. Maecenas sed diam eget risus varius blandit.aecenas sed diam eget risus varius blandit.aecenas sed diam eget risus varius blandit.</p >
-          </a >
-            <a href=" " class="list-group-item list-group-item-action flex-column align-items-start take_survey_list_margin">
-    <div class="d-flex w-auto justify-content-between">
-    <h5 class="mb-1">Search result title 1</h5>
-    <small>Search result 1 posting date</small>
-    </div>
-        <p class="mb-1">Search result 1 description. Maecenas sed diam eget risus varius blandit.aecenas sed diam eget risus varius blandit.aecenas sed diam eget risus varius blandit.</p >
-          </a >
-            <a href=" " class="list-group-item list-group-item-action flex-column align-items-start take_survey_list_margin">
-    <div class="d-flex w-auto justify-content-between">
-    <h5 class="mb-1">Search result title 1</h5>
-    <small>Search result 1 posting date</small>
-    </div>
-        <p class="mb-1">Search result 1 description. Maecenas sed diam eget risus varius blandit.aecenas sed diam eget risus varius blandit.aecenas sed diam eget risus varius blandit.</p >
-          </a >
-            <a href=" " class="list-group-item list-group-item-action flex-column align-items-start take_survey_list_margin">
-    <div class="d-flex w-auto justify-content-between">
-    <h5 class="mb-1">Search result title 1</h5>
-    <small>Search result 1 posting date</small>
-    </div>
-        <p class="mb-1">Search result 1 description. Maecenas sed diam eget risus varius blandit.aecenas sed diam eget risus varius blandit.aecenas sed diam eget risus varius blandit.</p >
-          </a >
-            <a href=" " class="list-group-item list-group-item-action flex-column align-items-start take_survey_list_margin">
-    <div class="d-flex w-auto justify-content-between">
-    <h5 class="mb-1">Search result title 1</h5>
-    <small>Search result 1 posting date</small>
-    </div>
-        <p class="mb-1">Search result 1 description. Maecenas sed diam eget risus varius blandit.aecenas sed diam eget risus varius blandit.aecenas sed diam eget risus varius blandit.</p >
-          </a >
-    </div>
-  </div>
  </div>
-
+{% endfor %}
+{% else %}
+     <p>Sorry, no survey found</p>
+{% endif %}
 {% endblock %}
