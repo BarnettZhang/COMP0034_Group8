@@ -16,8 +16,8 @@ class RegistrationForm(FlaskForm):
     confirm_password = PasswordField('Confirm Password')
     gender = SelectField('Gender', choices=[('male', 'Male'), ('female', 'Female')], validators=[DataRequired()])
     age = StringField('Age', validators=[DataRequired()])
-    ethnic = SelectField('Ethnicity', choices=[('white', 'White'), ('black', 'Black'), ('asian', 'Asian'),
-                                            ('arab', 'Arab'), ('mixed', 'Mixed'), ('other ethnic group', 'Other ethnic group')], validators=[DataRequired()])
+    ethnic = SelectField('Ethnic', choices=[('white', 'White'), ('black', 'Black'), ('asian', 'Asian'),
+                                            ('arab', 'Arab'), ('mixed', 'Mixed')], validators=[DataRequired()])
     religion = SelectField('Religion', choices=[('christianity', 'Christianity'), ('islam', 'Islam'),
                                                 ('buddhism', 'Buddhism'), ('hinduism', 'Hinduism'),
                                                 ('folk religion', 'Folk Religions'), ('irreligion', 'Irreligious')],
@@ -27,6 +27,14 @@ class RegistrationForm(FlaskForm):
 
 
 class LoginForm(FlaskForm):
-    email = StringField('Email', validators=[DataRequired()])
+    #email = StringField('Email', validators=[DataRequired()])
+    username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
     remember = BooleanField('Remember Me')
+
+
+
+class ProfileForm(FlaskForm):
+    email = StringField('Email', validators=[DataRequired(), Email(message='Valid email address required')])
+    age = StringField('Age', validators=[DataRequired()])
+    institution = StringField('Institution', validators=[DataRequired()])

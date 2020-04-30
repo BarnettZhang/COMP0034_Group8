@@ -3,8 +3,10 @@ import sys
 from flask import Blueprint, request, make_response, redirect, url_for, flash, render_template, session, abort
 from sqlalchemy import engine
 from sqlalchemy.exc import IntegrityError
+from flask_login import login_user, current_user, login_required
 
 from app import db, sess, models
+from app.auth.forms import RegistrationForm, ProfileForm
 from app.main.forms import CreateSurvey
 from app.models import Survey, User, Answer
 
@@ -15,23 +17,19 @@ bp_main = Blueprint('main', __name__)
 def index():
     return render_template('homepage.html')
 
-@bp_main.route('/edit_personal_info/', methods=['GET' , 'POST'])
-def edit_personal_info(username=""):
-    if 'username' in request.cookies:
-        username = request.cookies.get('username')
-
-    return render_template('personal_info_edit.html', username=username)
-
 
 @bp_main.route('/create_survey/', methods=['POST', 'GET'])
 def create_survey():
     form = CreateSurvey(request.form)
+    name = request.cookies.get('username')
     if request.method == 'POST':
-        survey = Survey(target_gender=form.target_gender.data, target_maximum_age=form.target_maximum_age.data,
+        survey = Survey(user_username=name, target_gender=form.target_gender.data,
+                        target_maximum_age=form.target_maximum_age.data,
                         target_minimum_age=form.target_minimum_age.data,
                         target_nationality=form.target_nationality.data,
                         end_date=form.end_date.data, respondent_number=form.respondent_number.data,
                         survey_name=form.survey_name.data,
+                        keyword=form.keyword.data, description=form.description.data,
                         q1question_num=form.q1question_num.data, q1question_must=form.q1question_must.data,
                         q1question_content=form.q1question_content.data, q1choice_one=form.q1choice_one.data,
                         q1choice_two=form.q1choice_two.data, q1choice_three=form.q1choice_three.data,
@@ -121,7 +119,7 @@ def take_survey_profile(name=""):
 def survey_review_profile():
     if 'username' in request.cookies:
         name = request.cookies.get('username')
-        print('name : '+name, file=sys.stderr)
+        print('name : ' + name, file=sys.stderr)
         # trying = User.query.filter_by(username='123').first()
         # print('pls work xD : ' + str(trying.id), file=sys.stderr)
         # print('pls work xD : ' + str(trying.age), file=sys.stderr)
@@ -132,7 +130,10 @@ def survey_review_profile():
         # results_only = User.query.join(Survey).with_entities(User.username, User.id, Survey.id.label('survey_id'),
         #                                       Survey.survey_name.label('survey_name')).all()
         # results_only = db.session.query(User).join(Survey).all()
-        results_only = db.session.query(User.username, User.id, Survey.survey_name, Survey.id.label('survey_id')).all()
+        results_only = db.session.query(Survey.survey_name, Survey.user_username, Survey.description,
+                                        Survey.id.label('survey_id')).filter_by(user_username=name).all()
+        # results_only = db.session.query(User.username, User.id, Survey.survey_name,
+        #                                 Survey.id.label('survey_id'), Survey.description).filter(User.username == name).all()
         print('results only : ' + str(results_only), file=sys.stderr)
         print('results only : ' + str(type(results_only)), file=sys.stderr)
         # srp_table = db.session.query(User.username, User.id, Survey.id.label('survey_id'),
@@ -146,6 +147,73 @@ def survey_review_profile():
         return redirect('main.index')
 
 
+@bp_main.route('/search_survey_results/', methods=['POST', 'GET'])
+def search_survey_results():
+    if request.method == 'POST':
+        term = request.form['search_term']
+        if term == "":
+            flash("Enter a survey to search for")
+            return redirect('/')
+    if 'username' in request.cookies:
+        name = request.cookies.get('username')
+        print('name : ' + name, file=sys.stderr)
+
+        results_only = db.session.query(Survey.survey_name, Survey.user_username, Survey.description,
+                                        Survey.id.label('survey_id'),
+                                        Answer.id, Answer.answer_content).\
+            filter_by(user_username=name). \
+            filter_by(survey_id=term).all()
+
+        print('results only : ' + str(results_only), file=sys.stderr)
+        print('results only : ' + str(type(results_only)), file=sys.stderr)
+
+        if not results_only:
+            flash("This survey does not exist, Please search again.")
+            return redirect('/')
+        return render_template('survey_results.html', results=results_only)
+    else:
+        return redirect('main.index')
+
+
 @bp_main.route('/privacy_policy', methods=['GET'])
 def privacy_policy():
     return render_template("privacy_policy.html")
+
+
+class ProfileFrom(object):
+    pass
+
+
+@bp_main.route('/edit_personal_info/', methods=['GET','POST'])
+def edit_personal_info(username=""):
+    if 'username' in request.cookies:
+        #   username = request.cookies.get('username')
+        username = current_user.username
+        email = current_user.email
+        age = current_user.age
+        gender = current_user.gender
+        religion = current_user.religion
+        nationality = current_user.nationality
+        ethnic = current_user.ethnic
+        institution = current_user.institution
+
+        form = ProfileForm(request.form)
+        if request.method == 'POST' and form.validate():
+            current_user.email = form.email.data
+            current_user.age = form.age.data
+            current_user.institution = form.institution.data
+            try:
+                db.session.flush()
+                db.session.commit()
+                flash('You have updated personal information.')
+                return redirect('/')
+            except IntegrityError:
+                db.session.rollback()
+                flash('Unable to change personal information.')
+        return render_template('signup.html', form=form, username=username, email=email, gender=gender,
+                           age=age, religion=religion, nationality=nationality, ethnic=ethnic, institution=institution)
+
+
+    return render_template("personal_info_edit.html", username=username, email=email, gender=gender,
+                           age=age, religion=religion, nationality=nationality, ethnic=ethnic, institution=institution)
+
