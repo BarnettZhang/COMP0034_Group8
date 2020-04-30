@@ -10,7 +10,7 @@ from app.models import Survey, User, Answer
 
 
 class CreateSurvey(FlaskForm):
-    target_gender = StringField('Gender')
+    target_gender = StringField('Gender(Please enter:male, female, or allgender.')
     target_minimum_age = StringField('Minimum Age')
     target_maximum_age = StringField('Maximum Age')
     target_nationality = StringField('Nationality')

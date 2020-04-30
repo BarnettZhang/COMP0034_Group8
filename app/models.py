@@ -5,12 +5,13 @@ from app import db
 
 class User(db.Model):
     user_id = db.Column(db.Integer, primary_key=True, nullable=True, unique=True)
-    first_name = db.Column(db.Text, nullable=False)
-    last_name = db.Column(db.Text, nullable=False)
     username = db.Column(db.Text, nullable=False)
     password = db.Column(db.Text, nullable=False)
     age = db.Column(db.Integer, nullable=False)
     gender = db.Column(db.Integer, nullable=False)
+    ethnic = db.Column(db.Text, nullable=False)
+    religion = db.Column(db.Text, nullable=False)
+    nationality = db.Column(db.Text, nullable=False)
     email = db.Column(db.Text, nullable=False)
     institution = db.Column(db.Text, nullable=False)
     credit = db.Column(db.Integer, nullable=False)
