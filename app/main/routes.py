@@ -60,36 +60,28 @@ def finish_create_survey():
 
 @bp_main.route('/search', methods=['POST', 'GET'])
 def search_result():
-    if request.method == 'POST':
-        term = request.form['search_term']
-        if term == "":
-            flash("Enter a survey name to search for")
-            return redirect('/')
-        results: object = Survey.query.filter(Survey.survey_name.contains(term)).all()
-        if not results:
-            flash("No survey related")
-            return redirect('/')
-        return render_template('search_result.html', results=results)
-    else:
-        return redirect(url_for('main.index'))
-
-
-@bp_main.route('/answer_survey', methods=['POST', 'GET'])
-def answer_survey():
-    form = Survey.query.all()
     answer = AnswerSurvey(request.form)
     if request.method == 'POST':
+        term = request.form['term']
+        if term == "":
+            flash("Enter a survey id")
+            return redirect('/')
+        results: object = Survey.query.filter(Survey.survey_name.is_(term)).all()
+        if not results:
+            flash("No survey with this id")
+            return redirect('/')
         answer = Answer(q1answer=answer.q1answer.data, q2answer=answer.q2answer.data, q3answer=answer.q3answer.data,
                         q4answer=answer.q4answer.data, q5answer=answer.q5answer.data, q6answer=answer.q6answer.data,
                         q7answer=answer.q7answer.data, q8answer=answer.q8answer.data, q9answer=answer.q9answer.data,
-                        q10answer=answer.q10answer.data, q11answer=answer.q11answer.data, q12answer=answer.q12answer.data,
-                        q13answer=answer.q13answer.data, q14answer=answer.q14answer.data, q15answer=answer.q15answer.data)
+                        q10answer=answer.q10answer.data, q11answer=answer.q11answer.data,
+                        q12answer=answer.q12answer.data,
+                        q13answer=answer.q13answer.data, q14answer=answer.q14answer.data,
+                        q15answer=answer.q15answer.data)
         db.session.add(answer)
         db.session.commit()
-        flash('You have finished answering')
+        return render_template('search_result.html', results=results, answer=answer)
+    else:
         return redirect(url_for('main.index'))
-    return render_template("answer_survey.html", answer = answer, form = form)
-
 
 
 @bp_main.route('/take_survey_profile/', methods=['GET'])

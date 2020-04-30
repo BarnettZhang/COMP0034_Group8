@@ -1,133 +1,0 @@
-{% extends "base.html" %}
-{% block title %} Answering Survey {% endblock %}
-{% block content %}
-    {% from "_formhelpers.html" import render_field %}
-<div class="container">
-<table class="table">
-    <thead class="thead-dark">
-    <tr>
-        <th scope="col">Question</th>
-        <th scope="col">Choice1</th>
-        <th scope="col">Choice2</th>
-        <th scope="col">Choice3</th>
-        <th scope="col">Choice4</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>{{ form.q1question_content }}</td>
-        <td>{{ form.q1choice_one }}</td>
-        <td>{{ form.q1choice_two }}</td>
-        <td>{{ form.q1choice_three }}</td>
-        <td>{{ form.q1choice_four }}</td>
-    </tr>
-        <tr>
-        <td>{{ form.q2question_content }}</td>
-        <td>{{ form.q2choice_one }}</td>
-        <td>{{ form.q2choice_two }}</td>
-        <td>{{ form.q2choice_three }}</td>
-        <td>{{ form.q2choice_four }}</td>
-    </tr>
-        <tr>
-        <td>{{ form.q3question_content }}</td>
-        <td>{{ form.q3choice_one }}</td>
-        <td>{{ form.q3choice_two }}</td>
-        <td>{{ form.q3choice_three }}</td>
-        <td>{{ form.q3choice_four }}</td>
-    </tr>
-        <tr>
-        <td>{{ form.q4question_content }}</td>
-        <td>{{ form.q4choice_one }}</td>
-        <td>{{ form.q4choice_two }}</td>
-        <td>{{ form.q4choice_three }}</td>
-        <td>{{ form.q4choice_four }}</td>
-    </tr>
-        <tr>
-        <td>{{ form.q5question_content }}</td>
-        <td>{{ form.q5choice_one }}</td>
-        <td>{{ form.q5choice_two }}</td>
-        <td>{{ form.q5choice_three }}</td>
-        <td>{{ form.q5choice_four }}</td>
-    </tr>
-        <tr>
-        <td>{{ form.q6question_content }}</td>
-        <td>{{ form.q6choice_one }}</td>
-        <td>{{ form.q6choice_two }}</td>
-        <td>{{ form.q6choice_three }}</td>
-        <td>{{ form.q6choice_four }}</td>
-    </tr>
-        <tr>
-        <td>{{ form.q7question_content }}</td>
-        <td>{{ form.q7choice_one }}</td>
-        <td>{{ form.q7choice_two }}</td>
-        <td>{{ form.q7choice_three }}</td>
-        <td>{{ form.q7choice_four }}</td>
-    </tr>
-        <tr>
-        <td>{{ form.q8question_content }}</td>
-        <td>{{ form.q8choice_one }}</td>
-        <td>{{ form.q8choice_two }}</td>
-        <td>{{ form.q8choice_three }}</td>
-        <td>{{ form.q8choice_four }}</td>
-    </tr>
-        <tr>
-        <td>{{ form.q9question_content }}</td>
-        <td>{{ form.q9choice_one }}</td>
-        <td>{{ form.q9choice_two }}</td>
-        <td>{{ form.q9choice_three }}</td>
-        <td>{{ form.q9choice_four }}</td>
-    </tr>
-        <tr>
-        <td>{{ form.q10question_content }}</td>
-        <td>{{ form.q10choice_one }}</td>
-        <td>{{ form.q10choice_two }}</td>
-        <td>{{ form.q10choice_three }}</td>
-        <td>{{ form.q10choice_four }}</td>
-    </tr>
-    <tr>
-        <td>{{ form.q11question_content }}</td>
-    </tr>
-    <tr>
-        <td>{{ form.q12question_content }}</td>
-    </tr>
-    <tr>
-        <td>{{ form.q13question_content }}</td>
-    </tr>
-    <tr>
-        <td>{{ form.q14question_content }}</td>
-    </tr>
-    <tr>
-        <td>{{ form.q15question_content }}</td>
-    </tr>
-    </tbody>
-</table>
-
-
-    <div class="row">
-    <div class="col-6">
-            <form method="post" novalidate>
-                    {{ form.csrf_token }}
-                    <dl>
-                        {{ render_field(answer.q1answer, class='form-control') }}
-                        {{ render_field(answer.q2answer, class='form-control') }}
-                        {{ render_field(answer.q3answer, class='form-control') }}
-                        {{ render_field(answer.q4answer, class='form-control') }}
-                        {{ render_field(answer.q5answer, class='form-control') }}
-                        {{ render_field(answer.q6answer, class='form-control') }}
-                        {{ render_field(answer.q7answer, class='form-control') }}
-                        {{ render_field(answer.q8answer, class='form-control') }}
-                        {{ render_field(answer.q9answer, class='form-control') }}
-                        {{ render_field(answer.q10answer, class='form-control') }}
-                        {{ render_field(answer.q11answer, class='form-control') }}
-                        {{ render_field(answer.q12answer, class='form-control') }}
-                        {{ render_field(answer.q13answer, class='form-control') }}
-                        {{ render_field(answer.q14answer, class='form-control') }}
-                        {{ render_field(answer.q15answer, class='form-control') }}
-
-                    </dl>
-                 <button type="submit" class="btn btn-primary">Submit Answer</button>
-                </form>
-    </div>
-    </div>
-</div>
-{%endblock%}
