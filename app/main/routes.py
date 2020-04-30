@@ -25,12 +25,14 @@ def edit_personal_info():
 @bp_main.route('/create_survey/', methods=['POST', 'GET'])
 def create_survey():
     form = CreateSurvey(request.form)
+    name = request.cookies.get('username')
     if request.method == 'POST':
-        survey = Survey(target_gender=form.target_gender.data, target_maximum_age=form.target_maximum_age.data,
+        survey = Survey(user_username=name, target_gender=form.target_gender.data, target_maximum_age=form.target_maximum_age.data,
                         target_minimum_age=form.target_minimum_age.data,
                         target_nationality=form.target_nationality.data,
                         end_date=form.end_date.data, respondent_number=form.respondent_number.data,
                         survey_name=form.survey_name.data,
+                        keyword=form.keyword.data, description=form.description.data,
                         q1question_num=form.q1question_num.data, q1question_must=form.q1question_must.data,
                         q1question_content=form.q1question_content.data, q1choice_one=form.q1choice_one.data,
                         q1choice_two=form.q1choice_two.data, q1choice_three=form.q1choice_three.data,
@@ -92,8 +94,6 @@ def create_survey():
             # trying2 = Survey.query.filter_by(survey_name="TEST123").first()
             # print('pls work xD : ' + str(trying2.id), file=sys.stderr)
 
-
-
             return redirect(url_for('main.index'))
         except IntegrityError:
             db.session.rollback()
@@ -132,8 +132,11 @@ def survey_review_profile():
         # result_second = Survey.query.filter_by
         # results_only = User.query.join(Survey).with_entities(User.username, User.id, Survey.id.label('survey_id'),
         #                                       Survey.survey_name.label('survey_name')).all()
-        # results_only = db.session.query(User).join(Survey).all()
-        results_only = db.session.query(User.username, User.id, Survey.survey_name, Survey.id.label('survey_id')).all()
+        #results_only = db.session.query(User).join(Survey).all()
+        results_only = db.session.query(Survey.survey_name, Survey.user_username, Survey.description,
+                                        Survey.id.label('survey_id')).filter_by(user_username=name).all()
+        # results_only = db.session.query(User.username, User.id, Survey.survey_name,
+        #                                 Survey.id.label('survey_id'), Survey.description).filter(User.username == name).all()
         print('results only : ' + str(results_only), file=sys.stderr)
         print('results only : ' + str(type(results_only)), file=sys.stderr)
         # srp_table = db.session.query(User.username, User.id, Survey.id.label('survey_id'),

@@ -19,6 +19,9 @@
                         {{ render_field (form.target_minimum_age, class='form-control') }}
                         {{ render_field (form.target_maximum_age, class='form-control') }}
                         {{ render_field (form.target_nationality, class='form-control') }}
+                        {{ render_field (form.target_religion, class='form-control') }}
+                        {{ render_field (form.target_ethnic, class='form-control') }}
+
 
                     </dl>
                 </form>
@@ -40,10 +43,13 @@
     </div>
 
     <div class="col-6">
-            <form method="post" novalidate>
+        <form method="post" novalidate>
+            <button type="submit" class="btn btn-primary">Finish editing the survey</button>
                     {{ form.csrf_token }}
                     <dl>
                         {{ render_field(form.survey_name, class='form-control') }}
+                        {{ render_field(form.keyword, class='form-control') }}
+                        {{ render_field(form.description, class='form-control') }}
                         <br>
                         {{ render_field(form.q1question_num, class='form-control') }}
                         {{ render_field(form.q1question_must, class='form-control') }}
@@ -146,8 +152,7 @@
                         {{ render_field(form.q15question_content, class='form-control') }}
 
                     </dl>
-                 <button type="submit" class="btn btn-primary">Finish editing the survey</button>
-                </form>
+                                </form>
     </div>
     </div>
 </div>

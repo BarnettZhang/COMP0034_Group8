@@ -16,17 +16,19 @@
  <div class="app_page1">
     <div class="row">
         <div class="col-sm-4" id="mid">
+            {% for result in results %}
           <a class="list-group-item list-group-item-action flex-column align-items-start take_survey_list_margin">
     <div class="d-flex w-auto justify-content-between">
-        {% for result in results %}
     <h5 class="mb-1">{{ result.survey_name }}</h5>
-        <small>{{result.survey_id}}</small>
+        <small>Survey ID: {{result.survey_id}}</small>
     </div>
+        <p class="mb-1">{{ result.survey_name }} description: {{ result.description }}</p >
           </a>
+            {% endfor %}
         </div>
+
     </div>
  </div>
-{% endfor %}
 {% else %}
      <p>Sorry, no survey found</p>
 {% endif %}

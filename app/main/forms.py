@@ -10,10 +10,19 @@ from app.models import Survey, User, Answer
 
 
 class CreateSurvey(FlaskForm):
-    target_gender = SelectField('Gender', choices=[('male', 'Male'), ('female', 'Female'), ('all gender', 'All Gender')])
+    target_gender = SelectField('Gender*', choices=[('male', 'Male'), ('female', 'Female'), ('all', 'All')],
+                                validators=[DataRequired()])
     target_minimum_age = StringField('Minimum Age')
     target_maximum_age = StringField('Maximum Age')
     target_nationality = StringField('Nationality')
+    target_ethnic = SelectField('Ethnic*', choices=[('white', 'White'), ('black', 'Black'), ('asian', 'Asian'),
+                                            ('arab', 'Arab'), ('mixed', 'Mixed'), ('all', 'All')], validators=[DataRequired()])
+    target_religion = SelectField('Religion*', choices=[('christianity', 'Christianity'), ('islam', 'Islam'),
+                                                ('buddhism', 'Buddhism'), ('hinduism', 'Hinduism'),
+                                                ('folk religion', 'Folk Religions'), ('irreligious', 'Irreligious'), ('all', 'All')],
+                           validators=[DataRequired()])
+    keyword = StringField('Keywords')
+    description = StringField('Description')
     end_date = StringField('End date')
     respondent_number = StringField('Number of Required Responses')
     q1question_num = StringField('Question Number')
@@ -101,9 +110,5 @@ class CreateSurvey(FlaskForm):
     q15question_num = StringField('Question Number')
     q15question_content = StringField('Question Content')
     q15question_must = BooleanField('Compulsory or not')
+    survey_name = StringField('Survey title*', validators=[DataRequired(message='You need a survey title!')])
 
-    survey_name = StringField('Survey title*')
-
-    def validate_age(self, target_minimum_age, target_maximum_age):
-        if target_minimum_age > target_maximum_age:
-            raise ValidationError('The target maximum age must be higher than the minimum.')

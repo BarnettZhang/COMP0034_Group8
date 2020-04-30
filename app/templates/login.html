@@ -5,7 +5,7 @@
     <form method=post novalidate>
         {{ form.csrf_token }}
     <dl>
-        {{ render_field(form.email, class='form-control') }}
+        {{ render_field(form.username, class='form-control') }}
         {{ render_field(form.password, class='form-control') }}
         {{ render_field(form.remember) }}
         <input type=submit value='Login' class='btn btn-primary'>

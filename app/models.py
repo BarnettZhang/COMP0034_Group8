@@ -29,9 +29,10 @@ class User(db.Model, UserMixin):
 
 class Survey(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=True)
-    user_id = db.Column(db.Integer, db.ForeignKey(User.id), nullable=True)
+    user_username = db.Column(db.Integer, db.ForeignKey(User.username), nullable=True)
     survey_name = db.Column(db.Text, nullable=False, unique=True)
     keyword = db.Column(db.Text, nullable=True)
+    description = db.Column(db.Text, nullable=True)
     target_gender = db.Column(db.Text, nullable=True)
     target_minimum_age = db.Column(db.Text, nullable=True)
     target_maximum_age = db.Column(db.Text, nullable=True)
