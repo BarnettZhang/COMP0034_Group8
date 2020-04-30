@@ -28,9 +28,11 @@ def create_app(config_class=DevConfig):
 
     # Initialise the database and create tables
     db.init_app(app)
+    from populate_db import populate_db
     from app.models import Survey, Answer, User
     with app.app_context():
         db.create_all()
+        populate_db()
 
     from app.main.routes import bp_main
     app.register_blueprint(bp_main)
