@@ -1,6 +1,7 @@
 from werkzeug.security import generate_password_hash, check_password_hash
-
+from flask_login import UserMixin
 from app import db
+
 
 
 class User(db.Model, UserMixin):
@@ -14,7 +15,7 @@ class User(db.Model, UserMixin):
     nationality = db.Column(db.Text, nullable=False)
     email = db.Column(db.Text, nullable=False)
     institution = db.Column(db.Text, nullable=False)
-    survey_id = db.relationship('Survey', backref='users')
+    #survey_id = db.relationship('Survey', backref='users')
     #respondent_id = db.relationship('Answer', backref='users')
 
     def __repr__(self):
