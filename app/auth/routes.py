@@ -56,9 +56,8 @@ def signup():
         try:
             db.session.add(user)
             db.session.commit()
-            response = make_response(redirect(url_for('main.index')))
-            response.set_cookie("username", form.username.data)
-            return response
+            flash('Please go to User tab and login now {}. '.format(form.username.data))
+            return redirect('/')
         except IntegrityError:
             db.session.rollback()
             flash('ERROR! Unable to register {}. Please check your details are correct and resubmit'.format(
@@ -70,12 +69,16 @@ def signup():
 def login():
     form = LoginForm()
     if request.method == 'POST' and form.validate():
-        user = User.query.filter_by(email=form.email.data).first()
+        user = User.query.filter_by(username=form.username.data).first()
         if user is None or not user.check_password(form.password.data):
-            flash('Invalid email or password')
+            flash('Invalid username or password')
             return redirect(url_for('auth.login'))
         login_user(user, remember=form.remember.data, duration=timedelta(minutes=1))
+        response = make_response(redirect(url_for('main.index')))
+        response.set_cookie("username", form.username.data)
         flash('{} logged in successfully'.format(user.username))
+        return response
+
         next = request.args.get('next')
         if not is_safe_url(next):
             return abort(400)

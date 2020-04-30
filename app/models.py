@@ -30,18 +30,18 @@ class User(db.Model, UserMixin):
 class Survey(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=True)
     user_username = db.Column(db.Integer, db.ForeignKey(User.username), nullable=True)
-    survey_name = db.Column(db.Text, nullable=False, unique=True)
+    survey_name = db.Column(db.Text, nullable=False)
     keyword = db.Column(db.Text, nullable=True)
     target_ethnic = db.Column(db.Text, nullable=True)
     target_religion = db.Column(db.Text, nullable=True)
     description = db.Column(db.Text, nullable=True)
     target_gender = db.Column(db.Text, nullable=True)
-    target_minimum_age = db.Column(db.Text, nullable=True)
-    target_maximum_age = db.Column(db.Text, nullable=True)
     respondent_number = db.Column(db.Integer, nullable=True)
     target_nationality = db.Column(db.Text, nullable=True)
     create_date = db.Column(db.Integer, nullable=True)
     end_date = db.Column(db.Integer, nullable=True)
+    minimum_age = db.Column(db.Integer, nullable=True)
+    maximum_age = db.Column(db.Integer, nullable=True)
     q1question_num = db.Column(db.Text, nullable=True)
     q1choice_one = db.Column(db.Text, nullable=True)
     q1choice_two = db.Column(db.Text, nullable=True)
@@ -131,7 +131,7 @@ class Survey(db.Model):
     #answer_id = db.relationship('Answer', backref='surveys')
 
     def __repr__(self):
-        return '<Survey {}>'.format(self.survey_id)
+        return '<Survey {}>'.format(self.id)
 
 
 class Answer(db.Model):

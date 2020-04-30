@@ -9,16 +9,21 @@ from app import db
 from app.models import Survey, User, Answer
 
 
+class passvalidate(SelectField):
+    def pre_validate(self, form):
+        pass
+
+
 class CreateSurvey(FlaskForm):
-    target_gender = SelectField('Gender*', choices=[('male', 'Male'), ('female', 'Female'), ('all', 'All')],
-                                validators=[DataRequired()])
+    target_gender = passvalidate('Gender*', coerce=str, choices=[('male', 'Male'), ('female', 'Female'), ('all', 'All')])
     target_nationality = StringField('Nationality')
-    target_ethnic = SelectField('Ethnic*', choices=[('white', 'White'), ('black', 'Black'), ('asian', 'Asian'),
-                                            ('arab', 'Arab'), ('mixed', 'Mixed'), ('all', 'All')], validators=[DataRequired()])
-    target_religion = SelectField('Religion*', choices=[('christianity', 'Christianity'), ('islam', 'Islam'),
+    target_ethnic = passvalidate('Ethnic*', coerce=str, choices=[('white', 'White'), ('black', 'Black'), ('asian', 'Asian'),
+                                            ('arab', 'Arab'), ('mixed', 'Mixed'), ('all', 'All')])
+    target_religion = passvalidate('Religion*', coerce=str, choices=[('christianity', 'Christianity'), ('islam', 'Islam'),
                                                 ('buddhism', 'Buddhism'), ('hinduism', 'Hinduism'),
-                                                ('folk religion', 'Folk Religions'), ('irreligious', 'Irreligious'), ('all', 'All')],
-                           validators=[DataRequired()])
+                                                ('folk religion', 'Folk Religions'), ('irreligious', 'Irreligious'), ('all', 'All')])
+    minimum_age = StringField('Minimum age')
+    maximum_age = StringField('Maximum age')
     keyword = StringField('Keywords')
     description = StringField('Description')
     end_date = StringField('End date')
@@ -110,6 +115,9 @@ class CreateSurvey(FlaskForm):
     q15question_must = BooleanField('Compulsory or not')
     survey_name = StringField('Survey title*', validators=[DataRequired(message='You need a survey title!')])
 
+    def validate_age(self, minimum_age, maximum_age):
+        if minimum_age is not None and maximum_age is not None and minimum_age > maximum_age:
+            raise ValidationError('The minimum age should be smaller than maximum age.')
 
 class AnswerSurvey(FlaskForm):
     q1answer = StringField('Question 1 Answer')

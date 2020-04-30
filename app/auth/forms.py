@@ -26,7 +26,18 @@ class RegistrationForm(FlaskForm):
     institution = StringField('Institution', validators=[DataRequired()])
 
 
+    def validate_username(self, username):
+        results = User.query.filter_by(username=username.data).first()
+        if results is not None:
+            raise ValidationError('An account is already registered for that username')
+
+    def validate_email(self, email):
+        results = User.query.filter_by(email=email.data).first()
+        if results is not None:
+            raise ValidationError('An account is already registered for that email address')
+
+
 class LoginForm(FlaskForm):
-    email = StringField('Email', validators=[DataRequired()])
+    username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
     remember = BooleanField('Remember Me')
