@@ -27,8 +27,7 @@ def create_survey():
     form = CreateSurvey(request.form)
     name = request.cookies.get('username')
     if request.method == 'POST':
-        survey = Survey(user_username=name, target_gender=form.target_gender.data, target_maximum_age=form.target_maximum_age.data,
-                        target_minimum_age=form.target_minimum_age.data,
+        survey = Survey(user_username=name, target_gender=form.target_gender.data,
                         target_nationality=form.target_nationality.data,
                         description=form.description.data, keyword=form.keyword.data,
                         end_date=form.end_date.data, respondent_number=form.respondent_number.data,
