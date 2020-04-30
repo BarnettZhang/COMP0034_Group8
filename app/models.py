@@ -3,18 +3,18 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from app import db
 
 
-class User(db.Model):
-    user_id = db.Column(db.Integer, primary_key=True, nullable=True, unique=True)
+class User(db.Model, UserMixin):
+    id = db.Column(db.Integer, primary_key=True, nullable=True, unique=True)
     username = db.Column(db.Text, nullable=False)
     password = db.Column(db.Text, nullable=False)
     age = db.Column(db.Integer, nullable=False)
-    gender = db.Column(db.Integer, nullable=False)
+    gender = db.Column(db.Text, nullable=False)
     ethnic = db.Column(db.Text, nullable=False)
     religion = db.Column(db.Text, nullable=False)
     nationality = db.Column(db.Text, nullable=False)
     email = db.Column(db.Text, nullable=False)
     institution = db.Column(db.Text, nullable=False)
-    #survey_id = db.relationship('Survey', backref='users')
+    survey_id = db.relationship('Survey', backref='users')
     #respondent_id = db.relationship('Answer', backref='users')
 
     def __repr__(self):
