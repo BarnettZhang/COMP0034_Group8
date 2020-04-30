@@ -110,6 +110,7 @@ class CreateSurvey(FlaskForm):
 
 
 class AnswerSurvey(FlaskForm):
+    survey_id = StringField('survey id')
     q1answer = StringField('Question 1 Answer')
     q2answer = StringField('Question 2 Answer')
     q3answer = StringField('Question 3 Answer')

@@ -134,8 +134,7 @@ class Survey(db.Model):
 
 class Answer(db.Model):
     answer_id = db.Column(db.Integer, primary_key=True, nullable=False, unique=True)
-    #question_id = db.Column(db.Integer, db.ForeignKey(Question.question_id), nullable=False)
-    #survey_id = db.Column(db.Integer, db.ForeignKey(Survey.survey_id), nullable=False)
+    survey_id = db.Column(db.Integer, db.ForeignKey(Survey.survey_id), nullable=True)
     q1answer = db.Column(db.Text, nullable=True)
     q2answer = db.Column(db.Text, nullable=True)
     q3answer = db.Column(db.Text, nullable=True)
