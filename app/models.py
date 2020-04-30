@@ -3,7 +3,6 @@ from flask_login import UserMixin
 from app import db
 
 
-
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True, nullable=True, unique=True)
     username = db.Column(db.Text, nullable=False)
@@ -15,11 +14,11 @@ class User(db.Model, UserMixin):
     nationality = db.Column(db.Text, nullable=False)
     email = db.Column(db.Text, nullable=False)
     institution = db.Column(db.Text, nullable=False)
-    #survey_id = db.relationship('Survey', backref='users')
+    survey_id = db.relationship('Survey', backref='users')
     #respondent_id = db.relationship('Answer', backref='users')
 
     def __repr__(self):
-        return '<User {}>'.format(self.user_id)
+        return '<User {}>'.format(self.id)
 
     def set_password(self, password):
         self.password = generate_password_hash(password)
@@ -29,8 +28,8 @@ class User(db.Model, UserMixin):
 
 
 class Survey(db.Model):
-    survey_id = db.Column(db.Integer, primary_key=True, nullable=True)
-    #user_id = db.Column(db.Integer, db.ForeignKey(User.user_id), nullable=True)
+    id = db.Column(db.Integer, primary_key=True, nullable=True)
+    user_id = db.Column(db.Integer, db.ForeignKey(User.id), nullable=True)
     survey_name = db.Column(db.Text, nullable=False, unique=True)
     keyword = db.Column(db.Text, nullable=True)
     target_ethnic = db.Column(db.Text, nullable=True)
