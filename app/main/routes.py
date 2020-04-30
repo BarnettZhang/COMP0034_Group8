@@ -60,7 +60,6 @@ def finish_create_survey():
 
 @bp_main.route('/search', methods=['POST', 'GET'])
 def search_result():
-    answer = AnswerSurvey(request.form)
     if request.method == 'POST':
         term = request.form['term']
         if term == "":
@@ -70,16 +69,8 @@ def search_result():
         if not results:
             flash("No survey with this id")
             return redirect('/')
-        answer = Answer(q1answer=answer.q1answer.data, q2answer=answer.q2answer.data, q3answer=answer.q3answer.data,
-                        q4answer=answer.q4answer.data, q5answer=answer.q5answer.data, q6answer=answer.q6answer.data,
-                        q7answer=answer.q7answer.data, q8answer=answer.q8answer.data, q9answer=answer.q9answer.data,
-                        q10answer=answer.q10answer.data, q11answer=answer.q11answer.data,
-                        q12answer=answer.q12answer.data,
-                        q13answer=answer.q13answer.data, q14answer=answer.q14answer.data,
-                        q15answer=answer.q15answer.data)
-        db.session.add(answer)
-        db.session.commit()
-        return render_template('search_result.html', results=results, answer=answer)
+
+        return render_template('search_result.html', results=results)
     else:
         return redirect(url_for('main.index'))
 
