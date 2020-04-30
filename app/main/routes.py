@@ -27,7 +27,7 @@ def create_survey():
                         target_minimum_age=form.target_minimum_age.data,
                         target_nationality=form.target_nationality.data,
                         end_date=form.end_date.data, respondent_number=form.respondent_number.data,
-                        survey_name=form.survey_name.data,
+                        survey_name=form.survey_name.data, target_ethnic=form.target_ethnic.data, target_religion=form.target_religion.data,
                         q1question_num=form.q1question_num.data, q1question_must=form.q1queastion_must.data,
                         q1question_content=form.q1question_content.data, q1choice_one=form.q1choice_one.data,
                         q1choice_two=form.q1choice_two.data, q1choice_three=form.q1choice_three.data,

@@ -14,7 +14,6 @@ class User(db.Model):
     nationality = db.Column(db.Text, nullable=False)
     email = db.Column(db.Text, nullable=False)
     institution = db.Column(db.Text, nullable=False)
-    credit = db.Column(db.Integer, nullable=False)
     #survey_id = db.relationship('Survey', backref='users')
     #respondent_id = db.relationship('Answer', backref='users')
 
@@ -33,6 +32,8 @@ class Survey(db.Model):
     #user_id = db.Column(db.Integer, db.ForeignKey(User.user_id), nullable=True)
     survey_name = db.Column(db.Text, nullable=False, unique=True)
     keyword = db.Column(db.Text, nullable=True)
+    target_ethnic = db.Column(db.Text, nullable=True)
+    target_religion = db.Column(db.Text, nullable=True)
     description = db.Column(db.Text, nullable=True)
     target_gender = db.Column(db.Text, nullable=True)
     target_minimum_age = db.Column(db.Text, nullable=True)

@@ -10,10 +10,17 @@ from app.models import Survey, User, Answer
 
 
 class CreateSurvey(FlaskForm):
-    target_gender = StringField('Gender(Please enter:male, female, or allgender.')
+    target_gender = SelectField('Gender*', choices=[('male', 'Male'), ('female', 'Female'), ('all', 'All')],
+                                validators=[DataRequired()])
     target_minimum_age = StringField('Minimum Age')
     target_maximum_age = StringField('Maximum Age')
     target_nationality = StringField('Nationality')
+    target_ethnic = SelectField('Ethnic*', choices=[('white', 'White'), ('black', 'Black'), ('asian', 'Asian'),
+                                            ('arab', 'Arab'), ('mixed', 'Mixed'), ('all', 'All')], validators=[DataRequired()])
+    target_religion = SelectField('Religion*', choices=[('christianity', 'Christianity'), ('islam', 'Islam'),
+                                                ('buddhism', 'Buddhism'), ('hinduism', 'Hinduism'),
+                                                ('folk religion', 'Folk Religions'), ('irreligious', 'Irreligious'), ('all', 'All')],
+                           validators=[DataRequired()])
     keyword = StringField('Keywords')
     description = StringField('Description')
     end_date = StringField('End date')

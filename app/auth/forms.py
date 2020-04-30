@@ -20,7 +20,7 @@ class RegistrationForm(FlaskForm):
                                             ('arab', 'Arab'), ('mixed', 'Mixed')], validators=[DataRequired()])
     religion = SelectField('Religion', choices=[('christianity', 'Christianity'), ('islam', 'Islam'),
                                                 ('buddhism', 'Buddhism'), ('hinduism', 'Hinduism'),
-                                                ('folk religion', 'Folk Religions'), ('irreligion', 'Irreligious')],
+                                                ('folk religion', 'Folk Religions'), ('irreligious', 'Irreligious')],
                            validators=[DataRequired()])
     nationality = StringField('Nationality', validators=[DataRequired()])
     institution = StringField('Institution', validators=[DataRequired()])

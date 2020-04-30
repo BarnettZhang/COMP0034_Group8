@@ -1,7 +1,6 @@
 from datetime import timedelta
 from urllib.parse import urlparse, urljoin
 
-import bcrypt as bcrypt
 from flask import render_template, Blueprint, request, flash, redirect, url_for, make_response, abort, session
 from flask_login import login_user, login_required, logout_user
 from sqlalchemy.exc import IntegrityError
@@ -80,7 +79,7 @@ def login():
         next = request.args.get('next')
         if not is_safe_url(next):
             return abort(400)
-        return redirect(next or url_for('main.homepage'))
+        return redirect(next or url_for('main.index'))
     return render_template('login.html', form=form)
 
 
@@ -89,4 +88,4 @@ def login():
 def logout():
     logout_user()
     flash('You have been logged out.')
-    return redirect(url_for('main.homepage'))
+    return redirect(url_for('main.index'))
