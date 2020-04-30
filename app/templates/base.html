@@ -25,22 +25,37 @@
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Surveys
                 </a>
+                {% if current_user.is_anonymous %}
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ url_for('auth.unauthorized')}}">My surveys</a>
+                    <a class="dropdown-item" href="{{ url_for('auth.unauthorized')}}">Take surveys</a>
+                    <a class="dropdown-item" href="{{ url_for('auth.unauthorized') }}">Create surveys</a>
+                </div>
+                {% else %}
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="{{ url_for('main.survey_review_profile')}}">My surveys</a>
                     <a class="dropdown-item" href="{{ url_for('main.take_survey_profile')}}">Take surveys</a>
                     <a class="dropdown-item" href="{{ url_for('main.create_survey') }}">Create surveys</a>
                 </div>
+                {% endif %}
             </li>
             <li class="nav-item dropdown my-2">
                 <a class="nav-link dropdown-toggle " id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   User
                 </a>
+                {% if current_user.is_anonymous %}
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ url_for('auth.unauthorized') }}">My profile</a>
+                    <a class="dropdown-item" href="{{ url_for('auth.signup') }}">Signup</a>
+                    <a class="dropdown-item" href="{{ url_for('auth.login') }}">Log in</a>
+                </div>
+                {% else %}
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="{{ url_for('main.edit_personal_info') }}">My profile</a>
-                    <a class="dropdown-item" href="#">Credit</a>
-                    <a class="dropdown-item" href="#">My library</a>
-                    <a class="dropdown-item" href="#">Log out</a>
+                    <a class="dropdown-item" href="{{ url_for('auth.logout') }}">Logout</a>
                 </div>
+                {% endif %}
+
             </li>
             <li class="nav-item dropdown my-2">
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -48,15 +63,19 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="{{ url_for('main.privacy_policy') }}">Privacy policy</a>
-                    <a class="dropdown-item" href="#">Cookie setting</a>
+                    <a class="dropdown-item" href="{{ url_for('main.search_result') }}">Cookie setting</a>
                 </div>
             </li>
-        </u1>
-            <form class="form-inline ml-auto" action="search" method="post">
-        <input class="form-control" type="search" placeholder="Enter student name" aria-label="Search" name="search_term">
-        <button class="search-btn btn-outline-dark my-2" type="submit">Search</button>
+            <div class="row">
+             <form class="form-inline" action="search" method="post">
+                    <input class="searchuserform mr-md-4" type="search"
+                           placeholder="Search users, surveys" aria-label="Search"
+                           name="search_term">
+                    <button class="search-btn btn-outline-dark my-2" type="submit">Search</button>
                 </form>
-        </div>
+            </div>
+        </u1>
+    </div>
 </header>
 <div class="container-fluid bg-light">
 {% with messages = get_flashed_messages() %}

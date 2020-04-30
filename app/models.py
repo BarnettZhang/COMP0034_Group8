@@ -1,24 +1,25 @@
 from werkzeug.security import generate_password_hash, check_password_hash
-
+from flask_login import UserMixin
 from app import db
 
 
-class User(db.Model):
-    user_id = db.Column(db.Integer, primary_key=True, nullable=True, unique=True)
-    first_name = db.Column(db.Text, nullable=False)
-    last_name = db.Column(db.Text, nullable=False)
+class User(db.Model, UserMixin):
+    id = db.Column(db.Integer, primary_key=True, nullable=True, unique=True)
     username = db.Column(db.Text, nullable=False)
     password = db.Column(db.Text, nullable=False)
     age = db.Column(db.Integer, nullable=False)
-    gender = db.Column(db.Integer, nullable=False)
+    gender = db.Column(db.Text, nullable=False)
+    ethnic = db.Column(db.Text, nullable=False)
+    religion = db.Column(db.Text, nullable=False)
+    nationality = db.Column(db.Text, nullable=False)
     email = db.Column(db.Text, nullable=False)
     institution = db.Column(db.Text, nullable=False)
-    credit = db.Column(db.Integer, nullable=False)
-    #survey_id = db.relationship('Survey', backref='users')
-    #respondent_id = db.relationship('Answer', backref='users')
+    survey_id = db.relationship('Survey', backref='users')
+
+    # respondent_id = db.relationship('Answer', backref='users')
 
     def __repr__(self):
-        return '<User {}>'.format(self.user_id)
+        return '<User {}>'.format(self.id)
 
     def set_password(self, password):
         self.password = generate_password_hash(password)
@@ -28,8 +29,8 @@ class User(db.Model):
 
 
 class Survey(db.Model):
-    survey_id = db.Column(db.Integer, primary_key=True, nullable=True)
-    #user_id = db.Column(db.Integer, db.ForeignKey(User.user_id), nullable=True)
+    id = db.Column(db.Integer, primary_key=True, nullable=True)
+    user_id = db.Column(db.Integer, db.ForeignKey(User.id), nullable=True)
     survey_name = db.Column(db.Text, nullable=False, unique=True)
     keyword = db.Column(db.Text, nullable=True)
     target_gender = db.Column(db.Text, nullable=True)
@@ -124,33 +125,18 @@ class Survey(db.Model):
     q14question_must = db.Column(db.Text, nullable=True)
     q14question_num = db.Column(db.Text, nullable=True)
     q14question_content = db.Column(db.Text, nullable=True)
-    #question_id = db.relationship('Question', backref='surveys')
-    #answer_id = db.relationship('Answer', backref='surveys')
+
+    # question_id = db.relationship('Question', backref='surveys')
+    # answer_id = db.relationship('Answer', backref='surveys')
 
     def __repr__(self):
         return '<Survey {}>'.format(self.survey_id)
 
 
-class Question(db.Model):
-    question_id = db.Column(db.Integer, primary_key=True)
-    survey_id = db.Column(db.Integer, db.ForeignKey(Survey.survey_id), nullable=True)
-    question_num = db.Column(db.Integer, nullable=True)
-    choice_one = db.Column(db.Text, nullable=True)
-    choice_two = db.Column(db.Text, nullable=True)
-    choice_three = db.Column(db.Text, nullable=True)
-    choice_four = db.Column(db.Text, nullable=True)
-    question_content = db.Column(db.Text, nullable=True)
-    question_must = db.Column(db.Text, nullable=True)
-    #answer_id = db.relationship('Answer', backref='questions')
-
-    def __repr__(self):
-        return '<Question {}>'.format(self.question_id)
-
-
 class Answer(db.Model):
-    answer_id = db.Column(db.Integer, primary_key=True, nullable=False, unique=True)
-    #question_id = db.Column(db.Integer, db.ForeignKey(Question.question_id), nullable=False)
-    #survey_id = db.Column(db.Integer, db.ForeignKey(Survey.survey_id), nullable=False)
+    id = db.Column(db.Integer, primary_key=True, nullable=False, unique=True)
+    # question_id = db.Column(db.Integer, db.ForeignKey(Question.question_id), nullable=False)
+    # survey_id = db.Column(db.Integer, db.ForeignKey(Survey.survey_id), nullable=False)
     answer_content = db.Column(db.Text, nullable=False)
     answer_time = db.Column(db.Integer, nullable=False)
     respondent_id = db.Column(db.Text, nullable=False)

@@ -29,7 +29,6 @@ function addQuestion() {
         <div class="input-group input-group-sm mb-2">
             <input type="text" class="form-control" placeholder="Enter your choice here." aria-label="Choice">
         </div>
-
         <div class="input-group input-group-sm mb-2">
             <input type="text" class="form-control" placeholder="Enter your choice here." aria-label="Choice">
         </div>

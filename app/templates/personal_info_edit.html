@@ -81,15 +81,19 @@
     <!--Username-->
         <form>
           <div class="form-group">
-            <label for="exampleInputUsername">Username: {{ name }}</label>
+            <label for="exampleInputUsername">Username: {{ username }}</label>
           </div>
-    <!--Birthday-->
+    <!--Age-->
           <div class="form-group">
-            <label for="exampleInputBirthday">Birthday: 18/02/1990</label>
+            <label for="exampleInputAge">Age: </label>
           </div>
     <!--Email-->
+            <div class="form-group">
+        <label for="exampleInputSports">Sports: </label>
+        <input type="sports" class="form-control" placeholder="{{ username }}" id="exampleInputSports">
+            </div>
           <div class="form-group">
-            <label for="exampleInputEmail">Email: comp0034@ucl.ac.uk</label>
+            <label for="exampleInputEmail">Email: {{email}}</label>
               <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#changeemail">
                   edit  <!-- change the data-target = "#___" and then enter the id accordingly -->
               </button>
@@ -125,7 +129,7 @@
             <div class="form-group">
             <label for="exampleInputGender">Gender: Female </label>
                     <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#changegender"
-                            onclick="javascript:location.href='http://www.wibibi.com'" value="回到 Wibibi 首頁">
+                            onclick="javascript:location.href='main.index'" value="homepage">
                   edit  <!-- change the data-target = "#___" and then enter the id accordingly -->
               </button>
                 <!-- Modal -->
@@ -211,7 +215,7 @@
                       <div class="modal-body"> <!-- content -->
                           <form>
                               <select name="Your Gender">
-                                 <option value="Christianity">Christianity</option>
+                                 <option value="ChristianityChristianity">Christianity</option>
                                   <option value="Islam">Islam</option>
                                   <option value="Hinduism">Hinduism</option>
                                   <option value="Buddhism">Buddhism</option>
