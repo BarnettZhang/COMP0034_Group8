@@ -18,7 +18,7 @@ class User(db.Model, UserMixin):
     #respondent_id = db.relationship('Answer', backref='users')
 
     def __repr__(self):
-        return '<User {}>'.format(self.user_id)
+        return '<User {}>'.format(self.id)
 
     def set_password(self, password):
         self.password = generate_password_hash(password)
