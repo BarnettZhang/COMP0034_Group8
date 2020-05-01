@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %} Answering Survey {% endblock %}
+{% block content %}
+{# Display the form validation errors #}
+{% if form.errors %}
+    <ul class="alert-warning list-unstyled">
+        {% for field_name, field_errors in form.errors|dictsort if field_errors %}
+            {% for error in field_errors %}
+                <li>{{ form[field_name].label }}: {{ error }}</li>
+            {% endfor %}
+        {% endfor %}
+    </ul>
+{% endif %}
+{# Display the form, turn off HTML validation #}
+{# The (class_="") after a form field is used to apply css style to the element, in this case a bootstrap style #}
+<form method="post" novalidate>
+    {{ form.csrf_token }}
+    {{ form.survey_name.label }}{{ form.survey_name(class="form-control") }}
+    {{ form.question_id.label }}{{ form.question_id(class="form-control") }}
+    {{ form.answer_content.label }}{{ form.answer_content(class="form-control") }}
+    <br>{{ form.submit(class="btn btn-primary") }}
+</form>
+{% endblock %}
