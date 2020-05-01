@@ -24,7 +24,8 @@ def index():
         ethnic = list(validuser)[0][1]
         gender = list(validuser)[0][2]
         result = []
-        allsurvey = db.session.query(Survey.target_religion, Survey.target_ethnic, Survey.target_gender, Survey.survey_name, Survey.description, Survey.id).all()
+        allsurvey = db.session.query(Survey.target_religion, Survey.target_ethnic, Survey.target_gender,
+                                     Survey.survey_name, Survey.description, Survey.id).all()
         print(allsurvey)
         for surveys in allsurvey:
             if surveys[0] == 'all' and surveys[1] == 'all' and surveys[2] == 'all':
@@ -49,9 +50,9 @@ def index():
                     result.append(surveys)
             elif surveys[0] == religion and surveys[1] == ethnic and surveys[2] == gender:
                 result.append(surveys)
-        #result = db.session.query(Survey).filter(
-         #   and_(Survey.target_religion == user.religion, Survey.target_ethnic == user.ethnic,
-         #        Survey.target_gender == user.gender)).all()
+        # result = db.session.query(Survey).filter(
+        #   and_(Survey.target_religion == user.religion, Survey.target_ethnic == user.ethnic,
+        #        Survey.target_gender == user.gender)).all()
 
         return render_template('homepage.html', results=result)
 
@@ -83,12 +84,12 @@ def edit_personal_info(username=""):
             except IntegrityError:
                 db.session.rollback()
                 flash('Unable to change personal information.')
-        #return render_template('signup.html', form=form, username=username, email=email, gender=gender,
+        # return render_template('signup.html', form=form, username=username, email=email, gender=gender,
         #                       age=age, religion=religion, nationality=nationality, ethnic=ethnic,
         #                       institution=institution)
 
-    return render_template("personal_info_edit.html", form= form, username= username, gender = gender, ethnic = ethnic,
-                           institution= institution, nationality= nationality, religion= religion, email= email, age=age)
+    return render_template("personal_info_edit.html", form=form, username=username, gender=gender, ethnic=ethnic,
+                           institution=institution, nationality=nationality, religion=religion, email=email, age=age)
 
 
 @bp_main.route('/create_survey/', methods=['POST', 'GET'])
@@ -218,30 +219,39 @@ def survey_review_profile():
 
 
 @bp_main.route('/search_survey_results/', methods=['POST', 'GET'])
-def search_survey_results():
-    name = request.cookies.get('username')
+def my_survey_results():
     if request.method == 'POST':
-        term = request.form['search_survey']
+        term = request.form['search_my_survey']
+
         if term == "":
-             flash("Enter a survey id to search for")
-             return redirect('main.survey_review_profile')
+            flash("Enter your survey id to search for results")
+            return redirect('/')
 
-        print('name : ' + name, file=sys.stderr)
+        if 'username' in request.cookies:
+            name = request.cookies.get('username')
+            print('name : ' + name, file=sys.stderr)
 
-        results_only = db.session.query(Survey.survey_name, Survey.user_username, Survey.description,
-                                        Answer.id, Answer.survey_id, Answer.q1answer, Answer.q2answer,Answer.q3answer,
-                                        Answer.q4answer, Answer.q5answer, Answer.q6answer, Answer.q7answer,
-                                        Answer.q8answer, Answer.q9answer, Answer.q10answer, Answer.q11answer,
-                                        Answer.q12answer, Answer.q13answer, Answer.q14answer, Answer.q15answer). filter_by(user_username=name).filter_by(survey_id=term).all()
+            results = db.session.query(Survey.survey_name, Survey.user_username,
+                                       Survey.id.label('survey_id')) \
+                .filter_by(user_username=name).all()
+            results_new = db.session.query(Survey.survey_name, Survey.id.label('survey_id'),
+                                           Answer.id, Answer.q1answer,
+                                           Answer.q2answer, Answer.q3answer,
+                                           Answer.q4answer, Answer.q5answer,
+                                           Answer.q6answer, Answer.q7answer,
+                                           Answer.q8answer, Answer.q9answer,
+                                           Answer.q10answer, Answer.q11answer,
+                                           Answer.q12answer, Answer.q13answer).filter_by(survey_id=term).all()
 
-        print('results only : ' + str(results_only), file=sys.stderr)
+            print('results : ' + str(results), file=sys.stderr)
+            print('results : ' + str(type(results_new)), file=sys.stderr)
 
-        if not results_only:
-            flash("This survey does not exist, Please search again.")
-            return render_template('survey_results.html', results=results_only)
-        return render_template('index.html', name=name)
-    else:
-        return redirect('main.index')
+            if not results_new:
+                flash("This is not your survey. Please re-enter your survey ID")
+                return redirect('/')
+            return render_template('survey_results.html', results=results_new)
+
+    return redirect(url_for('main.index'))
 
 
 @bp_main.route('/privacy_policy', methods=['GET'])
