@@ -11,11 +11,9 @@
                     {{ form.email(class="form-control-label") }}<br>
                     <p>Password</p>
                     {{ form.password(class="form-control-label") }}<br>
-                    <p>Conform Password</p>
-                    {{ form.confirm_password(class="form-control-label") }}<br>
                     {{ form.submit(class="btn btn-outline-info") }}
                     </fieldset>
                 </form>
-                <p>Already Have An Account? <a href=#>Login</a></p>
+                <p>Need An Account? <a href="{{ url_for('main.signup') }}">Sign Up</a></p>
             </div>
 {% endblock content %}

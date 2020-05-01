@@ -1,6 +1,6 @@
-from flask import Flask, render_template, url_for, flash, redirect, request
+from flask import Flask, render_template, url_for, flash, redirect, request, Blueprint
 from flask_sqlalchemy import SQLAlchemy
-from config import DevConfig
+from app.config import DevConfig
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 
@@ -8,6 +8,9 @@ from flask_login import LoginManager
 # The SQLAlchemy object is defined globally
 db = SQLAlchemy()
 bcrypt = Bcrypt()
+login_manager = LoginManager()
+login_manager.login_view = 'login'
+login_manager.login_message_category = 'info'
 
 
 def page_not_found(e):
@@ -26,14 +29,15 @@ def create_app(config_class=DevConfig):
     app = Flask(__name__)
 
     # Configure app wth the settings from config.py
-    app.config.from_object(config_class)
+    app.config.from_object(DevConfig)
 
     # Initialise the database and create tables
     db.init_app(app)
-
-    login_manager = LoginManager(app)
-    login_manager.login_view = 'login'
-    login_manager.login_message_category = 'info'
+    from app.models import Survey, Answer, User
+    with app.app_context():
+        db.create_all()
+    bcrypt.init_app(app)
+    login_manager.init_app(app)
 
     from app.main.routes import bp_main
     app.register_blueprint(bp_main)
