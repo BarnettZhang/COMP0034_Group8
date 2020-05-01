@@ -4,23 +4,29 @@ from sqlalchemy.orm import with_polymorphic
 from wtforms import SelectField, StringField, PasswordField, ValidationError, BooleanField
 from wtforms.validators import DataRequired, Email, EqualTo
 
-
 from app import db
 from app.models import Survey, User, Answer
 
 
+class passvalidate(SelectField):
+    def pre_validate(self, form):
+        pass
+
+
 class CreateSurvey(FlaskForm):
-    target_gender = SelectField('Gender*', choices=[('male', 'Male'), ('female', 'Female'), ('all', 'All')],
-                                validators=[DataRequired()])
-    target_minimum_age = StringField('Minimum Age')
-    target_maximum_age = StringField('Maximum Age')
+    target_gender = passvalidate('Gender*', coerce=str,
+                                 choices=[('male', 'Male'), ('female', 'Female'), ('all', 'All')])
     target_nationality = StringField('Nationality')
-    target_ethnic = SelectField('Ethnic*', choices=[('white', 'White'), ('black', 'Black'), ('asian', 'Asian'),
-                                            ('arab', 'Arab'), ('mixed', 'Mixed'), ('all', 'All')], validators=[DataRequired()])
-    target_religion = SelectField('Religion*', choices=[('christianity', 'Christianity'), ('islam', 'Islam'),
-                                                ('buddhism', 'Buddhism'), ('hinduism', 'Hinduism'),
-                                                ('folk religion', 'Folk Religions'), ('irreligious', 'Irreligious'), ('all', 'All')],
-                           validators=[DataRequired()])
+    target_ethnic = passvalidate('Ethnic*', coerce=str,
+                                 choices=[('white', 'White'), ('black', 'Black'), ('asian', 'Asian'),
+                                          ('arab', 'Arab'), ('mixed', 'Mixed'), ('all', 'All')])
+    target_religion = passvalidate('Religion*', coerce=str,
+                                   choices=[('christianity', 'Christianity'), ('islam', 'Islam'),
+                                            ('buddhism', 'Buddhism'), ('hinduism', 'Hinduism'),
+                                            ('folk religion', 'Folk Religions'), ('irreligious', 'Irreligious'),
+                                            ('all', 'All')])
+    minimum_age = StringField('Minimum age')
+    maximum_age = StringField('Maximum age')
     keyword = StringField('Keywords')
     description = StringField('Description')
     end_date = StringField('End date')
@@ -112,3 +118,24 @@ class CreateSurvey(FlaskForm):
     q15question_must = BooleanField('Compulsory or not')
     survey_name = StringField('Survey title*', validators=[DataRequired(message='You need a survey title!')])
 
+    def validate_age(self, minimum_age, maximum_age):
+        if minimum_age is not None and maximum_age is not None and minimum_age > maximum_age:
+            raise ValidationError('The minimum age should be smaller than maximum age.')
+
+
+class AnswerSurvey(FlaskForm):
+    q1answer = StringField('Question 1 Answer')
+    q2answer = StringField('Question 2 Answer')
+    q3answer = StringField('Question 3 Answer')
+    q4answer = StringField('Question 4 Answer')
+    q5answer = StringField('Question 5 Answer')
+    q6answer = StringField('Question 6 Answer')
+    q7answer = StringField('Question 7 Answer')
+    q8answer = StringField('Question 8 Answer')
+    q9answer = StringField('Question 9 Answer')
+    q10answer = StringField('Question 10 Answer')
+    q11answer = StringField('Question 11 Answer')
+    q12answer = StringField('Question 12 Answer')
+    q13answer = StringField('Question 13 Answer')
+    q14answer = StringField('Question 14 Answer')
+    q15answer = StringField('Question 15 Answer')
