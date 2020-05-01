@@ -1,43 +1,121 @@
 <!-- Use the base template -->
 {% extends "base.html" %}
-
-{% block title %}Privacy Policy {% endblock %}
+{% block title %}Search Result {% endblock %}
 {% block content %}
-<div class="container bg-light">
-<br>
-<center><h1>Search results</h1></center>
-<br>
-<br>
-<br>
-<div class="row justify-content-center">
-<div class="list-group">
-  <a href="#" class="list-group-item list-group-item-action">
-    <div class="d-flex w-100 justify-content-between ">
-      <h5 class="mb-1">List group item heading</h5>
-      <small>3 days ago</small>
-    </div>
-    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-    <small>Donec id elit non mi porta.</small>
-  </a>
-    <br>
-  <a href="#" class="list-group-item list-group-item-action">
-    <div class="d-flex w-100 justify-content-between">
-      <h5 class="mb-1">List group item heading</h5>
-      <small class="text-muted">3 days ago</small>
-    </div>
-    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-    <small class="text-muted">Donec id elit non mi porta.</small>
-  </a>
-    <br>
-  <a href="#" class="list-group-item list-group-item-action">
-    <div class="d-flex w-100 justify-content-between">
-      <h5 class="mb-1">List group item heading</h5>
-      <small class="text-muted">3 days ago</small>
-    </div>
-    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-    <small class="text-muted">Donec id elit non mi porta.</small>
-  </a>
-</div>
-</div>
+<div class="container">
+<table class="table">
+    <thead class="thead-dark">
+    <tr>
+        <th scope="col">Question No.</th>
+        <th scope="col">Question Content</th>
+        <th scope="col">Choice1</th>
+        <th scope="col">Choice2</th>
+        <th scope="col">Choice3</th>
+        <th scope="col">Choice4</th>
+    </tr>
+    </thead>
+    <tbody> {% for result in results %}
+    <tr>
+        <td>{{ result.q1question_num }}</td>
+        <td>{{ result.q1question_content }}</td>
+        <td>{{ result.q1choice_one }}</td>
+        <td>{{ result.q1choice_two }}</td>
+        <td>{{ result.q1choice_three }}</td>
+        <td>{{ result.q1choice_four }}</td>
+    </tr>
+        <tr>
+        <td>{{ result.q2question_num }}</td>
+        <td>{{ result.q2question_content }}</td>
+        <td>{{ result.q2choice_one }}</td>
+        <td>{{ result.q2choice_two }}</td>
+        <td>{{ result.q2choice_three }}</td>
+        <td>{{ result.q2choice_four }}</td>
+    </tr>
+        <tr>
+        <td>{{ result.q3question_num }}</td>
+        <td>{{ result.q3question_content }}</td>
+        <td>{{ result.q3choice_one }}</td>
+        <td>{{ result.q3choice_two }}</td>
+        <td>{{ result.q3choice_three }}</td>
+        <td>{{ result.q3choice_four }}</td>
+    </tr>
+        <tr>
+        <td>{{ result.q4question_num }}</td>
+        <td>{{ result.q4question_content }}</td>
+        <td>{{ result.q4choice_one }}</td>
+        <td>{{ result.q4choice_two }}</td>
+        <td>{{ result.q4choice_three }}</td>
+        <td>{{ result.q4choice_four }}</td>
+    </tr>
+        <tr>
+        <td>{{ result.q5question_num }}</td>
+        <td>{{ result.q5question_content }}</td>
+        <td>{{ result.q5choice_one }}</td>
+        <td>{{ result.q5choice_two }}</td>
+        <td>{{ result.q5choice_three }}</td>
+        <td>{{ result.q5choice_four }}</td>
+    </tr>
+        <tr>
+        <td>{{ result.q6question_num }}</td>
+        <td>{{ result.q6question_content }}</td>
+        <td>{{ result.q6choice_one }}</td>
+        <td>{{ result.q6choice_two }}</td>
+        <td>{{ result.q6choice_three }}</td>
+        <td>{{ result.q6choice_four }}</td>
+    </tr>
+        <tr>
+        <td>{{ result.q7question_num }}</td>
+        <td>{{ result.q7question_content }}</td>
+        <td>{{ result.q7choice_one }}</td>
+        <td>{{ result.q7choice_two }}</td>
+        <td>{{ result.q7choice_three }}</td>
+        <td>{{ result.q7choice_four }}</td>
+    </tr>
+        <tr>
+        <td>{{ result.q8question_num }}</td>
+        <td>{{ result.q8question_content }}</td>
+        <td>{{ result.q8choice_one }}</td>
+        <td>{{ result.q8choice_two }}</td>
+        <td>{{ result.q8choice_three }}</td>
+        <td>{{ result.q8choice_four }}</td>
+    </tr>
+        <tr>
+        <td>{{ result.q9question_num }}</td>
+        <td>{{ result.q9question_content }}</td>
+        <td>{{ result.q9choice_one }}</td>
+        <td>{{ result.q9choice_two }}</td>
+        <td>{{ result.q9choice_three }}</td>
+        <td>{{ result.q9choice_four }}</td>
+    </tr>
+        <tr>
+        <td>{{ result.q10question_num }}</td>
+        <td>{{ result.q10question_content }}</td>
+        <td>{{ result.q10choice_one }}</td>
+        <td>{{ result.q10choice_two }}</td>
+        <td>{{ result.q10choice_three }}</td>
+        <td>{{ result.q10choice_four }}</td>
+    </tr>
+    <tr>
+        <td>{{ result.q11question_num }}</td>
+        <td>{{ result.q11question_content }}</td>
+    </tr>
+    <tr>
+        <td>{{ result.q12question_num }}</td>
+        <td>{{ result.q12question_content }}</td>
+    </tr>
+    <tr>
+        <td>{{ result.q13question_num }}</td>
+        <td>{{ result.q13question_content }}</td>
+    </tr>
+    <tr>
+        <td>{{ result.q14question_num }}</td>
+        <td>{{ result.q14question_content }}</td>
+    </tr>
+    <tr>
+        <td>{{ result.q15question_num }}</td>
+        <td>{{ result.q15question_content }}</td>
+    </tr>
+    </tbody>   {% endfor %}
+</table>
 </div>
 {% endblock %}

@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
     <title>{% block title %}{{ title }}{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -13,7 +12,7 @@
 </head>
 <body>
 <header class="navbar navbar-expand-md navbar-light bg-light">
-    <img src="QNR_example_logo.png" alt="QNR Logo" width="108" height="108" class="navbar-brand">
+   <h1>QNR</h1>
     <button class="navbar-toggler border-light" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -26,22 +25,37 @@
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Surveys
                 </a>
+                {% if current_user.is_anonymous %}
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ url_for('auth.unauthorized')}}">My surveys</a>
+                    <a class="dropdown-item" href="{{ url_for('auth.unauthorized') }}">Create surveys</a>
+                    <a class="dropdown-item" href="{{ url_for('auth.unauthorized') }}">Answer surveys</a>
+                </div>
+                {% else %}
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="{{ url_for('main.survey_review_profile')}}">My surveys</a>
-                    <a class="dropdown-item" href="{{ url_for('main.take_survey_profile')}}">Take surveys</a>
                     <a class="dropdown-item" href="{{ url_for('main.create_survey') }}">Create surveys</a>
+                    <a class="dropdown-item" href="{{ url_for('main.answer_survey') }}">Answer surveys</a>
                 </div>
+                {% endif %}
             </li>
             <li class="nav-item dropdown my-2">
                 <a class="nav-link dropdown-toggle " id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   User
                 </a>
+                {% if current_user.is_anonymous %}
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ url_for('auth.unauthorized') }}">My profile</a>
+                    <a class="dropdown-item" href="{{ url_for('auth.signup') }}">Signup</a>
+                    <a class="dropdown-item" href="{{ url_for('auth.login') }}">Log in</a>
+                </div>
+                {% else %}
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="{{ url_for('main.edit_personal_info') }}">My profile</a>
-                    <a class="dropdown-item" href="#">Credit</a>
-                    <a class="dropdown-item" href="#">My library</a>
-                    <a class="dropdown-item" href="#">Log out</a>
+                    <a class="dropdown-item" href="{{ url_for('auth.logout') }}">Logout</a>
                 </div>
+                {% endif %}
+
             </li>
             <li class="nav-item dropdown my-2">
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -49,21 +63,27 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="{{ url_for('main.privacy_policy') }}">Privacy policy</a>
-                    <a class="dropdown-item" href="{{ url_for('main.search_result') }}">Cookie setting</a>
                 </div>
             </li>
-            <div class="row">
-             <form class="form-inline" action="search" method="post">
-                    <input class="searchuserform mr-md-4" type="search"
-                           placeholder="Search users, surveys" aria-label="Search"
-                           name="search_term">
-                    <button class="search-btn btn-outline-dark my-2" type="submit">Search</button>
+            </u1>
+
+             <form class="form-inline ml-auto" action="search" method="post">
+                <input class="form-control" type="search" placeholder="Enter survey id" aria-label="Search" name="term">
+                 <button class="search-btn btn-outline-dark my-2" type="submit">Search</button>
                 </form>
-            </div>
-        </u1>
+
     </div>
 </header>
 <div class="container-fluid bg-light">
+{% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class="alert-warning list-unstyled">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
      {% block content %}{% endblock %}
 </div>
 </body>
