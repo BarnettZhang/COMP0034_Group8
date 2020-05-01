@@ -154,7 +154,6 @@ class Answer(db.Model):
     q13answer = db.Column(db.Text, nullable=True)
     q14answer = db.Column(db.Text, nullable=True)
     q15answer = db.Column(db.Text, nullable=True)
-    respondent
 
     def __repr__(self):
         return '<Answer {}>'.format(self.id)

@@ -250,8 +250,7 @@ def my_survey_results():
                                            Answer.q6answer, Answer.q7answer,
                                            Answer.q8answer, Answer.q9answer,
                                            Answer.q10answer, Answer.q11answer,
-                                           Answer.q12answer, Answer.q13answer))\
-                                            .filter_by(survey_id = term).all()
+                                           Answer.q12answer, Answer.q13answer).filter_by(survey_id = term).all()
 
 
             print('results : ' + str(results), file=sys.stderr)
