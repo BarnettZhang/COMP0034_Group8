@@ -30,12 +30,14 @@
                     <a class="dropdown-item" href="{{ url_for('auth.unauthorized')}}">My surveys</a>
                     <a class="dropdown-item" href="{{ url_for('auth.unauthorized')}}">Take surveys</a>
                     <a class="dropdown-item" href="{{ url_for('auth.unauthorized') }}">Create surveys</a>
+                    <a class="dropdown-item" href="{{ url_for('auth.unauthorized') }}">Answer surveys</a>
                 </div>
                 {% else %}
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="{{ url_for('main.survey_review_profile')}}">My surveys</a>
                     <a class="dropdown-item" href="{{ url_for('main.take_survey_profile')}}">Take surveys</a>
                     <a class="dropdown-item" href="{{ url_for('main.create_survey') }}">Create surveys</a>
+                    <a class="dropdown-item" href="{{ url_for('main.answer_survey') }}">Answer surveys</a>
                 </div>
                 {% endif %}
             </li>
@@ -66,15 +68,13 @@
                     <a class="dropdown-item" href="{{ url_for('main.search_result') }}">Cookie setting</a>
                 </div>
             </li>
-            <div class="row">
-             <form class="form-inline" action="search" method="post">
-                    <input class="searchuserform mr-md-4" type="search"
-                           placeholder="Search users, surveys" aria-label="Search"
-                           name="search_term">
-                    <button class="search-btn btn-outline-dark my-2" type="submit">Search</button>
+            </u1>
+
+             <form class="form-inline ml-auto" action="search" method="post">
+                <input class="form-control" type="search" placeholder="Enter survey id" aria-label="Search" name="term">
+                 <button class="search-btn btn-outline-dark my-2" type="submit">Search</button>
                 </form>
-            </div>
-        </u1>
+
     </div>
 </header>
 <div class="container-fluid bg-light">

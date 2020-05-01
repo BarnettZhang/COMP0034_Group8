@@ -1,7 +1,6 @@
-from datetime import timedelta
+from datetime import timedelta, datetime
 from urllib.parse import urlparse, urljoin
 
-import bcrypt as bcrypt
 from flask import render_template, Blueprint, request, flash, redirect, url_for, make_response, abort, session
 from flask_login import login_user, login_required, logout_user
 from sqlalchemy.exc import IntegrityError
@@ -91,7 +90,7 @@ def login():
 @login_required
 def logout():
     logout_user()
+    response = make_response(redirect(url_for('main.index')))
+    response.set_cookie('username', '', expires=datetime.now())
     flash('You have been logged out.')
-    return redirect(url_for('main.index'))
-
-
+    return response

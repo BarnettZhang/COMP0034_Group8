@@ -15,7 +15,8 @@ class User(db.Model, UserMixin):
     email = db.Column(db.Text, nullable=False)
     institution = db.Column(db.Text, nullable=False)
     survey_id = db.relationship('Survey', backref='users')
-    #respondent_id = db.relationship('Answer', backref='users')
+
+    # respondent_id = db.relationship('Answer', backref='users')
 
     def __repr__(self):
         return '<User {}>'.format(self.id)
@@ -30,16 +31,18 @@ class User(db.Model, UserMixin):
 class Survey(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=True)
     user_username = db.Column(db.Integer, db.ForeignKey(User.username), nullable=True)
-    survey_name = db.Column(db.Text, nullable=False, unique=True)
+    survey_name = db.Column(db.Text, nullable=False)
     keyword = db.Column(db.Text, nullable=True)
+    target_ethnic = db.Column(db.Text, nullable=True)
+    target_religion = db.Column(db.Text, nullable=True)
     description = db.Column(db.Text, nullable=True)
     target_gender = db.Column(db.Text, nullable=True)
-    target_minimum_age = db.Column(db.Text, nullable=True)
-    target_maximum_age = db.Column(db.Text, nullable=True)
     respondent_number = db.Column(db.Integer, nullable=True)
     target_nationality = db.Column(db.Text, nullable=True)
     create_date = db.Column(db.Integer, nullable=True)
     end_date = db.Column(db.Integer, nullable=True)
+    minimum_age = db.Column(db.Integer, nullable=True)
+    maximum_age = db.Column(db.Integer, nullable=True)
     q1question_num = db.Column(db.Text, nullable=True)
     q1choice_one = db.Column(db.Text, nullable=True)
     q1choice_two = db.Column(db.Text, nullable=True)
@@ -125,21 +128,32 @@ class Survey(db.Model):
     q14question_must = db.Column(db.Text, nullable=True)
     q14question_num = db.Column(db.Text, nullable=True)
     q14question_content = db.Column(db.Text, nullable=True)
-    #question_id = db.relationship('Question', backref='surveys')
-    #answer_id = db.relationship('Answer', backref='surveys')
+
+    # question_id = db.relationship('Question', backref='surveys')
+    # answer_id = db.relationship('Answer', backref='surveys')
 
     def __repr__(self):
-        return '<Survey {}>'.format(self.survey_id)
+        return '<Survey {}>'.format(self.id)
 
 
 class Answer(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False, unique=True)
-    #question_id = db.Column(db.Integer, db.ForeignKey(Question.question_id), nullable=False)
-    #survey_id = db.Column(db.Integer, db.ForeignKey(Survey.survey_id), nullable=False)
-    answer_content = db.Column(db.Text, nullable=False)
-    answer_time = db.Column(db.Integer, nullable=False)
-    respondent_id = db.Column(db.Text, nullable=False)
-    answer_pool = db.Column(db.Integer, nullable=False)
+    survey_id = db.Column(db.Integer, db.ForeignKey(Survey.id), nullable=True)
+    q1answer = db.Column(db.Text, nullable=True)
+    q2answer = db.Column(db.Text, nullable=True)
+    q3answer = db.Column(db.Text, nullable=True)
+    q4answer = db.Column(db.Text, nullable=True)
+    q5answer = db.Column(db.Text, nullable=True)
+    q6answer = db.Column(db.Text, nullable=True)
+    q7answer = db.Column(db.Text, nullable=True)
+    q8answer = db.Column(db.Text, nullable=True)
+    q9answer = db.Column(db.Text, nullable=True)
+    q10answer = db.Column(db.Text, nullable=True)
+    q11answer = db.Column(db.Text, nullable=True)
+    q12answer = db.Column(db.Text, nullable=True)
+    q13answer = db.Column(db.Text, nullable=True)
+    q14answer = db.Column(db.Text, nullable=True)
+    q15answer = db.Column(db.Text, nullable=True)
 
     def __repr__(self):
-        return '<Answer {}>'.format(self.answer_id)
+        return '<Answer {}>'.format(self.id)
