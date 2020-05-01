@@ -1,38 +1,51 @@
+<!-- Use the base template -->
 {% extends "base.html" %}
-{% block title %}Homepage {% endblock %}
+{% block title %}Search Result {% endblock %}
 {% block content %}
-{% if results|length %}
-
-<h3>Survey Results</h3>
-
-<body>
-<p>Survey ID: {{ result.survey_id }}</p>
-
-{% if answer|length %}
+<div class="container">
 <table class="table">
     <thead class="thead-dark">
+    <h5> Survey Name: {{ result.survey_name }}</h5>
+    <h6> Survey Description: {{ result.description }}</h6>
     <tr>
-        <th scope="col">Answer ID</th>
-        <th scope="col">Answer</th>
-        <th scope="col">Time</th>
-        <th scope="col">Respondent ID</th>
+        <th scope="col">Answer 1</th>
+        <th scope="col">Answer 2</th>
+        <th scope="col">Answer 3</th>
+        <th scope="col">Answer 4</th>
+        <th scope="col">Answer 5</th>
+        <th scope="col">Answer 6</th>
+        <th scope="col">Answer 7</th>
+        <th scope="col">Answer 8</th>
+        <th scope="col">Answer 9</th>
+        <th scope="col">Answer 10</th>
+        <th scope="col">Answer 11</th>
+        <th scope="col">Answer 12</th>
+        <th scope="col">Answer 13</th>
+        <th scope="col">Answer 14</th>
+        <th scope="col">Answer 15</th>
     </tr>
     </thead>
     <tbody>
-    {% for answer in answer %}
+    {% for result in results %}
     <tr>
-        <td>{{ answer.answer_id }}</td>
-        <td>{{ answer.answer_content }}</td>
-        <td>{{ answer.answer_time }}</td>
-        <td>{{ answer.respondent_id }}</td>
+        <td>{{ result.q1answer }}</td>
+        <td>{{ result.q2answer }}</td>
+        <td>{{ result.q3answer }}</td>
+        <td>{{ result.q4answer }}</td>
+        <td>{{ result.q5answer }}</td>
+        <td>{{ result.q6answer }}</td>
+        <td>{{ result.q7answer }}</td>
+        <td>{{ result.q8answer }}</td>
+        <td>{{ result.q9answer }}</td>
+        <td>{{ result.q10answer }}</td>
+        <td>{{ result.q11answer }}</td>
+        <td>{{ result.q12answer }}</td>
+        <td>{{ result.q13answer }}</td>
+        <td>{{ result.q14answer }}</td>
+        <td>{{ result.q15answer }}</td>
     </tr>
+    </tbody>  
     {% endfor %}
-    </tbody>
 </table>
-{% else %}
-<p>Sorry, no answers are available at this time</p>
-
-{% endif %}
-</body>
-
+</div>
 {% endblock %}

@@ -226,28 +226,27 @@ def survey_review_profile():
 
 @bp_main.route('/search_survey_results/', methods=['POST', 'GET'])
 def search_survey_results():
+    name = request.cookies.get('username')
     if request.method == 'POST':
         term = request.form['search_survey']
         if term == "":
-            flash("Enter a survey id to search for")
-            return redirect('/')
-    if 'username' in request.cookies:
-        name = request.cookies.get('username')
+             flash("Enter a survey id to search for")
+             return redirect('main.survey_review_profile')
+
         print('name : ' + name, file=sys.stderr)
 
         results_only = db.session.query(Survey.survey_name, Survey.user_username, Survey.description,
-                                        Survey.id.label('survey_id'),
-                                        Answer.id, Answer.answer_content). \
-            filter_by(user_username=name). \
-            filter_by(survey_id=term).all()
+                                        Answer.id, Answer.survey_id, Answer.q1answer, Answer.q2answer,Answer.q3answer,
+                                        Answer.q4answer, Answer.q5answer, Answer.q6answer, Answer.q7answer,
+                                        Answer.q8answer, Answer.q9answer, Answer.q10answer, Answer.q11answer,
+                                        Answer.q12answer, Answer.q13answer, Answer.q14answer, Answer.q15answer). filter_by(user_username=name).filter_by(survey_id=term).all()
 
         print('results only : ' + str(results_only), file=sys.stderr)
-        print('results only : ' + str(type(results_only)), file=sys.stderr)
 
         if not results_only:
             flash("This survey does not exist, Please search again.")
-            return redirect('/')
-        return render_template('survey_results.html', results=results_only)
+            return render_template('survey_results.html', results=results_only)
+        return render_template('index.html', name=name)
     else:
         return redirect('main.index')
 
