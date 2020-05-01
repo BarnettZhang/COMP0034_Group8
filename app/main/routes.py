@@ -212,6 +212,7 @@ def survey_review_profile():
     if 'username' in request.cookies:
         name = request.cookies.get('username')
         print('name : ' + name, file=sys.stderr)
+
         results_only = db.session.query(Survey.survey_name, Survey.user_username,
                                         Survey.id.label('survey_id')).filter_by(user_username=name).all()
         # print('results only : ' + str(results_only), file=sys.stderr)
@@ -225,31 +226,46 @@ def survey_review_profile():
 
 
 @bp_main.route('/search_survey_results/', methods=['POST', 'GET'])
-def search_survey_results():
+def my_survey_results():
     if request.method == 'POST':
-        term = request.form['search_survey']
+        term = request.form['search_my_survey']
+
         if term == "":
-            flash("Enter a survey id to search for")
+            flash("Enter your survey id to search for results")
             return redirect('/')
-    if 'username' in request.cookies:
-        name = request.cookies.get('username')
-        print('name : ' + name, file=sys.stderr)
 
-        results_only = db.session.query(Survey.survey_name, Survey.user_username, Survey.description,
-                                        Survey.id.label('survey_id'),
-                                        Answer.id, Answer.answer_content). \
-            filter_by(user_username=name). \
-            filter_by(survey_id=term).all()
 
-        print('results only : ' + str(results_only), file=sys.stderr)
-        print('results only : ' + str(type(results_only)), file=sys.stderr)
 
-        if not results_only:
-            flash("This survey does not exist, Please search again.")
-            return redirect('/')
-        return render_template('survey_results.html', results=results_only)
-    else:
-        return redirect('main.index')
+        if 'username' in request.cookies:
+            name = request.cookies.get('username')
+            print('name : ' + name, file=sys.stderr)
+
+            results = db.session.query(Survey.survey_name, Survey.user_username,
+                                            Survey.id.label('survey_id'))\
+                                            .filter_by(user_username=name).all()
+            results_new = db.session.query(Survey.survey_name,  Survey.id.label('survey_id'),
+                                           Answer.id, Answer.q1answer,
+                                           Answer.q2answer, Answer.q3answer,
+                                           Answer.q4answer, Answer.q5answer,
+                                           Answer.q6answer, Answer.q7answer,
+                                           Answer.q8answer, Answer.q9answer,
+                                           Answer.q10answer, Answer.q11answer,
+                                           Answer.q12answer, Answer.q13answer))\
+                                            .filter_by(survey_id = term).all()
+
+
+            print('results : ' + str(results), file=sys.stderr)
+            print('results : ' + str(type(results_new)), file=sys.stderr)
+
+            if not results_new:
+                flash("This is not your survey. Please re-enter your survey ID")
+                return redirect('/')
+            return render_template('my_survey_results.html', results=results_only)
+
+    return redirect(url_for('main.index'))
+
+
+
 
 
 @bp_main.route('/privacy_policy', methods=['GET'])

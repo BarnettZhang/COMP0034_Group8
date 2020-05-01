@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block title %} My Survey Results {% endblock %}
+{% block content %}
+{% if results|length %}
+
+<h3>My Survey Results</h3>
+
+<body>
+<p>Survey ID: {{ result.survey_id }}</p>
+
+{% if answer|length %}
+<table class="table">
+
+   <tbody>
+   <tr>
+        <td>{{ Q1 answer }}</td>
+        <td>{{ Q2 answer  }}</td>
+        <td>{{ Q3 answer  }}</td>
+        <td>{{ Q4 answer  }}</td>
+        <td>{{ Q5 answer  }}</td>
+        <td>{{ Q6 answer  }}</td>
+        <td>{{ Q7 answer  }}</td>
+        <td>{{ Q8 answer  }}</td>
+        <td>{{ Q9 answer   }}</td>
+        <td>{{ Q10 answer  }}</td>
+        <td>{{ Q11 answer  }}</td>
+        <td>{{ Q12 answer  }}</td>
+        <td>{{ Q13 answer  }}</td>
+        <td>{{ Q14 answer  }}</td>
+        <td>{{ Q15 answer  }}</td>
+    </tr>
+    {% for result in results %}
+    <tr>
+        <td>{{ Answer.q1answer }}</td>
+        <td>{{ Answer.q2answer }}</td>
+        <td>{{ Answer.q3answer }}</td>
+        <td>{{ Answer.q4answer }}</td>
+        <td>{{ Answer.q5answer }}</td>
+        <td>{{ Answer.q6answer }}</td>
+        <td>{{ Answer.q7answer }}</td>
+        <td>{{ Answer.q8answer }}</td>
+        <td>{{ Answer.q9answer }}</td>
+        <td>{{ Answer.q10answer }}</td>
+        <td>{{ Answer.q11answer }}</td>
+        <td>{{ Answer.q12answer }}</td>
+        <td>{{ Answer.q13answer }}</td>
+        <td>{{ Answer.q14answer }}</td>
+        <td>{{ Answer.q15answer }}</td>
+    </tr>
+
+    </tbody>   {% endfor %}
+
+</table>
+{% else %}
+<p>Sorry, no answers are available at this time</p>
+
+{% endif %}
+</body>
+
+{% endblock %}
+
+

@@ -1,40 +1,0 @@
-{% extends "base.html" %}
-{% block title %}Homepage {% endblock %}
-{% block content %}
-{% if results|length %}
-
-<h3>Survey Results</h3>
-
-<body>
-<p>Survey ID: {{ result.survey_id }}</p>
-
-{% if answer|length %}
-<table class="table">
-    <thead class="thead-dark">
-    <tr>
-        <th scope="col">Answer ID</th>
-        <th scope="col">Answer</th>
-        <th scope="col">Time</th>
-        <th scope="col">Respondent ID</th>
-    </tr>
-    </thead>
-    <tbody>
-    {% for answer in answer %}
-    <tr>
-        <td>{{ answer.answer_id }}</td>
-        <td>{{ answer.answer_content }}</td>
-        <td>{{ answer.answer_time }}</td>
-        <td>{{ answer.respondent_id }}</td>
-    </tr>
-    {% endfor %}
-    </tbody>
-</table>
-{% else %}
-<p>Sorry, no answers are available at this time</p>
-
-{% endif %}
-</body>
-
-{% endblock %}
-
-
