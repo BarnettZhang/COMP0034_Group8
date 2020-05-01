@@ -5,6 +5,7 @@ from sqlalchemy import engine, and_
 from sqlalchemy.exc import IntegrityError
 from flask_login import login_user, current_user, login_required
 from app import db, sess, models
+from app.auth.forms import ProfileForm
 from app.main.forms import CreateSurvey, AnswerSurvey
 from app.models import Survey, User, Answer
 
@@ -55,9 +56,39 @@ def index():
         return render_template('homepage.html', results=result)
 
 
-@bp_main.route('/edit_personal_info/', methods=['GET'])
-def edit_personal_info():
-    return render_template("personal_info_edit.html")
+@bp_main.route('/edit_personal_info/', methods=['GET', 'POST'])
+def edit_personal_info(username=""):
+    if 'username' in request.cookies:
+        #   username = request.cookies.get('username')
+        username = current_user.username
+        email = current_user.email
+        age = current_user.age
+        gender = current_user.gender
+        religion = current_user.religion
+        nationality = current_user.nationality
+        ethnic = current_user.ethnic
+        institution = current_user.institution
+
+        form = ProfileForm()
+        if request.method == 'POST' and form.validate():
+            user = current_user
+            user.email = form.email.data
+            user.age = form.age.data
+            user.institution = form.institution.data
+            try:
+                db.session.flush()
+                db.session.commit()
+                flash('You have updated personal information.')
+                return redirect('/')
+            except IntegrityError:
+                db.session.rollback()
+                flash('Unable to change personal information.')
+        #return render_template('signup.html', form=form, username=username, email=email, gender=gender,
+        #                       age=age, religion=religion, nationality=nationality, ethnic=ethnic,
+        #                       institution=institution)
+
+    return render_template("personal_info_edit.html", form= form, username= username, gender = gender, ethnic = ethnic,
+                           institution= institution, nationality= nationality, religion= religion, email= email, age=age)
 
 
 @bp_main.route('/create_survey/', methods=['POST', 'GET'])
@@ -189,6 +220,34 @@ def survey_review_profile():
             flash("You have not created any survey")
             return redirect('/')
         return render_template('srp.html', results=results_only)
+    else:
+        return redirect('main.index')
+
+
+@bp_main.route('/search_survey_results/', methods=['POST', 'GET'])
+def search_survey_results():
+    if request.method == 'POST':
+        term = request.form['search_survey']
+        if term == "":
+            flash("Enter a survey id to search for")
+            return redirect('/')
+    if 'username' in request.cookies:
+        name = request.cookies.get('username')
+        print('name : ' + name, file=sys.stderr)
+
+        results_only = db.session.query(Survey.survey_name, Survey.user_username, Survey.description,
+                                        Survey.id.label('survey_id'),
+                                        Answer.id, Answer.answer_content). \
+            filter_by(user_username=name). \
+            filter_by(survey_id=term).all()
+
+        print('results only : ' + str(results_only), file=sys.stderr)
+        print('results only : ' + str(type(results_only)), file=sys.stderr)
+
+        if not results_only:
+            flash("This survey does not exist, Please search again.")
+            return redirect('/')
+        return render_template('survey_results.html', results=results_only)
     else:
         return redirect('main.index')
 
