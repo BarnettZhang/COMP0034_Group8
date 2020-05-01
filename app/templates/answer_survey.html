@@ -1,0 +1,34 @@
+<script src="../static/js/create_survey.js"></script>
+{% extends "base.html" %}
+{% block title %}Answer survey {% endblock %}
+{% block content %}
+    {% from "_formhelpers.html" import render_field %}
+    <h4>If the question content is none, please input "none" in that specific answer boxes </h4>
+<div class="row">
+    <div class="col-6">
+            <form method="post" novalidate>
+                    {{ answer.csrf_token }}
+                    <dl>
+                        {{ render_field(answer.survey_id, class='form-control') }}
+                        {{ render_field(answer.q1answer, class='form-control') }}
+                        {{ render_field(answer.q2answer, class='form-control') }}
+                        {{ render_field(answer.q3answer, class='form-control') }}
+                        {{ render_field(answer.q4answer, class='form-control') }}
+                        {{ render_field(answer.q5answer, class='form-control') }}
+                        {{ render_field(answer.q6answer, class='form-control') }}
+                        {{ render_field(answer.q7answer, class='form-control') }}
+                        {{ render_field(answer.q8answer, class='form-control') }}
+                        {{ render_field(answer.q9answer, class='form-control') }}
+                        {{ render_field(answer.q10answer, class='form-control') }}
+                        {{ render_field(answer.q11answer, class='form-control') }}
+                        {{ render_field(answer.q12answer, class='form-control') }}
+                        {{ render_field(answer.q13answer, class='form-control') }}
+                        {{ render_field(answer.q14answer, class='form-control') }}
+                        {{ render_field(answer.q15answer, class='form-control') }}
+
+                    </dl>
+                 <button type="submit" class="btn btn-primary">Submit Answer</button>
+                </form>
+    </div>
+    </div>
+{% endblock %}
