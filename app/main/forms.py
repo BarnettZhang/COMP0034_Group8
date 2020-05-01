@@ -1,11 +1,6 @@
 from flask_wtf import FlaskForm
-from sqlalchemy import or_
-from sqlalchemy.orm import with_polymorphic
-from wtforms import SelectField, StringField, PasswordField, ValidationError, BooleanField
-from wtforms.validators import DataRequired, Email, EqualTo
-
-from app import db
-from app.models import Survey, User, Answer
+from wtforms import SelectField, StringField, ValidationError, BooleanField
+from wtforms.validators import DataRequired
 
 
 class passvalidate(SelectField):

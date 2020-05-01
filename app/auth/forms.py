@@ -1,9 +1,7 @@
 from flask_wtf import FlaskForm
-from sqlalchemy.orm import with_polymorphic
-from wtforms import StringField, SubmitField, PasswordField, BooleanField, SelectField
+from wtforms import StringField, PasswordField, BooleanField, SelectField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 
-from app import db
 from app.models import User
 
 
@@ -41,6 +39,7 @@ class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
     remember = BooleanField('Remember Me')
+
 
 class ProfileForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email(message='Valid email address required')])

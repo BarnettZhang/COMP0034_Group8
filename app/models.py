@@ -16,8 +16,6 @@ class User(db.Model, UserMixin):
     institution = db.Column(db.Text, nullable=False)
     survey_id = db.relationship('Survey', backref='users')
 
-    # respondent_id = db.relationship('Answer', backref='users')
-
     def __repr__(self):
         return '<User {}>'.format(self.id)
 
@@ -128,9 +126,6 @@ class Survey(db.Model):
     q14question_must = db.Column(db.Text, nullable=True)
     q14question_num = db.Column(db.Text, nullable=True)
     q14question_content = db.Column(db.Text, nullable=True)
-
-    # question_id = db.relationship('Question', backref='surveys')
-    # answer_id = db.relationship('Answer', backref='surveys')
 
     def __repr__(self):
         return '<Survey {}>'.format(self.id)

@@ -1,10 +1,9 @@
 import sys
 
-from flask import Blueprint, request, make_response, redirect, url_for, flash, render_template, session, abort
-from sqlalchemy import engine, and_
+from flask import Blueprint, request, redirect, url_for, flash, render_template
 from sqlalchemy.exc import IntegrityError
-from flask_login import login_user, current_user, login_required
-from app import db, sess, models
+from flask_login import current_user
+from app import db
 from app.auth.forms import ProfileForm
 from app.main.forms import CreateSurvey, AnswerSurvey
 from app.models import Survey, User, Answer
@@ -26,7 +25,6 @@ def index():
         result = []
         allsurvey = db.session.query(Survey.target_religion, Survey.target_ethnic, Survey.target_gender,
                                      Survey.survey_name, Survey.description, Survey.id).all()
-        print(allsurvey)
         for surveys in allsurvey:
             if surveys[0] == 'all' and surveys[1] == 'all' and surveys[2] == 'all':
                 result.append(surveys)
@@ -50,9 +48,6 @@ def index():
                     result.append(surveys)
             elif surveys[0] == religion and surveys[1] == ethnic and surveys[2] == gender:
                 result.append(surveys)
-        # result = db.session.query(Survey).filter(
-        #   and_(Survey.target_religion == user.religion, Survey.target_ethnic == user.ethnic,
-        #        Survey.target_gender == user.gender)).all()
 
         return render_template('homepage.html', results=result)
 
@@ -60,7 +55,6 @@ def index():
 @bp_main.route('/edit_personal_info/', methods=['GET', 'POST'])
 def edit_personal_info(username=""):
     if 'username' in request.cookies:
-        #   username = request.cookies.get('username')
         username = current_user.username
         email = current_user.email
         age = current_user.age
@@ -84,9 +78,6 @@ def edit_personal_info(username=""):
             except IntegrityError:
                 db.session.rollback()
                 flash('Unable to change personal information.')
-        # return render_template('signup.html', form=form, username=username, email=email, gender=gender,
-        #                       age=age, religion=religion, nationality=nationality, ethnic=ethnic,
-        #                       institution=institution)
 
     return render_template("personal_info_edit.html", form=form, username=username, gender=gender, ethnic=ethnic,
                            institution=institution, nationality=nationality, religion=religion, email=email, age=age)
@@ -195,7 +186,6 @@ def answer_survey():
                         q15answer=answer.q15answer.data, survey_id=answer.survey_id.data)
         db.session.add(answer)
         db.session.commit()
-        print('Answer : ' + str(answer), file=sys.stderr)
         flash('You have finished answering')
         return redirect(url_for('main.index'))
     return render_template("answer_survey.html", answer=answer)
@@ -205,11 +195,8 @@ def answer_survey():
 def survey_review_profile():
     if 'username' in request.cookies:
         name = request.cookies.get('username')
-        print('name : ' + name, file=sys.stderr)
         results_only = db.session.query(Survey.survey_name, Survey.user_username,
                                         Survey.id.label('survey_id')).filter_by(user_username=name).all()
-        # print('results only : ' + str(results_only), file=sys.stderr)
-        # print('results only : ' + str(type(results_only)), file=sys.stderr)
         if not results_only:
             flash("You have not created any survey")
             return redirect('/')
@@ -229,8 +216,6 @@ def my_survey_results():
 
         if 'username' in request.cookies:
             name = request.cookies.get('username')
-            print('name : ' + name, file=sys.stderr)
-
             results = db.session.query(Survey.survey_name, Survey.user_username,
                                        Survey.id.label('survey_id')) \
                 .filter_by(user_username=name).all()
@@ -242,9 +227,6 @@ def my_survey_results():
                                            Answer.q8answer, Answer.q9answer,
                                            Answer.q10answer, Answer.q11answer,
                                            Answer.q12answer, Answer.q13answer).filter_by(survey_id=term).all()
-
-            print('results : ' + str(results), file=sys.stderr)
-            print('results : ' + str(type(results_new)), file=sys.stderr)
 
             if not results_new:
                 flash("This is not your survey. Please re-enter your survey ID")

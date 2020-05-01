@@ -94,4 +94,3 @@ def logout():
     response.set_cookie('username', '', expires=datetime.now())
     flash('You have been logged out.')
     return response
-
