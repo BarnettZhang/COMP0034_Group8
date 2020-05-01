@@ -160,7 +160,7 @@ def search_survey_results():
 
         results_only = db.session.query(Survey.survey_name, Survey.user_username, Survey.description,
                                         Survey.id.label('survey_id'),
-                                        Answer.id, Answer.answer_content).\
+                                        Answer.id, Answer.answer_content). \
             filter_by(user_username=name). \
             filter_by(survey_id=term).all()
 
@@ -184,7 +184,7 @@ class ProfileFrom(object):
     pass
 
 
-@bp_main.route('/edit_personal_info/', methods=['GET','POST'])
+@bp_main.route('/edit_personal_info/', methods=['GET', 'POST'])
 def edit_personal_info(username=""):
     if 'username' in request.cookies:
         #   username = request.cookies.get('username')
@@ -197,11 +197,12 @@ def edit_personal_info(username=""):
         ethnic = current_user.ethnic
         institution = current_user.institution
 
-        form = ProfileForm(request.form)
+        form = ProfileForm()
         if request.method == 'POST' and form.validate():
-            current_user.email = form.email.data
-            current_user.age = form.age.data
-            current_user.institution = form.institution.data
+            user = current_user
+            user.email = form.email.data
+            user.age = form.age.data
+            user.institution = form.institution.data
             try:
                 db.session.flush()
                 db.session.commit()
@@ -210,10 +211,9 @@ def edit_personal_info(username=""):
             except IntegrityError:
                 db.session.rollback()
                 flash('Unable to change personal information.')
-        return render_template('signup.html', form=form, username=username, email=email, gender=gender,
-                           age=age, religion=religion, nationality=nationality, ethnic=ethnic, institution=institution)
+        #return render_template('signup.html', form=form, username=username, email=email, gender=gender,
+        #                       age=age, religion=religion, nationality=nationality, ethnic=ethnic,
+        #                       institution=institution)
 
-
-    return render_template("personal_info_edit.html", username=username, email=email, gender=gender,
-                           age=age, religion=religion, nationality=nationality, ethnic=ethnic, institution=institution)
-
+    return render_template("personal_info_edit.html", form= form, username= username, gender = gender, ethnic = ethnic,
+                           institution= institution, nationality= nationality, religion= religion, email= email, age=age)

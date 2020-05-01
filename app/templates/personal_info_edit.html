@@ -1,10 +1,9 @@
 {% extends "base.html" %}
 {% block title %}Homepage {% endblock %}
 {% block content %}
-{% from "_formhelpers.html" import render_field %}
-    <form method=post novalidate>
-        {{ form.csrf_token }}
-<h3>Edit personal information</h3>
+    {% from "_formhelpers.html" import render_field %}
+
+<h3>My Profile</h3>
 <div class="row">
 
 <!--Left Column-->
@@ -19,7 +18,7 @@
                   <div class="modal-dialog" role="document">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Upload your new profile photo</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Upload your new profile photo (this function is not available)</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                         </button>
@@ -89,6 +88,14 @@
             　<td>Username:</td>
             　<td>{{ username }}</td>
             　</tr>
+              <tr>
+            　<td>Age:</td>
+            　<td>{{ age }}</td>
+            　</tr>
+              <tr>
+            　<td>Email:</td>
+            　<td>{{ email }}</td>
+            　</tr>
             　<tr>
             　<td>Gender:</td>
             　<td>{{ gender }}</td>
@@ -102,33 +109,32 @@
             　<td>{{ nationality }}</td>
             　</tr>
               <tr>
-            　<td>Age:</td>
-            　<td>
-                    <div class="form-group" method="post">
-                     <input type="age" class="form-control input-group-sm" placeholder="{{ age }}" id="exampleInputAge">
-                    </div></td>
-            　</tr>
-              <tr>
-            　<td>Email:</td>
-            　<td>
-                  <div class="form-group" method="post">
-                     <input type="email" class="form-control" placeholder="{{ email }}" id="exampleInputEmail">
-                    </div>
-              </td>
+            　<td>Religion:</td>
+            　<td>{{ religion }}</td>
             　</tr>
               <tr>
             　<td>Institution:</td>
-            　<td>
-                    <div class="form-group" method="post">
-                     <input type="institution" class="form-control" placeholder="{{ institution }}" id="exampleInputInstitution">
-                    </div>
+            　<td> {{ institution }}
               </td>
             　</tr>
          </table>
 
-      <p>Reminder:</p>
-      <p>Please re-enter your age, email and institution all together when updating personal information.</p>
-      <button type="submit" class="btn btn-dark">Save changes</button>
+      <p></p>
+      <h5>Edit my information</h5>
+      <p>Reminder:Please re-enter your age, email and institution all together when updating personal information.</p>
+
+
+      <form method=post novalidate>
+        {{ form.csrf_token }}
+        <dl>
+            {{ render_field(form.email, class='form-control') }}
+            {{ render_field(form.age, class='form-control') }}
+            {{ render_field(form.institution, class='form-control') }}
+        </dl>
+        <br>
+        <button type="submit" class="btn btn-dark">Save changes</button>
+     </form>
+
   </div>
 </div>
 
