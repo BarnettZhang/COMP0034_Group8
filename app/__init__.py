@@ -36,7 +36,7 @@ def create_app(config_class=DevConfig):
     db.init_app(app)
     from app.models import Survey, Answer, User
     with app.app_context():
-        #db.drop_all()
+        # db.drop_all()
         db.create_all()
 
     # Register error handlers

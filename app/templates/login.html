@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% block title %} Login {% endblock %}
 {% block content %}
-    {% from "_formhelpers.html" import render_field %}
-    <form method=post novalidate>
-        {{ form.csrf_token }}
+{% from "_formhelpers.html" import render_field %}
+<form method=post novalidate>
+    {{ form.csrf_token }}
     <dl>
         {{ render_field(form.username, class='form-control') }}
         {{ render_field(form.password, class='form-control') }}
@@ -11,5 +11,5 @@
         <input type=submit value='Login' class='btn btn-primary'>
     </dl>
 </form>
-    <p>Register Here: <a href="{{ url_for('auth.signup') }}">Sign Up</a></p>
+<p>Register Here: <a href="{{ url_for('auth.signup') }}">Sign Up</a></p>
 {% endblock %}

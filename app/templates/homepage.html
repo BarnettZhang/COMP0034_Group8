@@ -5,31 +5,33 @@
         <h3>Welcome to QNR {{ username }}</h3>
     </div>
     <div class="row">
-    <div class="col-auto" style="margin-top: 25px">
-    </div>
-
-    <div class="col-lg-8 list-group">
-    {% if current_user.is_anonymous %}
-        <a class="list-group-item list-group-item-action flex-column align-items-start" style="margin-top: 20px">
-            <h4>Please login to discover more! Surveys are waiting for you!</h4></a>
-    {% else %}
-
-        <a class="list-group-item list-group-item-action flex-column align-items-start" style="margin-top: 20px">
-            <h4>Discover surveys that are suitable for you</h4></a>
-            {% for result in results %}
-          <a class="list-group-item list-group-item-action flex-column align-items-start take_survey_list_margin">
-    <div class="d-flex w-auto justify-content-between">
-
-    <h5 class="mb-1">{{ result.survey_name }}</h5>
-        <small>Survey ID: {{result.id}}</small>
-    </div>
-        <p class="mb-1">{{ result.survey_name }} description: {{ result.description }}</p >
-          </a>
-            {% endfor %}
+        <div class="col-auto" style="margin-top: 25px">
         </div>
 
-    </div>
-    {% endif %}
+        <div class="col-lg-8 list-group">
+            {% if current_user.is_anonymous %}
+                <a class="list-group-item list-group-item-action flex-column align-items-start"
+                   style="margin-top: 20px">
+                    <h4>Please login to discover more! Surveys are waiting for you!</h4></a>
+            {% else %}
+
+                <a class="list-group-item list-group-item-action flex-column align-items-start"
+                   style="margin-top: 20px">
+                    <h4>Discover surveys that are suitable for you</h4></a>
+                {% for result in results %}
+                    <a class="list-group-item list-group-item-action flex-column align-items-start take_survey_list_margin">
+                        <div class="d-flex w-auto justify-content-between">
+
+                            <h5 class="mb-1">{{ result.survey_name }}</h5>
+                            <small>Survey ID: {{ result.id }}</small>
+                        </div>
+                        <p class="mb-1">{{ result.survey_name }} description: {{ result.description }}</p>
+                    </a>
+                {% endfor %}
+                </div>
+
+                </div>
+            {% endif %}
     </div>
     </div>
 {% endblock %}

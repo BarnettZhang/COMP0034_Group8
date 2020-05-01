@@ -6,28 +6,28 @@
 <h3>My Survey Results</h3>
 
 <body>
-<p>Survey ID: {{ result.survey_id }}</p >
+<p>Survey ID: {{ result.survey_id }}</p>
 
 {% if answer|length %}
 <table class="table">
 
-   <tbody>
-   <tr>
+    <tbody>
+    <tr>
         <td>{{ Q1 answer }}</td>
-        <td>{{ Q2 answer  }}</td>
-        <td>{{ Q3 answer  }}</td>
-        <td>{{ Q4 answer  }}</td>
-        <td>{{ Q5 answer  }}</td>
-        <td>{{ Q6 answer  }}</td>
-        <td>{{ Q7 answer  }}</td>
-        <td>{{ Q8 answer  }}</td>
-        <td>{{ Q9 answer   }}</td>
-        <td>{{ Q10 answer  }}</td>
-        <td>{{ Q11 answer  }}</td>
-        <td>{{ Q12 answer  }}</td>
-        <td>{{ Q13 answer  }}</td>
-        <td>{{ Q14 answer  }}</td>
-        <td>{{ Q15 answer  }}</td>
+        <td>{{ Q2 answer }}</td>
+        <td>{{ Q3 answer }}</td>
+        <td>{{ Q4 answer }}</td>
+        <td>{{ Q5 answer }}</td>
+        <td>{{ Q6 answer }}</td>
+        <td>{{ Q7 answer }}</td>
+        <td>{{ Q8 answer }}</td>
+        <td>{{ Q9 answer }}</td>
+        <td>{{ Q10 answer }}</td>
+        <td>{{ Q11 answer }}</td>
+        <td>{{ Q12 answer }}</td>
+        <td>{{ Q13 answer }}</td>
+        <td>{{ Q14 answer }}</td>
+        <td>{{ Q15 answer }}</td>
     </tr>
     {% for result in results %}
     <tr>
@@ -48,11 +48,13 @@
         <td>{{ Answer.q15answer }}</td>
     </tr>
 
-    </tbody>   {% endfor %}
+    </tbody>
+     {% endfor %}
 
-</table>
+</table>
+
 {% else %}
-<p>Sorry, no answers are available at this time</p >
+<p>Sorry, no answers are available at this time</p>
 
 {% endif %}
 </body>

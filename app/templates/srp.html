@@ -4,32 +4,33 @@
 {% if results|length %}
 
 
-     <h3>
-        <div class="mid_relative">My Survey</div>
-    </h3>
+<h3>
+    <div class="mid_relative">My Survey</div>
+</h3>
 
-            <form class="form-inline ml-auto" action="search" method="post">
-        <input class="form-control" type="search_survey" placeholder="Enter survey ID" aria-label="Search" name="search_my_survey">
-        <button class="search-btn btn-outline-dark my-2" type="submit">Search Survey Result</button>
-        </form>
+<form class="form-inline ml-auto" action="search" method="post">
+    <input class="form-control" type="search_survey" placeholder="Enter survey ID" aria-label="Search"
+           name="search_my_survey">
+    <button class="search-btn btn-outline-dark my-2" type="submit">Search Survey Result</button>
+</form>
 
- <div class="app_page1">
+<div class="app_page1">
     <div class="row">
         <div class="col-sm-4" id="mid">
             {% for result in results %}
-          <a class="list-group-item list-group-item-action flex-column align-items-start take_survey_list_margin">
-    <div class="d-flex w-auto justify-content-between">
-    <h5 class="mb-1">{{ result.survey_name }}</h5>
-        <small>Survey ID: {{result.survey_id}}</small>
-    </div>
-        <p class="mb-1">{{ result.survey_name }} description: {{ result.description }}</p >
-          </a>
+            <a class="list-group-item list-group-item-action flex-column align-items-start take_survey_list_margin">
+                <div class="d-flex w-auto justify-content-between">
+                    <h5 class="mb-1">{{ result.survey_name }}</h5>
+                    <small>Survey ID: {{result.survey_id}}</small>
+                </div>
+                <p class="mb-1">{{ result.survey_name }} description: {{ result.description }}</p>
+            </a>
             {% endfor %}
         </div>
 
     </div>
- </div>
+</div>
 {% else %}
-     <p>Sorry, no survey found</p>
+<p>Sorry, no survey found</p>
 {% endif %}
 {% endblock %}

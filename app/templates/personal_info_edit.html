@@ -3,140 +3,170 @@
 {% block content %}
     {% from "_formhelpers.html" import render_field %}
 
-<h3>My Profile</h3>
-<div class="row">
+    <h3>My Profile</h3>
+    <div class="row">
 
-<!--Left Column-->
-  <div class="column left" style="background-color:#aaa;">
-        <img src="image/women.png" alt="personal photo">
+        <!--Left Column-->
+        <div class="column left" style="background-color:#aaa;">
+            <img src="image/women.png" alt="personal photo">
 
-        <!-- Change photo -->
-                <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#changephoto">
-                  Change Photo
-                </button>
-                <div class="modal fade" id="changephoto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                  <div class="modal-dialog" role="document">
+            <!-- Change photo -->
+            <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#changephoto">
+                Change Photo
+            </button>
+            <div class="modal fade" id="changephoto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
                     <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Upload your new profile photo (this function is not available)</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body"> <!-- content -->
-                          <form>
-                              <div class="form-group">
-                                <label for="exampleFormControlFile1">size limit:__ </label>
-                                <input type="file" class="form-control-file" id="exampleFormControlFile1">
-                              </div>
-                          </form>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-dark btn-sm" data-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-secondary btn-sm">Update</button>
-                      </div>
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Upload your new profile photo (this function
+                                is not available)</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body"> <!-- content -->
+                            <form>
+                                <div class="form-group">
+                                    <label for="exampleFormControlFile1">size limit:__ </label>
+                                    <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-dark btn-sm" data-dismiss="modal">Cancel
+                            </button>
+                            <button type="button" class="btn btn-secondary btn-sm">Update</button>
+                        </div>
                     </div>
-                  </div>
                 </div>
+            </div>
 
-        <!-- Change Password Button trigger modal -->
-                <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#changepassword">
-                  Change Password
-                </button>
-                <!-- Modal -->
-                <div class="modal fade" id="changepassword" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                  <div class="modal-dialog" role="document">
+            <!-- Change Password Button trigger modal -->
+            <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#changepassword">
+                Change Password
+            </button>
+            <!-- Modal -->
+            <div class="modal fade" id="changepassword" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
                     <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Change password</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body"> <!-- content -->
-                          <form>
-                          <div class="form-group">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Change password</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body"> <!-- content -->
+                            <form>
+                                <div class="form-group">
                                     <label for="exampleInputPassword">Enter new password:</label>
                                     <input type="password" class="form-control" id="exampleInputPassword">
-                                  </div>
-                                  <div class="form-group">
+                                </div>
+                                <div class="form-group">
                                     <label for="exampleInputPassword">Re-enter password:</label>
-                                    <input type="password" class="form-control" id="exampleInputPassword" >
-                                  </div>
-                        </form>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-dark btn-sm" data-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-secondary btn-sm">Save changes</button>
-                      </div>
+                                    <input type="password" class="form-control" id="exampleInputPassword">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-dark btn-sm" data-dismiss="modal">Cancel
+                            </button>
+                            <button type="button" class="btn btn-secondary btn-sm">Save changes</button>
+                        </div>
                     </div>
-                  </div>
                 </div>
-  </div>
+            </div>
+        </div>
 
-<!--Right Column-->
-  <div class="column right">
+        <!--Right Column-->
+        <div class="column right">
 
             <h4>Basic Info:</h4>
-              <p>We'll never share your details with anyone else.</p>
+            <p>We'll never share your details with anyone else.</p>
 
 
+            <table width="600" height="500">
+                　
+                <tr>
+                    　
+                    <td>Username:</td>
+                    　
+                    <td>{{ username }}</td>
+                    　
+                </tr>
+                <tr>
+                    　
+                    <td>Age:</td>
+                    　
+                    <td>{{ age }}</td>
+                    　
+                </tr>
+                <tr>
+                    　
+                    <td>Email:</td>
+                    　
+                    <td>{{ email }}</td>
+                    　
+                </tr>
+                　
+                <tr>
+                    　
+                    <td>Gender:</td>
+                    　
+                    <td>{{ gender }}</td>
+                    　
+                </tr>
+                <tr>
+                    　
+                    <td>Ethnicity:</td>
+                    　
+                    <td>{{ ethnic }}</td>
+                    　
+                </tr>
+                <tr>
+                    　
+                    <td>Nationality:</td>
+                    　
+                    <td>{{ nationality }}</td>
+                    　
+                </tr>
+                <tr>
+                    　
+                    <td>Religion:</td>
+                    　
+                    <td>{{ religion }}</td>
+                    　
+                </tr>
+                <tr>
+                    　
+                    <td>Institution:</td>
+                    　
+                    <td> {{ institution }}
+                    </td>
+                    　
+                </tr>
+            </table>
+
+            <p></p>
+            <h5>Edit my information</h5>
+            <p>Reminder:Please re-enter your age, email and institution all together when updating personal
+                information.</p>
 
 
-              <table width="600" height="500">
-            　<tr>
-            　<td>Username:</td>
-            　<td>{{ username }}</td>
-            　</tr>
-              <tr>
-            　<td>Age:</td>
-            　<td>{{ age }}</td>
-            　</tr>
-              <tr>
-            　<td>Email:</td>
-            　<td>{{ email }}</td>
-            　</tr>
-            　<tr>
-            　<td>Gender:</td>
-            　<td>{{ gender }}</td>
-            　</tr>
-              <tr>
-            　<td>Ethnicity:</td>
-            　<td>{{ ethnic }}</td>
-            　</tr>
-              <tr>
-            　<td>Nationality:</td>
-            　<td>{{ nationality }}</td>
-            　</tr>
-              <tr>
-            　<td>Religion:</td>
-            　<td>{{ religion }}</td>
-            　</tr>
-              <tr>
-            　<td>Institution:</td>
-            　<td> {{ institution }}
-              </td>
-            　</tr>
-         </table>
+            <form method=post novalidate>
+                {{ form.csrf_token }}
+                <dl>
+                    {{ render_field(form.email, class='form-control') }}
+                    {{ render_field(form.age, class='form-control') }}
+                    {{ render_field(form.institution, class='form-control') }}
+                </dl>
+                <br>
+                <button type="submit" class="btn btn-dark">Save changes</button>
+            </form>
 
-      <p></p>
-      <h5>Edit my information</h5>
-      <p>Reminder:Please re-enter your age, email and institution all together when updating personal information.</p>
+        </div>
+    </div>
 
-
-      <form method=post novalidate>
-        {{ form.csrf_token }}
-        <dl>
-            {{ render_field(form.email, class='form-control') }}
-            {{ render_field(form.age, class='form-control') }}
-            {{ render_field(form.institution, class='form-control') }}
-        </dl>
-        <br>
-        <button type="submit" class="btn btn-dark">Save changes</button>
-     </form>
-
-  </div>
-</div>
-
-</form>
+    </form>
 {% endblock %}
