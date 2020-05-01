@@ -56,6 +56,39 @@ def index():
         return render_template('homepage.html', results=result)
 
 
+@bp_main.route('/edit_personal_info/', methods=['GET', 'POST'])
+def edit_personal_info(username=""):
+    if 'username' in request.cookies:
+        #   username = request.cookies.get('username')
+        username = current_user.username
+        email = current_user.email
+        age = current_user.age
+        gender = current_user.gender
+        religion = current_user.religion
+        nationality = current_user.nationality
+        ethnic = current_user.ethnic
+        institution = current_user.institution
+
+        form = ProfileForm()
+        if request.method == 'POST' and form.validate():
+            user = current_user
+            user.email = form.email.data
+            user.age = form.age.data
+            user.institution = form.institution.data
+            try:
+                db.session.flush()
+                db.session.commit()
+                flash('You have updated personal information.')
+                return redirect('/')
+            except IntegrityError:
+                db.session.rollback()
+                flash('Unable to change personal information.')
+        #return render_template('signup.html', form=form, username=username, email=email, gender=gender,
+        #                       age=age, religion=religion, nationality=nationality, ethnic=ethnic,
+        #                       institution=institution)
+
+    return render_template("personal_info_edit.html", form= form, username= username, gender = gender, ethnic = ethnic,
+                           institution= institution, nationality= nationality, religion= religion, email= email, age=age)
 
 
 @bp_main.route('/create_survey/', methods=['POST', 'GET'])
@@ -191,55 +224,12 @@ def survey_review_profile():
         return redirect('main.index')
 
 
-@bp_main.route('/privacy_policy', methods=['GET'])
-def privacy_policy():
-    return render_template("privacy_policy.html")
-
-class ProfileFrom(object):
-    pass
-
-
-@bp_main.route('/edit_personal_info/', methods=['GET', 'POST'])
-def edit_personal_info(username=""):
-    if 'username' in request.cookies:
-        #   username = request.cookies.get('username')
-        username = current_user.username
-        email = current_user.email
-        age = current_user.age
-        gender = current_user.gender
-        religion = current_user.religion
-        nationality = current_user.nationality
-        ethnic = current_user.ethnic
-        institution = current_user.institution
-
-        form = ProfileForm()
-        if request.method == 'POST' and form.validate():
-            user = current_user
-            user.email = form.email.data
-            user.age = form.age.data
-            user.institution = form.institution.data
-            try:
-                db.session.flush()
-                db.session.commit()
-                flash('You have updated personal information.')
-                return redirect('/')
-            except IntegrityError:
-                db.session.rollback()
-                flash('Unable to change personal information.')
-        #return render_template('signup.html', form=form, username=username, email=email, gender=gender,
-        #                       age=age, religion=religion, nationality=nationality, ethnic=ethnic,
-        #                       institution=institution)
-
-    return render_template("personal_info_edit.html", form= form, username= username, gender = gender, ethnic = ethnic,
-                           institution= institution, nationality= nationality, religion= religion, email= email, age=age)
-
-
 @bp_main.route('/search_survey_results/', methods=['POST', 'GET'])
-def show_survey_results():
+def search_survey_results():
     if request.method == 'POST':
-        term = request.form['search_term']
+        term = request.form['search_survey']
         if term == "":
-            flash("Enter a survey to search for")
+            flash("Enter a survey id to search for")
             return redirect('/')
     if 'username' in request.cookies:
         name = request.cookies.get('username')
@@ -260,3 +250,8 @@ def show_survey_results():
         return render_template('survey_results.html', results=results_only)
     else:
         return redirect('main.index')
+
+
+@bp_main.route('/privacy_policy', methods=['GET'])
+def privacy_policy():
+    return render_template("privacy_policy.html")

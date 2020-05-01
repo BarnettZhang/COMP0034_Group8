@@ -42,8 +42,6 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     remember = BooleanField('Remember Me')
 
-
-
 class ProfileForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email(message='Valid email address required')])
     age = StringField('Age', validators=[DataRequired()])
