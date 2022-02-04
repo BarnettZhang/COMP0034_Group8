@@ -24,7 +24,7 @@ def index():
         gender = list(validuser)[0][2]
         result = []
         allsurvey = db.session.query(Survey.target_religion, Survey.target_ethnic, Survey.target_gender,
-                                     Survey.survey_name, Survey.description, Survey.id).all()
+                                     Survey.survey_name, Survey.description, Survey.survey_id).all()
         for surveys in allsurvey:
             if surveys[0] == 'all' and surveys[1] == 'all' and surveys[2] == 'all':
                 result.append(surveys)
@@ -163,7 +163,7 @@ def search_result():
         if term == "":
             flash("Enter a survey id")
             return redirect('/')
-        results: object = Survey.query.filter(Survey.id.is_(term)).all()
+        results: object = Survey.query.filter(Survey.survey_id.is_(term)).all()
         if not results:
             flash("No survey with this id")
             return redirect('/')
@@ -196,7 +196,7 @@ def survey_review_profile():
     if 'username' in request.cookies:
         name = request.cookies.get('username')
         results_only = db.session.query(Survey.survey_name, Survey.user_username,
-                                        Survey.id.label('survey_id')).filter_by(user_username=name).all()
+                                        Survey.survey_id.label('survey_id')).filter_by(user_username=name).all()
         if not results_only:
             flash("You have not created any survey")
             return redirect('/')
@@ -217,10 +217,10 @@ def my_survey_results():
         if 'username' in request.cookies:
             name = request.cookies.get('username')
             results = db.session.query(Survey.survey_name, Survey.user_username,
-                                       Survey.id.label('survey_id')) \
+                                       Survey.survey_id.label('survey_id')) \
                 .filter_by(user_username=name).all()
-            results_new = db.session.query(Survey.survey_name, Survey.id.label('survey_id'),
-                                           Answer.id, Answer.q1answer,
+            results_new = db.session.query(Survey.survey_name, Survey.survey_id.label('survey_id'),
+                                           Answer.answer_id, Answer.q1answer,
                                            Answer.q2answer, Answer.q3answer,
                                            Answer.q4answer, Answer.q5answer,
                                            Answer.q6answer, Answer.q7answer,

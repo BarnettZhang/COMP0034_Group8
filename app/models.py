@@ -4,7 +4,7 @@ from app import db
 
 
 class User(db.Model, UserMixin):
-    id = db.Column(db.Integer, primary_key=True, nullable=True, unique=True)
+    user_id = db.Column(db.Integer, primary_key=True, nullable=True, unique=True)
     username = db.Column(db.Text, nullable=False)
     password = db.Column(db.Text, nullable=False)
     age = db.Column(db.Integer, nullable=False)
@@ -17,7 +17,7 @@ class User(db.Model, UserMixin):
     survey_id = db.relationship('Survey', backref='users')
 
     def __repr__(self):
-        return '<User {}>'.format(self.id)
+        return '<User {}>'.format(self.user_id)
 
     def set_password(self, password):
         self.password = generate_password_hash(password)
@@ -27,8 +27,8 @@ class User(db.Model, UserMixin):
 
 
 class Survey(db.Model):
-    id = db.Column(db.Integer, primary_key=True, nullable=True)
-    user_username = db.Column(db.Integer, db.ForeignKey(User.username), nullable=True)
+    survey_id = db.Column(db.Integer, primary_key=True, nullable=True)
+    user_username = db.Column(db.Text, db.ForeignKey(User.username), nullable=True)
     survey_name = db.Column(db.Text, nullable=False)
     keyword = db.Column(db.Text, nullable=True)
     target_ethnic = db.Column(db.Text, nullable=True)
@@ -128,12 +128,12 @@ class Survey(db.Model):
     q14question_content = db.Column(db.Text, nullable=True)
 
     def __repr__(self):
-        return '<Survey {}>'.format(self.id)
+        return '<Survey {}>'.format(self.survey_id)
 
 
 class Answer(db.Model):
-    id = db.Column(db.Integer, primary_key=True, nullable=False, unique=True)
-    survey_id = db.Column(db.Integer, db.ForeignKey(Survey.id), nullable=True)
+    answer_id = db.Column(db.Integer, primary_key=True, nullable=False, unique=True)
+    survey_id = db.Column(db.Integer, db.ForeignKey(Survey.survey_id), nullable=True)
     q1answer = db.Column(db.Text, nullable=True)
     q2answer = db.Column(db.Text, nullable=True)
     q3answer = db.Column(db.Text, nullable=True)
